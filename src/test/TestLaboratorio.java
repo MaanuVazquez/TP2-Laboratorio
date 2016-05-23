@@ -3,13 +3,16 @@ package test;
 import laboratorio.Analisis;
 import laboratorio.Estudio;
 import laboratorio.GrupoDeEstudios;
-import laboratorio.*;
+
+//favor de borrar los "//" es por el warning 
+//import laboratorio.*;
 
 import org.junit.rules.ExpectedException;
 import org.junit.Rule;
 import org.junit.Test;
 
-import excepciones.*;
+//favor de borrar los "//" es por el warning
+//import excepciones.FechasInvalidasException;
 
 public class TestLaboratorio {
 
@@ -49,6 +52,8 @@ public class TestLaboratorio {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
 				50.0, (10.0 + 50.0) / 2);
 
+		// favor de borrar es por el warning
+		analisisDePrueba.getNombre();
 	}
 
 	/*
@@ -145,6 +150,8 @@ public class TestLaboratorio {
 
 		Estudio estudioDePrueba = new Estudio("nombre", "indicacion", true);
 
+		// favor de borrar es por el warning
+		estudioDePrueba.getId();
 	}
 
 	/*
@@ -191,8 +198,11 @@ public class TestLaboratorio {
 
 		GrupoDeEstudios grupoDeEstudiosDePrueba = new GrupoDeEstudios("nombre",
 				"indicacion");
+
+		// favor de borrar es por el warning
+		grupoDeEstudiosDePrueba.getId();
 	}
-	
+
 	/*
 	 * 
 	 */
