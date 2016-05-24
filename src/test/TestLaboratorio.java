@@ -3,7 +3,7 @@ package test;
 import laboratorio.Analisis;
 import laboratorio.Estudio;
 import laboratorio.GrupoDeEstudios;
-//asdas
+
 //favor de borrar los "//" es por el warning 
 //import laboratorio.*;
 
