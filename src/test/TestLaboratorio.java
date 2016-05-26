@@ -5,7 +5,7 @@ import org.junit.Test;
 public class TestLaboratorio {
 
 	/*
-	 * cargarResultado
+	 * Prueba cargarResultado
 	 */
 
 	@Test
@@ -14,7 +14,7 @@ public class TestLaboratorio {
 	}
 
 	/*
-	 * agregarPaciente
+	 * Prueba agregarPaciente
 	 */
 
 	@Test
@@ -23,7 +23,7 @@ public class TestLaboratorio {
 	}
 
 	/*
-	 * buscarPaciente
+	 * Prueba buscarPaciente
 	 */
 
 	@Test
@@ -32,7 +32,7 @@ public class TestLaboratorio {
 	}
 
 	/*
-	 * listarEstadisticas
+	 * Prueba listarEstadisticas
 	 */
 
 	@Test

@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class TestEstudio {
 
-
 	/*
 	 * Prueba constructor de estudio
 	 */
@@ -21,13 +20,14 @@ public class TestEstudio {
 	}
 
 	/*
-	 * Prueba obtener resultado de un estudio
+	 * Prueba get y set resultado de un estudio
 	 */
 
 	@Test
-	public void testGetResultadoDeEstudio() {
+	public void testGetandSetResultadoDeEstudio() {
 		Estudio estudioDePrueba = new Estudio("nombre", "indicacion", true);
 
+		estudioDePrueba.setResultado(false);
 		estudioDePrueba.getResultado();
 	}
 
@@ -42,17 +42,6 @@ public class TestEstudio {
 		Estudio estudioDePrueba = new Estudio("nombre", "indicacion", true);
 
 		estudioDePrueba.isResultado();
-	}
-
-	/*
-	 * Prueba setear resultado.
-	 */
-
-	@Test
-	public void testSetResultado() {
-		Estudio estudioDePrueba = new Estudio("nombre", "indicacion", true);
-
-		estudioDePrueba.setResultado(false);
 	}
 
 }

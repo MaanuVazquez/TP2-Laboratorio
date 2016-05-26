@@ -5,67 +5,66 @@ import org.junit.Test;
 public class TestPrestacionPaciente {
 
 	/*
-	 * getPrestacion
+	 * Prueba getPrestacion
 	 */
-	
+
 	@Test
-	public void testGetPrestacion(){
-		
+	public void testGetPrestacion() {
+
 	}
-	
+
 	/*
-	 * setPrestacion
+	 * Prueba setPrestacion
 	 */
-	
+
 	@Test
-	public void testSetPrestacion(){
-		
+	public void testSetPrestacion() {
+
 	}
-	
+
 	/*
-	 * getPaciente
+	 * Prueba getPaciente
 	 */
-	
+
 	@Test
-	public void testGetPaciente(){
-		
+	public void testGetPaciente() {
+
 	}
-	
+
 	/*
-	 * setPaciente
+	 * Prueba setPaciente
 	 */
-	
+
 	@Test
-	public void testSetPaciente(){
-		
+	public void testSetPaciente() {
+
 	}
-	
+
 	/*
-	 * getId
+	 * Prueba getId
 	 */
-	
+
 	@Test
-	public void testGetId(){
-		
+	public void testGetId() {
+
 	}
-	
+
 	/*
-	 * setId
+	 * Prueba setId
 	 */
-	
+
 	@Test
-	public void testSetId(){
-		
+	public void testSetId() {
+
 	}
-	
+
 	/*
-	 * getFecha
+	 * Prueba getFecha
 	 */
-	
+
 	@Test
-	public void testGetFecha(){
-		
+	public void testGetFecha() {
+
 	}
-	
-	
+
 }

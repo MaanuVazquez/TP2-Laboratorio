@@ -1,7 +1,5 @@
 package test;
 
-
-
 //favor de borrar los "//" es por el warning 
 //import laboratorio.*;
 
@@ -40,12 +38,4 @@ public class TestLaboratorioException {
 		// excepcionEsperada.expect(PrestacionExistenteException.class);
 	}
 
-
-	/*
-	 * 
-	 */
-	
-	/*
-	 * 
-	 */
 }

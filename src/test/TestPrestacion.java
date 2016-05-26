@@ -1,69 +1,72 @@
 package test;
 
+
+
 import org.junit.Test;
 
 public class TestPrestacion {
-	
+
 	/*
-	 * constructor
+	 * Prueba constructor
 	 */
 
 	@Test
-	public void testConstructor(){
-		
-	}
+	public void testConstructor() {
+
 	
+	}
+
 	/*
-	 * getId
+	 * Prueba getId
 	 */
 
 	@Test
-	public void testGetId(){
-		
+	public void testGetId() {
+
 	}
-	
+
 	/*
-	 * setId
+	 * Prueba setId
 	 */
-	
+
 	@Test
-	public void testSetId(){
-		
+	public void testSetId() {
+
 	}
-	
+
 	/*
-	 * getNombre
+	 * Prueba getNombre
 	 */
-	
+
 	@Test
-	public void testGetNombre(){
-		
+	public void testGetNombre() {
+
 	}
-	
+
 	/*
-	 * setNombre
+	 * Prueba setNombre
 	 */
-	
+
 	@Test
-	public void testSetNombre(){
-		
+	public void testSetNombre() {
+
 	}
-	
+
 	/*
-	 * getIndicacion
+	 * Prueba getIndicacion
 	 */
-	
+
 	@Test
-	public void testGetIndicacion(){
-		
+	public void testGetIndicacion() {
+
 	}
-	
+
 	/*
-	 * setIndicacion
+	 * Prueba setIndicacion
 	 */
-	
+
 	@Test
-	public void testSetIndicacion(){
-		
+	public void testSetIndicacion() {
+
 	}
 }
