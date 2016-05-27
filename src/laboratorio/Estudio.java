@@ -1,27 +1,27 @@
 package laboratorio;
 
-public class Estudio extends Prestacion {
+import enums.ClasificacionEstudio;
 
-	private boolean resultado;
+public class Estudio extends Prestacion {
 	
+	private ClasificacionEstudio clasificacion;
+	private String informe;
+
 	public Estudio(String nombre, String indicacion, boolean resultado) {
 		super(nombre, indicacion);
-		this.setResultado(resultado);
 	}
 
 	@Override
 	public String getResultado() {
-		// TODO Apéndice de método generado automáticamente
+		// TODO Apï¿½ndice de mï¿½todo generado automï¿½ticamente
 		return null;
 	}
-
-	public boolean isResultado() {
-		return resultado;
+	
+	public void setResultado(ClasificacionEstudio clasificacion , String informe) {
+		this.clasificacion = clasificacion;
+		this.informe = informe;
 	}
 
-	public void setResultado(boolean resultado) {
-		this.resultado = resultado;
-	}
 	
 	
 

@@ -1,11 +1,14 @@
 package laboratorio;
 
+import enums.EstadoPrestaciones;
+
 public abstract class Prestacion {
 	
 	private static Integer idMax = 1;
 	private Integer id;
 	private String nombre;
 	private String indicacion;
+	private EstadoPrestaciones estado;
 	
 	public Prestacion(String nombre, String indicacion) {
 		this.id = new Integer(idMax.intValue());

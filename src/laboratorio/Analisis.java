@@ -48,8 +48,20 @@ public class Analisis extends Prestacion {
 	}
 
 	public void setValorMedido(double valorMedido) {
-		this.resultadoConcluido = true;
 		this.valorMedido = valorMedido;
 	}
+
+	@Override
+	public String setResultado() {
+		return null;
+		//ACA DEBERIA MOSTRARSE EL FORMULARIO DE CARGA DE RESULTADOS QUE Y APARTIR DE LOS QUE CARGA
+		//SE LLAMA AL METODO CARGAR RESULTADO CON LOS PARAMETROS ESPECIFICOS DE LOS ANALISIS
+	}
+	
+	public void cargarResultado(double valorMedido){
+		
+	}
+	
+
 
 }

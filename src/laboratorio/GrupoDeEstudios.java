@@ -20,21 +20,20 @@ public class GrupoDeEstudios extends Prestacion {
 	}
 
 	public String toString() {
-		String cadena = "Lista de Estudios: ";
+		String cadena = "Lista de estudios de "+this.getNombre()+": \n";
 		for (Prestacion e : estudios) {
-			cadena += " " + e + "\n";
+			cadena += " " + e.toString() + "\n";
 		}
 		return cadena;
 	}
 
 	public void mostrarEstudios() {
-		System.out.println(this);
+		System.out.println(this.toString());
 	}
 
 	@Override
 	public String getResultado() {
-		// TODO Apéndice de método generado automáticamente
-		return null;
+		
 	}
 
 }

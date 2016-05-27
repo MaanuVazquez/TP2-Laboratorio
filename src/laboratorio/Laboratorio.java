@@ -9,6 +9,7 @@ import excepciones.PrestacionExistenteException;
 public class Laboratorio {
 
 	private static Laboratorio laboratorioInstance = new Laboratorio();
+	
 	private HashMap<Integer, Prestacion> prestaciones;
 	private HashMap<Integer, Paciente> pacientes;
 	private HashMap<Integer, PrestacionPaciente> prestacionPaciente;
@@ -40,18 +41,27 @@ public class Laboratorio {
 	}
 	
 	public String listarEstadisticas(Date inicio, Date fin) throws FechasInvalidasException{
+		//E-GIT
+		//Lo hago yo
+		//metodo listarEstadisticasAnalisis
+		//metodo listarEstadisticasEstudios
+	
 		if(inicio.compareTo(fin) != -1){
 			throw new FechasInvalidasException(inicio, fin);
 		}
-		String cadena = "";
+		HashMap<String, Estadistica> estadisticas = new HashMap<String, Estadistica>();
 		for(Integer i : prestacionPaciente.keySet()){
 			PrestacionPaciente p = prestacionPaciente.get(i);
 			if(p.getFecha().compareTo(inicio) > -1 &&
 					p.getFecha().compareTo(fin) < 1){
-				cadena += p.toString() + "\n";
+				if(estadisticas.get(p.getPrestacion().getNombre()) == null){
+					estadisticas.put(p.getPrestacion().getNombre(), new Estadistica(p.getPrestacion().getNombre()));
+				}
+				estadisticas.get( p.getPrestacion().getNombre() ).add(p.getPrestacion());
 			}
 		}
-		return cadena;
+		
+		return estadisticas.toString();
 	}
 	
 }
