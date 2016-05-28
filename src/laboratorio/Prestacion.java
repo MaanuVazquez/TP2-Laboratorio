@@ -1,6 +1,7 @@
 package laboratorio;
 
-import enums.EstadoPrestaciones;
+import enums.EstadoPrestacion;
+import excepciones.PrestacionRegistroException;
 
 public abstract class Prestacion {
 	
@@ -8,13 +9,13 @@ public abstract class Prestacion {
 	private Integer id;
 	private String nombre;
 	private String indicacion;
-	private EstadoPrestaciones estado;
+	private EstadoPrestacion estado;
 	
-	public Prestacion(String nombre, String indicacion) {
+	public Prestacion(String nombre, String indicacion) throws PrestacionRegistroException {
 		this.id = new Integer(idMax.intValue());
 		idMax++;
-		this.nombre = nombre;
-		this.indicacion = indicacion;
+		this.setNombre(nombre);
+		this.setIndicacion(indicacion);
 	}
 
 	public int getId() {
@@ -29,16 +30,34 @@ public abstract class Prestacion {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws PrestacionRegistroException {
+		this.validarStrings(nombre);
 		this.nombre = nombre;
 	}
 
 	public String getIndicacion() {
 		return indicacion;
 	}
+	
+	public EstadoPrestacion getEstado() {
+		return estado;
+	}
 
-	public void setIndicacion(String indicacion) {
+	public void setEstado(EstadoPrestacion estado) {
+		this.estado = estado;
+	}
+
+	public void setIndicacion(String indicacion) throws PrestacionRegistroException {
+		this.validarStrings(indicacion);
 		this.indicacion = indicacion;
+	}
+	
+	private void validarStrings(String str) throws PrestacionRegistroException {
+		
+		if("".equals(str) || str == null){
+			throw new PrestacionRegistroException("Las cadenas de caracteres no pueden ser vacías");
+		}
+		
 	}
 	
 	public abstract String getResultado();

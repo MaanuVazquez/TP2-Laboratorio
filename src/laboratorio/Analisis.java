@@ -1,45 +1,65 @@
 package laboratorio;
 
+import enums.ClasificacionEstudio;
+import enums.EstadoPrestacion;
+import excepciones.AnalisisRegistroException;
+import excepciones.PrestacionRegistroException;
+
 public class Analisis extends Prestacion {
 
 	private double valorNormalMinimo;
 	private double valorNormalMaximo;
 	private double valorMedido;
-	private boolean resultadoConcluido;
+	private ClasificacionEstudio clasificacion;
 	
 	public Analisis(String nombre, String indicacion, double valorNormalMinimo,
-			double valorNormalMaximo, double valorMedido) {
+		double valorNormalMaximo) throws AnalisisRegistroException, PrestacionRegistroException {
+		
 		super(nombre, indicacion);
 		this.setValorNormalMaximo(valorNormalMaximo);
 		this.setValorNormalMinimo(valorNormalMinimo);
+		
+		this.validarRangoValores();
+		
+		this.setEstado(EstadoPrestacion.PENDIENTE);
 	}
 
 	@Override
 	public String getResultado() {
-		if(!this.resultadoConcluido){
-			return "";
-		}
-		String resultado = "Anormal";
-		if(valorMedido <= valorNormalMaximo && valorMedido >= valorNormalMinimo){
-			resultado = "Normal";
-		}
-		return (valorMedido + " " + resultado);
+		
+		//VALOR - CLASIFICACION  RANGO [MAX-MIN]
+		return (
+				this.valorMedido + " - " + this.getClasificacion().toString() + 
+				"["+this.getValorNormalMinimo()+"-"+this.getValorNormalMaximo()+"]"
+				);
 	}
 
 	public double getValorNormalMinimo() {
 		return valorNormalMinimo;
 	}
 
-	public void setValorNormalMinimo(double valorNormalMinimo) {
+	public void setValorNormalMinimo(double valorNormalMinimo) throws AnalisisRegistroException {
+		
+		this.validarValores(valorNormalMinimo);
+		
 		this.valorNormalMinimo = valorNormalMinimo;
+		
+		this.validarRangoValores();
+		
 	}
 
-	public double getValorNormalMaximo() {
-		return valorNormalMaximo;
+	public double getValorNormalMaximo(){
+
+		return this.valorNormalMaximo;
 	}
 
-	public void setValorNormalMaximo(double valorNormalMaximo) {
+	public void setValorNormalMaximo(double valorNormalMaximo) throws AnalisisRegistroException {
+		this.validarValores(valorNormalMinimo);
+		
 		this.valorNormalMaximo = valorNormalMaximo;
+		
+		this.validarRangoValores();
+		
 	}
 
 
@@ -47,12 +67,45 @@ public class Analisis extends Prestacion {
 		return valorMedido;
 	}
 
-	public void setValorMedido(double valorMedido) {
+	public void setValorMedido(double valorMedido) throws AnalisisRegistroException {
+		
+		this.validarValores(valorNormalMinimo);
 		this.valorMedido = valorMedido;
+		
+		if(this.valorMedido <= this.valorNormalMaximo && this.valorMedido >= this.valorNormalMinimo){
+			this.setClasificacion(ClasificacionEstudio.NORMAL);
+		}else{
+			this.setClasificacion(ClasificacionEstudio.ANORMAL);
+		}
+		
+	}
+	
+	public ClasificacionEstudio getClasificacion() {
+		return clasificacion;
 	}
 
-	@Override
+	public void setClasificacion(ClasificacionEstudio clasificacion) {
+		this.clasificacion = clasificacion;
+	}
+
+	private void validarValores(double valor) throws AnalisisRegistroException {
+		
+		if(valor < 0){
+			throw new AnalisisRegistroException("Los valores ingresados deben ser positivos");
+		}	
+	}
+	
+	private void validarRangoValores() throws AnalisisRegistroException {
+		
+		if(this.getValorNormalMaximo() <= this.getValorNormalMinimo()){
+			throw new AnalisisRegistroException("El rango de valor mínimo debe ser menor al valor máximo del rango ingresado");
+		}
+		
+	}
+
 	public String setResultado() {
+		
+		//NO OLVIDAR LLAMAR DEL PADRE EL QUE CAMBIA EL STATUS A FINALIZADO
 		return null;
 		//ACA DEBERIA MOSTRARSE EL FORMULARIO DE CARGA DE RESULTADOS QUE Y APARTIR DE LOS QUE CARGA
 		//SE LLAMA AL METODO CARGAR RESULTADO CON LOS PARAMETROS ESPECIFICOS DE LOS ANALISIS
