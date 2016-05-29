@@ -1,26 +1,27 @@
 package laboratorio;
 
-import java.util.HashMap;
+import estadisticas.EstadisticaEstudios;
+import estadisticas.EstadisticaAnalisis;
 
 public class Estadistica {
 	
-	private String nombre;
-	private int numeroDePacientes;
+	protected EstadisticaAnalisis estadisticaAnalisis;
+	protected EstadisticaEstudios estadisticaEstudios;
 	
-	public Estadistica(String nombre) {
-		
-		this.nombre = nombre;
+	public Estadistica(Prestacion p) {
+		//POR LO QUE ENTIENDO LA ESTADISTICA ES DE LAS HOJAS, NO DE LOS GRUPOS DE ESTUDIOS
+		p.setValoresEstadisticos(this);
+	}
+
+
+	public void addPrestacion(Prestacion p) {
+		p.setValoresEstadisticos(this);
 	}
 	
-	public void add(Prestacion p) {
-		p.getValoresEstadisticos(this);
-	}
 	
-	public void setEstatAnalisis(Analisis analisis){
-		
-	}
-	
-	public void setEstatEstudio(Estudio estudio){
+	public String mostrarEstadistica(){
+		//Terminar toString, para despues si anda bien la estadistica
+		return this.estadisticaAnalisis.toString()+"/n"+this.estadisticaEstudios.toString();
 		
 	}
 	

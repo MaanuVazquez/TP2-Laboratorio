@@ -62,4 +62,6 @@ public abstract class Prestacion {
 	}
 	
 	public abstract String getResultado();
+
+	public abstract void setValoresEstadisticos(Estadistica estadistica);
 }

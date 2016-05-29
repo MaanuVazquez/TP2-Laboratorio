@@ -2,6 +2,7 @@ package laboratorio;
 
 import enums.ClasificacionEstudio;
 import enums.EstadoPrestacion;
+import estadisticas.EstadisticaAnalisis;
 import excepciones.AnalisisRegistroException;
 import excepciones.PrestacionRegistroException;
 
@@ -110,6 +111,18 @@ public class Analisis extends Prestacion {
 	}
 	
 	public void cargarResultado(double valorMedido){
+		
+	}
+
+	@Override
+	public void setValoresEstadisticos(Estadistica estadistica) {
+		
+		if (estadistica.estadisticaAnalisis == null) {
+			estadistica.estadisticaAnalisis = new EstadisticaAnalisis();
+		}
+		
+		//Aca esta la clave de la estadistica sin hacer instanceof
+		estadistica.estadisticaAnalisis.setValoresEstadisticos(this);
 		
 	}
 	

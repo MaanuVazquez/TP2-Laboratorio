@@ -2,6 +2,8 @@ package laboratorio;
 
 import enums.ClasificacionEstudio;
 import enums.EstadoPrestacion;
+import estadisticas.EstadisticaAnalisis;
+import estadisticas.EstadisticaEstudios;
 import excepciones.PrestacionRegistroException;
 
 public class Estudio extends Prestacion {
@@ -42,6 +44,18 @@ public class Estudio extends Prestacion {
 		
 		//CUANDO SE CARGAN LOS RESULTADOS SE PONE EN FINALIZADO
 		this.setEstado(EstadoPrestacion.FINALIZADO);
+	}
+	
+	@Override
+	public void setValoresEstadisticos(Estadistica estadistica) {
+		
+		if (estadistica.estadisticaEstudios == null) {
+			estadistica.estadisticaEstudios = new EstadisticaEstudios();
+		}
+		
+		//Aca esta la clave de la estadistica sin hacer instance of
+		estadistica.estadisticaEstudios.setValoresEstadisticos(this);
+		
 	}
 
 	
