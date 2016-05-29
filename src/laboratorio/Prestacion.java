@@ -53,10 +53,10 @@ public abstract class Prestacion {
 		this.indicacion = indicacion;
 	}
 	
-	private void validarStrings(String str) throws PrestacionRegistroException {
+	protected void validarStrings(String str) throws PrestacionRegistroException {
 		
 		if("".equals(str) || str == null){
-			throw new PrestacionRegistroException("Las cadenas de caracteres no pueden ser vacías");
+			throw new PrestacionRegistroException("Las cadenas de caracteres no pueden estar vacías");
 		}
 		
 	}
