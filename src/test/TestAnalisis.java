@@ -34,12 +34,14 @@ public class TestAnalisis {
 	}
 	
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testConstructorDeAnalisisConErrorDeAnalisis() throws AnalisisRegistroException, PrestacionRegistroException{
 		exception.expect(AnalisisRegistroException.class);
 		Analisis analisisDePrueba = new Analisis("Glucemia", "Indicaciones", -200.0, 100.0);
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testConstructorDeAnalisisConErrorDePrestacion() throws AnalisisRegistroException, PrestacionRegistroException {
 		
@@ -47,6 +49,7 @@ public class TestAnalisis {
 		Analisis analisisDePrueba = new Analisis("Glucemia", "", 10.0, 100.0);
 	}
 	
+	@SuppressWarnings("unused")
 	@Test
 	public void testAnalisisConValorMinimoMedidoMayorOIgualAlMayor() throws AnalisisRegistroException, PrestacionRegistroException {
 		

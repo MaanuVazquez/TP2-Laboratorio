@@ -16,6 +16,7 @@ public abstract class Prestacion {
 		idMax++;
 		this.setNombre(nombre);
 		this.setIndicacion(indicacion);
+		this.setEstado(EstadoPrestacion.PENDIENTE);
 	}
 
 	public int getId() {

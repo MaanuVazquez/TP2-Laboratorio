@@ -20,8 +20,6 @@ public class Analisis extends Prestacion {
 		this.setValorNormalMinimo(valorNormalMinimo);
 		
 		this.validarRangoValores();
-		
-		this.setEstado(EstadoPrestacion.PENDIENTE);
 	}
 
 	@Override
