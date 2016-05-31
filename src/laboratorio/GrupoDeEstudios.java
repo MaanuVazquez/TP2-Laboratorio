@@ -1,39 +1,32 @@
 package laboratorio;
 
-import java.util.LinkedList;
+import java.util.HashMap;
 
-import excepciones.PrestacionRegistroException;
+import excepciones.StringVacioException;
 
 public class GrupoDeEstudios extends Prestacion {
 
-	//PREGUNTA NO SERIA MEJOR UN MAP QUE IDENTIFICA POR ID LAS PRESTACIONES DEL GRUPO DE ESTUDIOS, ES MAS FACIL DE BORRAR LUEGO
-	//PUEDEN EXISTIR IGUAL MULTIPLES GRUPOS DE ESTUDIOS CON ESTUDIOS IGUALES, SER MAP NO LO AFECTO A ESO
-	private LinkedList<Prestacion> estudios;
+	private HashMap<Integer, Prestacion> estudios;
 
-	public GrupoDeEstudios(String nombre, String indicacion) throws PrestacionRegistroException {
+	public GrupoDeEstudios(String nombre, String indicacion) throws StringVacioException {
 		super(nombre, indicacion);
-		this.estudios = new LinkedList<Prestacion>();
+		this.estudios = new HashMap<Integer, Prestacion>();
 	}
 
-	public void agregarEstudio(Prestacion e) {
-		this.estudios.add(e);
-	}
-
-	public void removerEstudio(Prestacion e) {
-		this.estudios.remove(e);
-		//ACA HABRIA QUE SOBREESCRIBIR EL EQUALS PERO SI FUESE UN MAP SOLO LO BORRAMOS POR LA CLAVE
+	/*
+	 * return false si el estudio ya se encontraba agregado
+	 */
+	
+	public boolean agregarEstudio(Prestacion prestacion) {
+		return (this.estudios.put(prestacion.getId(), prestacion) == null);
 	}
 
 	public String toString() {
 		String cadena = "Lista de estudios de "+this.getNombre()+": \n";
-		for (Prestacion e : estudios) {
+		for (Prestacion e : estudios.values()) {
 			cadena += " " + e.getNombre() + "\n";
 		}
 		return cadena;
-	}
-
-	public void mostrarEstudios() {
-		System.out.println(this.toString());
 	}
 
 	@Override

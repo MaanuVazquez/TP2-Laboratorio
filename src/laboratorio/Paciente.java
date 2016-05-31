@@ -1,6 +1,7 @@
 package laboratorio;
 
-import excepciones.PacienteRegistroException;
+import excepciones.StringVacioException;
+import excepciones.ValoresNegativosException;
 
 public class Paciente {
 
@@ -11,29 +12,26 @@ public class Paciente {
 	private String telefono;
 	private String mail;
 
-	public Paciente(String nombre, Integer dni, String telefono, String mail) throws PacienteRegistroException {
+	public Paciente(String nombre, Integer dni, String telefono, String mail)
+			throws StringVacioException, ValoresNegativosException {
 		this.id = idMax;
 		idMax++;
 		this.setNombre(nombre);
 		this.setDni(dni);
 		this.setTelefono(telefono);
 		this.setMail(mail);
-	
+
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) throws PacienteRegistroException {
+	public void setNombre(String nombre) throws StringVacioException {
 		this.validarStrings(nombre);
 		this.nombre = nombre;
 	}
@@ -42,18 +40,16 @@ public class Paciente {
 		return dni;
 	}
 
-	public void setDni(Integer dni) throws PacienteRegistroException {
+	public void setDni(Integer dni) throws ValoresNegativosException {
 		this.validarEnteros(dni);
 		this.dni = dni;
 	}
-
-	
 
 	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(String telefono) throws PacienteRegistroException {
+	public void setTelefono(String telefono) throws StringVacioException {
 		this.validarStrings(telefono);
 		this.telefono = telefono;
 	}
@@ -62,27 +58,23 @@ public class Paciente {
 		return mail;
 	}
 
-	public void setMail(String mail) throws PacienteRegistroException {
+	public void setMail(String mail) throws StringVacioException {
 		this.validarStrings(mail);
 		this.mail = mail;
 	}
-	
-	private void validarStrings(String str) throws PacienteRegistroException {
-		
-		if("".equals(str) || str == null){
-			throw new PacienteRegistroException("Las cadenas de caracteres no pueden estar vacías");
-		}
-		
-	}
-	
-	private void validarEnteros(Integer entero) throws PacienteRegistroException {
-		
-		if(entero <= 0){
-			throw new PacienteRegistroException("Los numeros enteros deben ser mayores a cero");
-		}
-		
-	}
-	
-	
 
+	private void validarStrings(String str) throws StringVacioException {
+
+		if ("".equals(str) || str == null) {
+			throw new StringVacioException();
+		}
+
+	}
+
+	private void validarEnteros(Integer valor) throws ValoresNegativosException {
+
+		if (valor <= 0) {
+			throw new ValoresNegativosException(valor);
+		}
+	}
 }

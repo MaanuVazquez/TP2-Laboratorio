@@ -1,7 +1,7 @@
 package laboratorio;
 
 import enums.EstadoPrestacion;
-import excepciones.PrestacionRegistroException;
+import excepciones.StringVacioException;
 
 public abstract class Prestacion {
 	
@@ -11,11 +11,13 @@ public abstract class Prestacion {
 	private String indicacion;
 	private EstadoPrestacion estado;
 	
-	public Prestacion(String nombre, String indicacion) throws PrestacionRegistroException {
-		this.id = new Integer(idMax.intValue());
-		idMax++;
-		this.setNombre(nombre);
-		this.setIndicacion(indicacion);
+	public Prestacion(String nombre, String indicacion) throws StringVacioException {
+		validarStrings(indicacion);
+		validarStrings(nombre);
+		this.id = new Integer(Prestacion.idMax.intValue());
+		Prestacion.idMax++;
+		this.nombre = nombre;
+		this.indicacion = indicacion;
 		this.setEstado(EstadoPrestacion.PENDIENTE);
 	}
 
@@ -23,17 +25,8 @@ public abstract class Prestacion {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getNombre() {
 		return nombre;
-	}
-
-	public void setNombre(String nombre) throws PrestacionRegistroException {
-		this.validarStrings(nombre);
-		this.nombre = nombre;
 	}
 
 	public String getIndicacion() {
@@ -43,22 +36,16 @@ public abstract class Prestacion {
 	public EstadoPrestacion getEstado() {
 		return estado;
 	}
-
-	public void setEstado(EstadoPrestacion estado) {
-		this.estado = estado;
-	}
-
-	public void setIndicacion(String indicacion) throws PrestacionRegistroException {
-		this.validarStrings(indicacion);
-		this.indicacion = indicacion;
-	}
 	
-	protected void validarStrings(String str) throws PrestacionRegistroException {
+	protected void validarStrings(String str) throws StringVacioException {
 		
 		if("".equals(str) || str == null){
-			throw new PrestacionRegistroException("Las cadenas de caracteres no pueden estar vacías");
+			throw new StringVacioException();
 		}
-		
+	}
+	
+	protected void setEstado(EstadoPrestacion estado) {
+		this.estado = estado;
 	}
 	
 	public abstract String getResultado();

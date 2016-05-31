@@ -12,20 +12,19 @@ public class Laboratorio {
 	
 	private HashMap<Integer, Prestacion> prestaciones;
 	private HashMap<Integer, Paciente> pacientes;
-	private HashMap<Integer, PrestacionPaciente> prestacionPaciente;
-	private HashMap<Integer, Estadistica> estadisticas;
+	private HashMap<Integer, Visita> prestacionPaciente;
 	
 	private Laboratorio(){
 		this.prestaciones = new HashMap<Integer, Prestacion>();
 		this.pacientes = new HashMap<Integer, Paciente>();
-		this.prestacionPaciente = new HashMap<Integer, PrestacionPaciente>();
+		this.prestacionPaciente = new HashMap<Integer, Visita>();
 	}
 	
 	public void cargarResultado(Prestacion prestacion, Paciente paciente) throws PrestacionExistenteException{
 		if(this.prestaciones.put(prestacion.getId(), prestacion) != null){
 			throw new PrestacionExistenteException();
 		}
-		PrestacionPaciente pp = new PrestacionPaciente(prestacion, paciente);
+		Visita pp = new Visita(prestacion, paciente);
 		this.prestacionPaciente.put(pp.getId(), pp);
 	}
 	
@@ -43,8 +42,7 @@ public class Laboratorio {
 	
 	public String listarEstadisticas(Date inicio, Date fin) throws FechasInvalidasException{
 		
-		//Cada vez que las listamos limpiamos el map
-		this.estadisticas = new HashMap<Integer, Estadistica>();
+		HashMap<Integer, Estadistica> estadisticas = new HashMap<Integer, Estadistica>();
 		
 		//compare to de fechas con cero, si es el mismo dia entre inicio y fin, se pide la estadistica 
 		//del dia
@@ -53,7 +51,7 @@ public class Laboratorio {
 		}
 		
 		for(Integer i : prestacionPaciente.keySet()){
-			PrestacionPaciente p = prestacionPaciente.get(i);
+			Visita p = prestacionPaciente.get(i);
 			
 			//EL COMPARE TO DE FECHAS ES CON 0 
 			if(p.getFecha().compareTo(inicio) >= 0 && p.getFecha().compareTo(fin) <= 0){

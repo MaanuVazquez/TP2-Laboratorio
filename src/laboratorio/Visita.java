@@ -2,7 +2,7 @@ package laboratorio;
 
 import java.util.Date;
 
-public class PrestacionPaciente {
+public class Visita {
 	
 	private static Integer idMax = new Integer (1);
 	private Prestacion prestacion;
@@ -10,7 +10,7 @@ public class PrestacionPaciente {
 	private Integer id;
 	private Date fecha;
 	
-	public PrestacionPaciente(Prestacion prestacion, Paciente paciente) {
+	public Visita(Prestacion prestacion, Paciente paciente) {
 		this.prestacion = prestacion;
 		this.paciente = paciente;
 		this.id = new Integer(idMax.intValue());
@@ -21,24 +21,12 @@ public class PrestacionPaciente {
 		return prestacion;
 	}
 
-	public void setPrestacion(Prestacion prestacion) {
-		this.prestacion = prestacion;
-	}
-
 	public Paciente getPaciente() {
 		return paciente;
 	}
 
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Date getFecha() {
