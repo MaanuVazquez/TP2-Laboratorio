@@ -37,7 +37,7 @@ public class Analisis extends Prestacion {
 		} else {
 			this.clasificacion = ClasificacionEstudio.ANORMAL;
 		}
-
+		this.setEstado(EstadoPrestacion.FINALIZADO);
 	}
 
 	@Override

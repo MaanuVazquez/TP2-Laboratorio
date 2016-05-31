@@ -12,21 +12,21 @@ public class Laboratorio {
 
 	private HashMap<Integer, Prestacion> prestaciones;
 	private HashMap<Integer, Paciente> pacientes;
-	private HashMap<Integer, Visita> prestacionPaciente;
+	private HashMap<Integer, Visita> visitas;
 
 	private Laboratorio() {
 		this.prestaciones = new HashMap<Integer, Prestacion>();
 		this.pacientes = new HashMap<Integer, Paciente>();
-		this.prestacionPaciente = new HashMap<Integer, Visita>();
+		this.visitas = new HashMap<Integer, Visita>();
 	}
 
-	public void cargarResultado(Prestacion prestacion, Paciente paciente)
+	public void agregarVisita(Prestacion prestacion, Paciente paciente)
 			throws PrestacionExistenteException {
 		if (this.prestaciones.put(prestacion.getId(), prestacion) != null) {
 			throw new PrestacionExistenteException();
 		}
 		Visita visita = new Visita(prestacion, paciente);
-		this.prestacionPaciente.put(visita.getId(), visita);
+		this.visitas.put(visita.getId(), visita);
 	}
 
 	public void agregarPaciente(Paciente p) {
@@ -44,19 +44,19 @@ public class Laboratorio {
 	public String listarEstadisticas(Date inicio, Date fin)
 			throws FechasInvalidasException {
 
-		if (inicio.compareTo(fin) > 0) {
+		if (inicio.after(fin)) {
 			throw new FechasInvalidasException(inicio, fin);
 		}
 
 		Estadistica estadistica = new Estadistica();
 
-		for (Integer i : prestacionPaciente.keySet()) {
-			Visita visita = prestacionPaciente.get(i);
+		for (Integer i : visitas.keySet()) {
+			Visita visita = visitas.get(i);
 
-			if (visita.getFecha().compareTo(inicio) >= 0	&& visita.getFecha().compareTo(fin) <= 0) {
+			if (visita.getFecha().compareTo(inicio) >= 0 && visita.getFecha().compareTo(fin) <= 0) {
 				estadistica.addPrestacion(visita.getPrestacion());
 			}
 		}
-		return estadistica.toString();
+		return estadistica.mostrarEstadistica();
 	}
 }

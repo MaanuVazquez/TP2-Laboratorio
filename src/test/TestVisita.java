@@ -2,7 +2,7 @@ package test;
 
 import org.junit.Test;
 
-public class TestPrestacionPaciente {
+public class TestVisita {
 
 	/*
 	 * Prueba getPrestacion

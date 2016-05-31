@@ -19,7 +19,7 @@ public class Estadistica {
 	}
 
 	public String mostrarEstadistica() {
-		String resultado = "";
+		String resultado = "123";
 		Iterator<String> iterador = estadisticas.keySet().iterator();
 		while (iterador.hasNext()) {
 			resultado += estadisticas.get(iterador.next()).toString();
@@ -36,6 +36,10 @@ public class Estadistica {
 	}
 
 	public void agregarEstudio(Estudio estudio) {
-
+		if (!estadisticas.containsKey(estudio.getNombre())) {
+			estadisticas.put(estudio.getNombre(), new EstadisticaAnalisis(estudio));
+		} else {
+			estadisticas.get(estudio.getNombre()).agregarPrestacion(estudio);
+		}
 	}
 }
