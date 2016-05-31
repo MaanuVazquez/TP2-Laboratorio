@@ -9,52 +9,60 @@ import org.junit.rules.ExpectedException;
 
 import enums.ClasificacionEstudio;
 import enums.EstadoPrestacion;
-import excepciones.AnalisisRegistroException;
-import excepciones.PrestacionRegistroException;
+import excepciones.RangoDeValoresInvalido;
+import excepciones.StringVacioException;
+import excepciones.ValoresNegativosException;
 
 public class TestAnalisis {
-	
+
 	@Rule
 	public final ExpectedException exception = ExpectedException.none();
-	
-	@Test
-	public void testConstructorDeAnalisis() throws AnalisisRegistroException, PrestacionRegistroException {
 
-		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0, 50.0);
+	@Test
+	public void ConstructorDeAnalisis() throws StringVacioException,
+			ValoresNegativosException, RangoDeValoresInvalido {
+
+		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
+				50.0);
 
 		Assert.assertEquals("nombre", analisisDePrueba.getNombre());
 	}
-	
-	@Test
-	public void testEstadoDeAnalisisAlCrearlo() throws AnalisisRegistroException, PrestacionRegistroException {
 
-		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0, 50.0);
+	@Test
+	public void EstadoDeAnalisisAlCrearlo() throws StringVacioException,
+			ValoresNegativosException, RangoDeValoresInvalido {
 
-		Assert.assertEquals(EstadoPrestacion.PENDIENTE, analisisDePrueba.getEstado());
+		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
+				50.0);
+
+		Assert.assertEquals(EstadoPrestacion.PENDIENTE,
+				analisisDePrueba.getEstado());
 	}
-	
-	
-	@SuppressWarnings("unused")
+
 	@Test
-	public void testConstructorDeAnalisisConErrorDeAnalisis() throws AnalisisRegistroException, PrestacionRegistroException{
-		exception.expect(AnalisisRegistroException.class);
-		Analisis analisisDePrueba = new Analisis("Glucemia", "Indicaciones", -200.0, 100.0);
+	public void ConstructorDeAnalisisConErrorDeAnalisis()
+			throws StringVacioException, ValoresNegativosException,
+			RangoDeValoresInvalido {
+		exception.expect(ValoresNegativosException.class);
+		new Analisis("Glucemia", "Indicaciones", -200.0, 100.0);
 	}
-	
-	@SuppressWarnings("unused")
+
 	@Test
-	public void testConstructorDeAnalisisConErrorDePrestacion() throws AnalisisRegistroException, PrestacionRegistroException {
-		
-		exception.expect(PrestacionRegistroException.class);
-		Analisis analisisDePrueba = new Analisis("Glucemia", "", 10.0, 100.0);
+	public void ConstructorDeAnalisisConErrorDePrestacion()
+			throws StringVacioException, ValoresNegativosException,
+			RangoDeValoresInvalido {
+
+		exception.expect(StringVacioException.class);
+		new Analisis("Glucemia", "", 10.0, 100.0);
 	}
-	
-	@SuppressWarnings("unused")
+
 	@Test
-	public void testAnalisisConValorMinimoMedidoMayorOIgualAlMayor() throws AnalisisRegistroException, PrestacionRegistroException {
-		
-		exception.expect(AnalisisRegistroException.class);
-		Analisis analisisDePrueba = new Analisis("Glucemia", "Indicacion", 10.0, 5);
+	public void AnalisisConValorMinimoMedidoMayorOIgualAlMayor()
+			throws StringVacioException, ValoresNegativosException,
+			RangoDeValoresInvalido {
+
+		exception.expect(RangoDeValoresInvalido.class);
+		new Analisis("Glucemia", "Indicacion", 10.0, 5);
 	}
 
 	/*
@@ -62,12 +70,14 @@ public class TestAnalisis {
 	 */
 
 	@Test
-	public void testAnalisisConResultadoCargado() throws AnalisisRegistroException, PrestacionRegistroException {
-		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,50.0);
+	public void AnalisisConResultadoCargado() throws StringVacioException,
+			ValoresNegativosException, RangoDeValoresInvalido {
+		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
+				50.0);
 
-		analisisDePrueba.setValorMedido(20);
-		
-		Assert.assertEquals(20, analisisDePrueba.getValorMedido() , 0);
+		analisisDePrueba.setResultado(20);
+
+		Assert.assertEquals(20, analisisDePrueba.getValorMedido(), 0);
 
 	}
 
@@ -76,11 +86,12 @@ public class TestAnalisis {
 	 */
 
 	@Test
-	public void testGetValorMinimo() throws AnalisisRegistroException, PrestacionRegistroException {
+	public void GetValorMinimo() throws StringVacioException,
+			ValoresNegativosException, RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
 				50.0);
 
-		Assert.assertEquals(10, analisisDePrueba.getValorNormalMinimo() , 0);
+		Assert.assertEquals(10, analisisDePrueba.getValorNormalMinimo(), 0);
 	}
 
 	/*
@@ -88,72 +99,39 @@ public class TestAnalisis {
 	 */
 
 	@Test
-	public void testAnalisisGetValorMaximo() throws AnalisisRegistroException, PrestacionRegistroException {
+	public void AnalisisGetValorMaximo() throws StringVacioException,
+			ValoresNegativosException, RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
 				50.0);
 
-		Assert.assertEquals(10, analisisDePrueba.getValorNormalMinimo() , 0);
+		Assert.assertEquals(10, analisisDePrueba.getValorNormalMinimo(), 0);
 	}
 
-
-	/*
-	 * Prueba setear el valor minimo del analisis.
-	 */
-
 	@Test
-	public void testAnalisisSetValorMinimo() throws AnalisisRegistroException, PrestacionRegistroException {
+	public void ClasificacionEstudioNormalDeAnalisis()
+			throws StringVacioException, ValoresNegativosException,
+			RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
 				50.0);
 
-		analisisDePrueba.setValorNormalMinimo(30);
-		Assert.assertEquals(30, analisisDePrueba.getValorNormalMinimo() , 0);
+		analisisDePrueba.setResultado(49);
+
+		Assert.assertEquals(ClasificacionEstudio.NORMAL,
+				analisisDePrueba.getClasificacion());
+
 	}
 
-	/*
-	 * Prueba setear el valor maximo del analisis.
-	 */
-
 	@Test
-	public void testSetValorMaximo() throws AnalisisRegistroException, PrestacionRegistroException {
+	public void ClasificacionEstudioAnormalDeAnalisis()
+			throws StringVacioException, ValoresNegativosException,
+			RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
 				50.0);
 
-		analisisDePrueba.setValorNormalMaximo(100);
-		Assert.assertEquals(100, analisisDePrueba.getValorNormalMaximo() , 0);
-	}
-	
-	@Test
-	public void testSetValorMaximoConRangoErroneoEnSeteo() throws AnalisisRegistroException, PrestacionRegistroException {
-		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0, 50.0);
-		exception.expect(AnalisisRegistroException.class);
-		analisisDePrueba.setValorNormalMaximo(1);
-	}
-	
-	@Test
-	public void testSetValorMinimoConRangoErroneoEnSeteo() throws AnalisisRegistroException, PrestacionRegistroException {
-		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0, 50.0);
-		exception.expect(AnalisisRegistroException.class);
-		analisisDePrueba.setValorNormalMinimo(100);
-	}
+		analisisDePrueba.setResultado(51);
 
-
-	@Test
-	public void testClasificacionEstudioNormalDeAnalisis() throws AnalisisRegistroException, PrestacionRegistroException {
-		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,50.0);
-		
-		analisisDePrueba.setValorMedido(49);
-		
-		Assert.assertEquals(ClasificacionEstudio.NORMAL, analisisDePrueba.getClasificacion());
-
-	}
-	
-	@Test
-	public void testClasificacionEstudioAnormalDeAnalisis() throws AnalisisRegistroException, PrestacionRegistroException {
-		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,50.0);
-		
-		analisisDePrueba.setValorMedido(51);
-		
-		Assert.assertEquals(ClasificacionEstudio.ANORMAL, analisisDePrueba.getClasificacion());
+		Assert.assertEquals(ClasificacionEstudio.ANORMAL,
+				analisisDePrueba.getClasificacion());
 
 	}
 }

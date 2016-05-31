@@ -1,7 +1,6 @@
 package test;
 
 import laboratorio.Estudio;
-import laboratorio.Paciente;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -10,7 +9,7 @@ import org.junit.rules.ExpectedException;
 
 import enums.ClasificacionEstudio;
 import enums.EstadoPrestacion;
-import excepciones.PrestacionRegistroException;
+import excepciones.StringVacioException;
 
 public class TestEstudio {
 
@@ -22,67 +21,33 @@ public class TestEstudio {
 	 * Prueba constructor de estudio
 	 */
 	@Test
-	public void testConstructorDeEstudio() throws PrestacionRegistroException {
+	public void ConstructorDeEstudio() throws StringVacioException  {
 
 		Estudio estudioDePrueba = new Estudio("nombre", "indicacion");
-		Assert.assertTrue(estudioDePrueba instanceof Estudio);
+		Assert.assertEquals("nombre", estudioDePrueba.getNombre());
 		
 	}
 	
-	@SuppressWarnings("unused")
 	@Test
-	public void testConstructorDeEstudioConExcepcion() throws PrestacionRegistroException {
+	public void ConstructorDeEstudioConExcepcion() throws StringVacioException {
 		
-		exception.expect(PrestacionRegistroException.class);
-		Estudio estudioDePrueba = new Estudio("", "");
+		exception.expect(StringVacioException.class);
+		new Estudio("", "");
 		
 	}
 
 	/*
-	 * Prueba get y set resultado de un estudio
+	 * Prueba get resultado de un estudio
 	 */
 
 	@Test
-	public void testEstudioConIndicacion() throws PrestacionRegistroException {
+	public void EstudioConIndicacion() throws StringVacioException {
 		Estudio estudioDePrueba = new Estudio("nombre", "indicacion");
 		Assert.assertEquals("indicacion", estudioDePrueba.getIndicacion());
 	}
 	
 	@Test
-	public void testEstudioConNombreModificado() throws PrestacionRegistroException {
-		Estudio estudioDePrueba = new Estudio("nombre", "indicacion");
-		
-		estudioDePrueba.setNombre("Otro nombre");
-		Assert.assertEquals("Otro nombre", estudioDePrueba.getNombre());
-	}
-	
-	@Test
-	public void testEstudioConNombreModificadoPeroErroneo() throws PrestacionRegistroException {
-		Estudio estudioDePrueba = new Estudio("nombre", "indicacion");
-		
-		exception.expect(PrestacionRegistroException.class);
-		estudioDePrueba.setNombre("");
-	}
-	
-	@Test
-	public void testEstudioConIndicacionModificada() throws PrestacionRegistroException {
-		Estudio estudioDePrueba = new Estudio("nombre", "indicacion");
-		
-		estudioDePrueba.setIndicacion("Otra Indicacion");
-		Assert.assertEquals("Otra Indicacion", estudioDePrueba.getIndicacion());
-	}
-	
-	@Test
-	public void testEstudioConIndicacionModificadaPeroErronea() throws PrestacionRegistroException {
-		Estudio estudioDePrueba = new Estudio("nombre", "indicacion");
-		
-		exception.expect(PrestacionRegistroException.class);
-		estudioDePrueba.setIndicacion("");
-	}
-	
-	
-	@Test
-	public void testEstudioConSeteoResultado() throws PrestacionRegistroException {
+	public void EstudioConSeteoResultado() throws StringVacioException {
 		Estudio estudioDePrueba = new Estudio("nombre", "indicacion");
 		
 		estudioDePrueba.setResultado(ClasificacionEstudio.NORMAL, "OK");
@@ -91,10 +56,10 @@ public class TestEstudio {
 	}
 	
 	@Test
-	public void testEstudioConSeteoResultadoErroneo() throws PrestacionRegistroException {
+	public void testEstudioConSeteoResultadoErroneo() throws StringVacioException {
 		Estudio estudioDePrueba = new Estudio("nombre", "indicacion");
 		
-		exception.expect(PrestacionRegistroException.class);
+		exception.expect(StringVacioException.class);
 		estudioDePrueba.setResultado(null, "");
 	}
 

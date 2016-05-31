@@ -1,7 +1,7 @@
 package laboratorio;
 
 import enums.ClasificacionEstudio;
-import estadisticas.EstadisticaAnalisis;
+import enums.EstadoPrestacion;
 import excepciones.RangoDeValoresInvalido;
 import excepciones.StringVacioException;
 import excepciones.ValoresNegativosException;
@@ -25,28 +25,27 @@ public class Analisis extends Prestacion {
 		this.validarRangoValores();
 	}
 
-	// public void setValorMedido(double valorMedido)
-	// throws AnalisisRegistroException {
-	//
-	// this.validarValores(valorMedido);
-	// this.valorMedido = valorMedido;
-	//
-	// if (this.valorMedido <= this.valorNormalMaximo
-	// && this.valorMedido >= this.valorNormalMinimo) {
-	// this.clasificacion = ClasificacionEstudio.NORMAL;
-	// } else {
-	// this.clasificacion = ClasificacionEstudio.ANORMAL;
-	// }
-	//
-	// }
+	public void setResultado(double valorMedido)
+			throws ValoresNegativosException {
+
+		this.validarValores(valorMedido);
+		this.valorMedido = valorMedido;
+
+		if (this.valorMedido <= this.valorNormalMaximo
+				&& this.valorMedido >= this.valorNormalMinimo) {
+			this.clasificacion = ClasificacionEstudio.NORMAL;
+		} else {
+			this.clasificacion = ClasificacionEstudio.ANORMAL;
+		}
+
+	}
 
 	@Override
 	public String getResultado() {
-
-		// VALOR - CLASIFICACION RANGO [MAX-MIN]
-		return (this.valorMedido + " - " + this.getClasificacion().toString()
-				+ "[" + this.getValorNormalMinimo() + "-"
-				+ this.getValorNormalMaximo() + "]");
+		return (super.toString() + "Valor Medido: " + this.valorMedido
+				+ ". Clasificacion: " + this.getClasificacion().toString()
+				+ ". Rango de Normalidad [" + this.getValorNormalMinimo() + " - "
+				+ this.getValorNormalMaximo() + "].");
 	}
 
 	public double getValorNormalMinimo() {
@@ -66,30 +65,11 @@ public class Analisis extends Prestacion {
 		return clasificacion;
 	}
 
-	public String setResultado() {
-
-		// NO OLVIDAR LLAMAR DEL PADRE EL QUE CAMBIA EL STATUS A FINALIZADO
-		return null;
-		// ACA DEBERIA MOSTRARSE EL FORMULARIO DE CARGA DE RESULTADOS QUE Y
-		// APARTIR DE LOS QUE CARGA
-		// SE LLAMA AL METODO CARGAR RESULTADO CON LOS PARAMETROS ESPECIFICOS DE
-		// LOS ANALISIS
-	}
-
-	public void cargarResultado(double valorMedido) {
-
-	}
-
 	@Override
-	public void setValoresEstadisticos(Estadistica estadistica) {
-
-		if (estadistica.estadisticaAnalisis == null) {
-			estadistica.estadisticaAnalisis = new EstadisticaAnalisis();
+	public void getValoresEstadisticos(Estadistica estadistica) {
+		if (this.getEstado().equals(EstadoPrestacion.FINALIZADO)) {
+			estadistica.agregarAnalisis(this);
 		}
-
-		// Aca esta la clave de la estadistica sin hacer instanceof
-		estadistica.estadisticaAnalisis.setValoresEstadisticos(this);
-
 	}
 
 	private void validarValores(double valor) throws ValoresNegativosException {

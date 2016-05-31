@@ -1,8 +1,14 @@
 package test;
 
+import laboratorio.Analisis;
 import laboratorio.GrupoDeEstudios;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import excepciones.RangoDeValoresInvalido;
+import excepciones.StringVacioException;
+import excepciones.ValoresNegativosException;
 
 public class TestGrupoDeEstudios {
 
@@ -11,62 +17,26 @@ public class TestGrupoDeEstudios {
 	 */
 
 	@Test
-	public void testConstructorGrupoDeEstudios() {
+	public void ConstructorGrupoDeEstudios() throws StringVacioException {
 
 		GrupoDeEstudios grupoDeEstudiosDePrueba = new GrupoDeEstudios("nombre",
 				"indicacion");
-
-		// favor de borrar es por el warning
-		grupoDeEstudiosDePrueba.getId();
+		Assert.assertEquals("nombre", grupoDeEstudiosDePrueba.getNombre());
 	}
 
 	/*
-	 * Prueba agregarEstudio
+	 * Prueba agregarEstudio (para poder comprobar que se agrego tuve que probar todos los metodos)
 	 */
 	
 	@Test
-	public void testAgregarEstudio() {
+	public void AgregarEstudio() throws StringVacioException, ValoresNegativosException, RangoDeValoresInvalido {
 		GrupoDeEstudios grupoDeEstudiosDePrueba = new GrupoDeEstudios("nombre",
 				"indicacion");
-		
-		//grupoDeEstudiosDePrueba.agregarEstudio();
+		Analisis analisis = new Analisis("Analisis1", "Ninguna", 15, 30);
+		analisis.setResultado(20);
+		grupoDeEstudiosDePrueba.agregarEstudio(analisis);
+		String Resultado = analisis.getResultado();
+		Assert.assertTrue(grupoDeEstudiosDePrueba.getResultado().contains(Resultado));;
 	}
 	
-	/*
-	 * Prueba removerEstudio
-	 */
-	
-	@Test
-	public void testRemoverEstudio(){
-		GrupoDeEstudios grupoDeEstudiosDePrueba = new GrupoDeEstudios("nombre",
-				"indicacion");
-		
-		//grupoDeEstudiosDePrueba.removerEstudio(e);
-	}
-	
-	/*
-	 * Prueba mostrarEstudios
-	 */
-	
-	@Test
-	public void testMostrarEstudio(){
-		GrupoDeEstudios grupoDeEstudiosDePrueba = new GrupoDeEstudios("nombre",
-				"indicacion");
-		
-		grupoDeEstudiosDePrueba.mostrarEstudios();
-	}
-	
-	/*
-	 * Prueba getResultado
-	 */
-	
-	@Test
-	public void testGetResultado(){
-		GrupoDeEstudios grupoDeEstudiosDePrueba = new GrupoDeEstudios("nombre",
-				"indicacion");
-		
-		grupoDeEstudiosDePrueba.getResultado();
-	}
-	
-
 }

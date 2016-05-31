@@ -1,28 +1,41 @@
 package laboratorio;
 
-import estadisticas.EstadisticaEstudios;
+import java.util.Iterator;
+import java.util.TreeMap;
+
 import estadisticas.EstadisticaAnalisis;
+import estadisticas.EstadisticaIndividual;
 
 public class Estadistica {
-	
-	protected EstadisticaAnalisis estadisticaAnalisis;
-	protected EstadisticaEstudios estadisticaEstudios;
-	
-	public Estadistica(Prestacion p) {
-		//POR LO QUE ENTIENDO LA ESTADISTICA ES DE LAS HOJAS, NO DE LOS GRUPOS DE ESTUDIOS
-		p.setValoresEstadisticos(this);
-	}
 
+	TreeMap<String, EstadisticaIndividual> estadisticas;
+
+	public Estadistica() {
+		estadisticas = new TreeMap<String, EstadisticaIndividual>();
+	}
 
 	public void addPrestacion(Prestacion p) {
-		p.setValoresEstadisticos(this);
+		p.getValoresEstadisticos(this);
 	}
-	
-	
-	public String mostrarEstadistica(){
-		//Terminar toString, para despues si anda bien la estadistica
-		return this.estadisticaAnalisis.toString()+"/n"+this.estadisticaEstudios.toString();
-		
+
+	public String mostrarEstadistica() {
+		String resultado = "";
+		Iterator<String> iterador = estadisticas.keySet().iterator();
+		while (iterador.hasNext()) {
+			resultado += estadisticas.get(iterador.next()).toString();
+		}
+		return resultado;
 	}
-	
+
+	public void agregarAnalisis(Analisis analisis) {
+		if (!estadisticas.containsKey(analisis.getNombre())) {
+			estadisticas.put(analisis.getNombre(), new EstadisticaAnalisis(analisis));
+		} else {
+			estadisticas.get(analisis.getNombre()).agregarPrestacion(analisis);
+		}
+	}
+
+	public void agregarEstudio(Estudio estudio) {
+
+	}
 }

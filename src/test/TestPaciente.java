@@ -7,46 +7,45 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import excepciones.PacienteRegistroException;
+import excepciones.StringVacioException;
+import excepciones.ValoresNegativosException;
 
 
 public class TestPaciente {
 
 	@Rule
 	public final ExpectedException exception = ExpectedException.none();
+	
+	@Test
+	public void ConstructorDePaciente() throws StringVacioException, ValoresNegativosException {
 
+		Paciente pacienteDePrueba = new Paciente("nombre", 10, "123123112","mail");
+
+		Assert.assertEquals("nombre", pacienteDePrueba.getNombre());
+	}
+	
 	@Test
-	public void testConstructorPaciente() throws PacienteRegistroException {
-		Paciente pacienteDePrueba = new Paciente("nombre", 1111111, "123123112","mail");
+	public void PacienteConDniErroneo() throws StringVacioException, ValoresNegativosException {
 		
-		Assert.assertTrue(pacienteDePrueba instanceof Paciente);
+		exception.expect(ValoresNegativosException.class);
+		new Paciente("nombre", -10, "123123112","mail");
 		
 	}
 	
-	@SuppressWarnings("unused")
 	@Test
-	public void testPacienteConDniErroneo() throws PacienteRegistroException {
+	public void PacienteConCadenasVaciasErroneo() throws StringVacioException, ValoresNegativosException {
 		
-		exception.expect(PacienteRegistroException.class);
-		Paciente pacienteDePrueba = new Paciente("nombre", -10, "123123112","mail");
-		
-	}
-	
-	@SuppressWarnings("unused")
-	@Test
-	public void testPacienteConCadenasVaciasErroneo() throws PacienteRegistroException {
-		
-		exception.expect(PacienteRegistroException.class);
-		Paciente pacienteDePrueba = new Paciente("nombre", 10, "","");
+		exception.expect(StringVacioException.class);
+		new Paciente("nombre", 10, "","");
 		
 	}
 	
 	/*
-	 * Prueba getId y setId
+	 * Prueba incremento del Id al crear paciente
 	 */
 
 	@Test
-	public void testIdPacienteIncremental() throws PacienteRegistroException {
+	public void IdPacienteIncremental() throws StringVacioException, ValoresNegativosException {
 		Paciente pacienteDePruebaA = new Paciente("Paciente A", 1111111, "123123112","mailA");
 		Paciente pacienteDePruebaB = new Paciente("Paciente B", 1111112, "123123112","mailB");
 		
@@ -60,7 +59,7 @@ public class TestPaciente {
 	 */
 
 	@Test
-	public void testGetAndSetNombre() throws PacienteRegistroException {
+	public void GetAndSetNombre() throws StringVacioException, ValoresNegativosException {
 		Paciente pacienteDePrueba = new Paciente("nombre", 1111111, "123123112","mail");
 		pacienteDePrueba.setNombre("nombre b");
 		
@@ -72,7 +71,7 @@ public class TestPaciente {
 	 */
 
 	@Test
-	public void testGetAndSetDni() throws PacienteRegistroException {
+	public void GetAndSetDni() throws StringVacioException, ValoresNegativosException {
 		Paciente pacienteDePrueba = new Paciente("nombre", 1111111, "123123112","mail");
 		pacienteDePrueba.setDni(12312365);
 		Assert.assertEquals(12312365,pacienteDePrueba.getDni() , 0);
@@ -84,7 +83,7 @@ public class TestPaciente {
 	 */
 
 	@Test
-	public void testGetAndSetTelefono() throws PacienteRegistroException {
+	public void GetAndSetTelefono() throws StringVacioException, ValoresNegativosException {
 		Paciente pacienteDePrueba = new Paciente("nombre", 1111111, "123123112","mail");
 		
 		pacienteDePrueba.setTelefono("011-123123112");
@@ -96,7 +95,7 @@ public class TestPaciente {
 	 */
 
 	@Test
-	public void testGetAndSetMail() throws PacienteRegistroException {
+	public void GetAndSetMail() throws StringVacioException, ValoresNegativosException {
 		Paciente pacienteDePrueba = new Paciente("nombre", 1111111, "123123112","mail");
 
 		pacienteDePrueba.setMail("no-tengo-mail@hotmail.com");

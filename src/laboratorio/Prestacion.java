@@ -48,7 +48,9 @@ public abstract class Prestacion {
 		this.estado = estado;
 	}
 	
-	public abstract String getResultado();
+	public String getResultado(){
+		return ("Nombre del estudio: " + nombre + ". ");
+	}
 
-	public abstract void setValoresEstadisticos(Estadistica estadistica);
+	public abstract void getValoresEstadisticos(Estadistica estadistica);
 }

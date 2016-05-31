@@ -21,24 +21,19 @@ public class GrupoDeEstudios extends Prestacion {
 		return (this.estudios.put(prestacion.getId(), prestacion) == null);
 	}
 
-	public String toString() {
-		String cadena = "Lista de estudios de "+this.getNombre()+": \n";
-		for (Prestacion e : estudios.values()) {
-			cadena += " " + e.getNombre() + "\n";
-		}
-		return cadena;
-	}
-
 	@Override
 	public String getResultado() {
-		return null;
-		
+		String resultado = super.toString() + "/n";
+		for (Prestacion prestacion : estudios.values()) {
+			resultado += " " + prestacion.getResultado() + "\n";
+		}
+		return resultado;
 	}
 
 	@Override
-	public void setValoresEstadisticos(Estadistica estadistica) {
-		//hay que recorrer la lista y hacer la estadistica, queda para despues si con las hojas lo hace bien
-		
+	public void getValoresEstadisticos(Estadistica estadistica) {
+		for(Integer i : estudios.keySet()){
+			estudios.get(i).getValoresEstadisticos(estadistica);
+		}
 	}
-
 }
