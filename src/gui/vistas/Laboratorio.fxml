@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPaneMain" prefHeight="425.0" prefWidth="1128.0" styleClass="anchorPaneMain" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controladores.LaboratorioControlador">
+   <children>
+      <TableView fx:id="tableViewPacientes" layoutY="36.0" onMouseClicked="#tableViewPacientesOnMouseClicked" prefHeight="339.0" prefWidth="557.0" styleClass="tableViewPacientes" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="36.0">
+        <columns>
+          <TableColumn fx:id="pacienteID" prefWidth="75.0" styleClass="pacienteID" text="ID" />
+          <TableColumn fx:id="pacienteNombre" prefWidth="75.0" styleClass="pacienteNombre" text="Nombre" />
+            <TableColumn fx:id="pacienteDNI" prefWidth="75.0" styleClass="pacienteDNI" text="DNI" />
+            <TableColumn fx:id="pacienteTelefono" prefWidth="75.0" styleClass="pacienteTelefono" text="Teléfono" />
+            <TableColumn fx:id="pacienteMail" prefWidth="75.0" styleClass="pacienteMail" text="Mail" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TableView fx:id="tableViewPrestaciones" layoutX="572.0" layoutY="36.0" prefHeight="339.0" prefWidth="557.0" styleClass="tableViewPrestaciones" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+        <columns>
+          <TableColumn fx:id="prestacionNombre" prefWidth="75.0" styleClass="prestacionNombre" text="Nombre" />
+          <TableColumn fx:id="prestacionIndicacion" prefWidth="75.0" styleClass="prestacionIndicacion" text="Indicación" />
+            <TableColumn fx:id="prestacionEstado" prefWidth="75.0" styleClass="prestacionEstado" text="Estado Prestación" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label fx:id="labelPacientes" layoutX="223.0" layoutY="-1.0" styleClass="labelPacientes" text="Pacientes" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="794.0" AnchorPane.topAnchor="-1.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelPrestaciones" layoutX="794.0" layoutY="-1.0" styleClass="labelPrestaciones" text="Prestaciones" AnchorPane.leftAnchor="794.0" AnchorPane.rightAnchor="223.0" AnchorPane.topAnchor="-1.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <HBox fx:id="hBox" layoutX="14.0" layoutY="391.0" prefHeight="30.0" prefWidth="1104.0" spacing="10.0" styleClass="hBox" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="391.0">
+         <children>
+            <Button fx:id="buttonAgregarAnalisis" mnemonicParsing="false" onAction="#buttonAgregarAnalisisOnAction" styleClass="buttonAgregarAnalisis" text="Agregar analisis" />
+            <Button fx:id="buttonAgregarPaciente" mnemonicParsing="false" onAction="#buttonAgregarPacienteOnAction" prefHeight="25.0" prefWidth="107.0" styleClass="buttonAgregarPaciente" text="Agregar paciente" />
+            <Button fx:id="buttonAgregarEstudio" mnemonicParsing="false" onAction="#buttonAgregarEstudioOnAction" prefHeight="25.0" prefWidth="104.0" styleClass="buttonAgregarEstudio" text="Agregar estudio" />
+            <Button fx:id="buttonAgregarGrupoDeEstudios" mnemonicParsing="false" onAction="#buttonAgregarGrupoDeEstudiosOnAction" prefHeight="25.0" prefWidth="160.0" styleClass="buttonAgregarGrupoDeEstudios" text="Agregar grupo de estudios" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

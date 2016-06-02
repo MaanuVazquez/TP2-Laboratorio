@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPaneMain" prefHeight="366.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controladores.AgregarGrupoDeEstudiosControlador">
+   <children>
+      <TableView fx:id="tableViewPrestaciones" layoutX="14.0" layoutY="31.0" prefHeight="318.0" prefWidth="359.0">
+        <columns>
+          <TableColumn fx:id="prestacionNombre" prefWidth="75.0" text="Nombre" />
+          <TableColumn fx:id="prestacionIndicacion" prefWidth="75.0" text="Indicación" />
+            <TableColumn fx:id="prestacionEstado" prefWidth="75.0" text="Estado Prestación" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label fx:id="labelPrestaciones" layoutX="144.0" layoutY="1.0" text="Prestaciones" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelNombre" layoutX="398.0" layoutY="31.0" text="Nombre:" />
+      <Label fx:id="labelIndicacion" layoutX="388.0" layoutY="61.0" text="Indicación:" />
+      <TextField fx:id="textFieldNombre" layoutX="454.0" layoutY="27.0" prefHeight="25.0" prefWidth="160.0" />
+      <VBox fx:id="vBox" layoutX="388.0" layoutY="172.0" prefHeight="100.0" prefWidth="164.0" spacing="10.0">
+         <children>
+            <Button fx:id="buttonAgregarEstudio" mnemonicParsing="false" onAction="#buttonAgregarEstudioOnAction" text="Agregar Estudio" />
+            <Button fx:id="buttonAgregarAnalisis" mnemonicParsing="false" onAction="#buttonAgregarAnalisisOnAction" text="Agregar Analisis" />
+            <Button fx:id="buttonAgregarGrupoDeEstudios" mnemonicParsing="false" onAction="#buttonAgregarGrupoDeEstudiosOnAction" text="Agregar Grupo de Estudios" />
+         </children>
+      </VBox>
+      <Button fx:id="buttonAgregar" layoutX="552.0" layoutY="327.0" mnemonicParsing="false" onAction="#buttonAgregarOnAction" text="Agregar" />
+      <TextArea fx:id="textAreaIndicacion" layoutX="454.0" layoutY="61.0" prefHeight="100.0" prefWidth="160.0" />
+   </children>
+</AnchorPane>

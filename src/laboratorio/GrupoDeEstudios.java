@@ -21,6 +21,10 @@ public class GrupoDeEstudios extends Prestacion {
 		return (this.estudios.put(prestacion.getId(), prestacion) == null);
 	}
 
+	public HashMap<Integer, Prestacion> getEstudios() {
+		return this.estudios;
+	}
+
 	@Override
 	public String getResultado() {
 		String resultado = super.toString() + "/n";
