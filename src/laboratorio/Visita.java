@@ -3,17 +3,18 @@ package laboratorio;
 import java.util.Date;
 
 public class Visita {
-	
-	private static Integer idMax = new Integer (1);
+
+	private static Integer idMax = new Integer(1);
 	private Prestacion prestacion;
 	private Paciente paciente;
 	private Integer id;
 	private Date fecha;
-	
+
 	public Visita(Prestacion prestacion, Paciente paciente) {
 		this.prestacion = prestacion;
 		this.paciente = paciente;
 		this.id = new Integer(idMax.intValue());
+		idMax++;
 		this.fecha = new Date();
 	}
 

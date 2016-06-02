@@ -16,7 +16,7 @@ public class GrupoDeEstudios extends Prestacion {
 	/*
 	 * return false si el estudio ya se encontraba agregado
 	 */
-	
+
 	public boolean agregarEstudio(Prestacion prestacion) {
 		return (this.estudios.put(prestacion.getId(), prestacion) == null);
 	}
@@ -32,7 +32,7 @@ public class GrupoDeEstudios extends Prestacion {
 
 	@Override
 	public void getValoresEstadisticos(Estadistica estadistica) {
-		for(Integer i : estudios.keySet()){
+		for (Integer i : estudios.keySet()) {
 			estudios.get(i).getValoresEstadisticos(estadistica);
 		}
 	}

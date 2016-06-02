@@ -20,8 +20,7 @@ public class Laboratorio {
 		this.visitas = new HashMap<Integer, Visita>();
 	}
 
-	public void agregarVisita(Prestacion prestacion, Paciente paciente)
-			throws PrestacionExistenteException {
+	public void agregarVisita(Prestacion prestacion, Paciente paciente) throws PrestacionExistenteException {
 		if (this.prestaciones.put(prestacion.getId(), prestacion) != null) {
 			throw new PrestacionExistenteException();
 		}
@@ -41,8 +40,7 @@ public class Laboratorio {
 		return laboratorioInstance;
 	}
 
-	public String listarEstadisticas(Date inicio, Date fin)
-			throws FechasInvalidasException {
+	public String listarEstadisticas(Date inicio, Date fin) throws FechasInvalidasException {
 
 		if (inicio.after(fin)) {
 			throw new FechasInvalidasException(inicio, fin);
@@ -58,5 +56,17 @@ public class Laboratorio {
 			}
 		}
 		return estadistica.mostrarEstadistica();
+	}
+
+	public HashMap<Integer, Prestacion> getPrestaciones() {
+		return this.prestaciones;
+	}
+
+	public HashMap<Integer, Paciente> getPacientes() {
+		return this.pacientes;
+	}
+
+	public HashMap<Integer, Visita> getVisitas() {
+		return this.visitas;
 	}
 }
