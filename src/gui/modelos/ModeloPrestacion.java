@@ -1,17 +1,28 @@
 package gui.modelos;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class ModeloPrestacion {
 
+	private SimpleIntegerProperty id = new SimpleIntegerProperty();
 	private SimpleStringProperty nombre = new SimpleStringProperty();
 	private SimpleStringProperty indicacion = new SimpleStringProperty();
 	private SimpleStringProperty estado = new SimpleStringProperty();
 
-	public ModeloPrestacion(String nombre, String indicacion, String estado) {
+	public ModeloPrestacion(Integer id, String nombre, String indicacion, String estado) {
+		setId(id);
 		setNombre(nombre);
 		setIndicacion(indicacion);
 		setEstado(estado);
+	}
+
+	public Integer getId() {
+		return this.id.get();
+	}
+
+	public void setId(Integer id) {
+		this.id.set(id);
 	}
 
 	public String getNombre() {

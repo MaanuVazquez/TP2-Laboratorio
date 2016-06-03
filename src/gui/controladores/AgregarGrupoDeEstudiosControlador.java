@@ -123,9 +123,9 @@ public class AgregarGrupoDeEstudiosControlador {
 		listaPrestaciones = FXCollections.observableArrayList();
 
 		for (Prestacion prestacion : grupo.getEstudios().values()) {
-			ModeloPrestacion modeloPaciente = new ModeloPrestacion(prestacion.getNombre(), prestacion.getIndicacion(),
-					prestacion.getEstado().toString());
-			listaPrestaciones.add(modeloPaciente);
+			ModeloPrestacion modeloPrestacion = new ModeloPrestacion(prestacion.getId(), prestacion.getNombre(),
+					prestacion.getIndicacion(), prestacion.getEstado().toString());
+			listaPrestaciones.add(modeloPrestacion);
 		}
 
 		tableViewPrestaciones.setItems(listaPrestaciones);
@@ -170,17 +170,17 @@ public class AgregarGrupoDeEstudiosControlador {
 		AnchorPane root;
 		root = (AnchorPane) loader.load();
 		Scene scene = new Scene(root);
-		Stage dialogoAgregarEstudio = new Stage();
+		Stage dialogoAgregarAnalisis = new Stage();
 		scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-		dialogoAgregarEstudio.initOwner(anchorPaneMain.getScene().getWindow());
-		dialogoAgregarEstudio.initStyle(StageStyle.DECORATED);
-		dialogoAgregarEstudio.initModality(Modality.APPLICATION_MODAL);
-		dialogoAgregarEstudio.setScene(scene);
-		dialogoAgregarEstudio.setTitle("Agregar Estudio");
-		dialogoAgregarEstudio.setResizable(false);
+		dialogoAgregarAnalisis.initOwner(anchorPaneMain.getScene().getWindow());
+		dialogoAgregarAnalisis.initStyle(StageStyle.DECORATED);
+		dialogoAgregarAnalisis.initModality(Modality.APPLICATION_MODAL);
+		dialogoAgregarAnalisis.setScene(scene);
+		dialogoAgregarAnalisis.setTitle("Agregar Estudio");
+		dialogoAgregarAnalisis.setResizable(false);
 		AgregarAnalisisControlador controller = (AgregarAnalisisControlador) loader.getController();
 		controller.initDataDeGrupo(this, grupo);
-		dialogoAgregarEstudio.show();
+		dialogoAgregarAnalisis.show();
 
 	}
 
@@ -191,17 +191,17 @@ public class AgregarGrupoDeEstudiosControlador {
 		AnchorPane root;
 		root = (AnchorPane) loader.load();
 		Scene scene = new Scene(root);
-		Stage dialogoAgregarEstudio = new Stage();
+		Stage dialogoAgregarGrupoDeEstudios = new Stage();
 		scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-		dialogoAgregarEstudio.initOwner(anchorPaneMain.getScene().getWindow());
-		dialogoAgregarEstudio.initStyle(StageStyle.DECORATED);
-		dialogoAgregarEstudio.initModality(Modality.APPLICATION_MODAL);
-		dialogoAgregarEstudio.setScene(scene);
-		dialogoAgregarEstudio.setTitle("Agregar Estudio");
-		dialogoAgregarEstudio.setResizable(false);
+		dialogoAgregarGrupoDeEstudios.initOwner(anchorPaneMain.getScene().getWindow());
+		dialogoAgregarGrupoDeEstudios.initStyle(StageStyle.DECORATED);
+		dialogoAgregarGrupoDeEstudios.initModality(Modality.APPLICATION_MODAL);
+		dialogoAgregarGrupoDeEstudios.setScene(scene);
+		dialogoAgregarGrupoDeEstudios.setTitle("Agregar Estudio");
+		dialogoAgregarGrupoDeEstudios.setResizable(false);
 		AgregarGrupoDeEstudiosControlador controller = (AgregarGrupoDeEstudiosControlador) loader.getController();
 		controller.initDataDeGrupo(this, grupo);
-		dialogoAgregarEstudio.show();
+		dialogoAgregarGrupoDeEstudios.show();
 
 	}
 

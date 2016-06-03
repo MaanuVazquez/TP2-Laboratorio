@@ -73,13 +73,13 @@ public class AgregarPacienteControlador {
 			lab.agregarPaciente(
 					new Paciente(this.textFieldNombre.getText(), Integer.parseInt(this.textFieldDNI.getText()),
 							this.textFieldTelefono.getText(), this.textFieldMail.getText()));
+			laboratorioControlador.actualizarTablaPacientes();
+			Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
+			stage.close();
 		} catch (NumberFormatException | StringVacioException | ValoresNegativosException e) {
-			// TODO Auto-generated catch block
+			// TODO Mensaje de Error
 			e.printStackTrace();
 		}
-		laboratorioControlador.actualizarTablaPacientes();
-		Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
-		stage.close();
 
 	}
 }
