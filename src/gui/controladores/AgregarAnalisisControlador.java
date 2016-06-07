@@ -1,6 +1,7 @@
 package gui.controladores;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import excepciones.PrestacionExistenteException;
 import excepciones.RangoDeValoresInvalido;
@@ -105,7 +106,7 @@ public class AgregarAnalisisControlador {
 	}
 
 	@FXML
-	private void buttonAgregarOnAction() throws IOException {
+	private void buttonAgregarOnAction() throws IOException, ParseException {
 
 		Laboratorio lab = Laboratorio.getIntance();
 		try {

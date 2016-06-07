@@ -1,5 +1,6 @@
 package laboratorio;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -20,7 +21,7 @@ public class Laboratorio {
 		this.visitas = new HashMap<Integer, Visita>();
 	}
 
-	public void agregarVisita(Prestacion prestacion, Paciente paciente) throws PrestacionExistenteException {
+	public void agregarVisita(Prestacion prestacion, Paciente paciente) throws PrestacionExistenteException, ParseException {
 		if (this.prestaciones.put(prestacion.getId(), prestacion) != null) {
 			throw new PrestacionExistenteException();
 		}
@@ -29,7 +30,7 @@ public class Laboratorio {
 	}
 
 	public void agregarPaciente(Paciente p) {
-		this.pacientes.put(p.getId(), p);
+		this.pacientes.put(p.getDni(), p);
 	}
 
 	public Paciente buscarPaciente(int id) {

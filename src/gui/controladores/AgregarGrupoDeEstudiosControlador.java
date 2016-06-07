@@ -1,6 +1,7 @@
 package gui.controladores;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import excepciones.PrestacionExistenteException;
 import excepciones.StringVacioException;
@@ -207,7 +208,7 @@ public class AgregarGrupoDeEstudiosControlador {
 	}
 
 	@FXML
-	private void buttonAgregarOnAction() throws IOException {
+	private void buttonAgregarOnAction() throws IOException, ParseException {
 
 		grupo.setNombre(this.textFieldNombre.getText());
 		grupo.setIndicacion(this.textAreaIndicacion.getText());

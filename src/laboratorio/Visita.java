@@ -12,18 +12,14 @@ public class Visita {
 	private Integer id;
 	private Date fecha;
 
-	public Visita(Prestacion prestacion, Paciente paciente) {
+	public Visita(Prestacion prestacion, Paciente paciente) throws ParseException {
 		this.prestacion = prestacion;
 		this.paciente = paciente;
 		this.id = new Integer(idMax.intValue());
 		idMax++;
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			this.fecha = formatter.parse(formatter.format(new Date()));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.fecha = formatter.parse(formatter.format(new Date()));
+
 	}
 
 	public Prestacion getPrestacion() {

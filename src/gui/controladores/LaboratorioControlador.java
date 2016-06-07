@@ -1,6 +1,7 @@
 package gui.controladores;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import enums.EstadoPrestacion;
 import excepciones.PrestacionExistenteException;
@@ -129,7 +130,7 @@ public class LaboratorioControlador {
 
 	@FXML
 	private void initialize() throws StringVacioException, ValoresNegativosException, PrestacionExistenteException,
-			RangoDeValoresInvalido {
+			RangoDeValoresInvalido, ParseException {
 		assert buttonAgregarEstudio != null : "fx:id=\"buttonAgregarEstudio\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		assert buttonIngresarResultadoPorPaciente != null : "fx:id=\"buttonIngresarResultadoPorPaciente\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		assert buttonAgregarPaciente != null : "fx:id=\"buttonAgregarPaciente\" was not injected: check your FXML file 'Laboratorio.fxml'.";
@@ -163,7 +164,7 @@ public class LaboratorioControlador {
 	}
 
 	private void popularPrograma() throws StringVacioException, ValoresNegativosException, PrestacionExistenteException,
-			RangoDeValoresInvalido {
+			RangoDeValoresInvalido, ParseException {
 		Paciente p = new Paciente("Juan Perez", 12345670, "03034567", "hola@hola.com");
 		Paciente p2 = new Paciente("Roberto Gomez Bolaños", 12345671, "03034567", "hola@hola.com");
 		Paciente p3 = new Paciente("Bruce Wayne", 12345672, "03034567", "hola@hola.com");

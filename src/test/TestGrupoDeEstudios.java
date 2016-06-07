@@ -25,7 +25,7 @@ public class TestGrupoDeEstudios {
 	}
 
 	/*
-	 * Prueba agregarEstudio (para poder comprobar que se agrego tuve que probar todos los metodos)
+	 * Prueba agregarEstudio
 	 */
 	
 	@Test
@@ -36,7 +36,7 @@ public class TestGrupoDeEstudios {
 		analisis.setResultado(20);
 		grupoDeEstudiosDePrueba.agregarEstudio(analisis);
 		String Resultado = analisis.getResultado();
-		Assert.assertTrue(grupoDeEstudiosDePrueba.getResultado().contains(Resultado));;
+		Assert.assertTrue(grupoDeEstudiosDePrueba.getResultado().contains(Resultado));
 	}
 	
 }

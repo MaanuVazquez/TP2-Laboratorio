@@ -14,15 +14,6 @@ public class TestVisita {
 	}
 
 	/*
-	 * Prueba setPrestacion
-	 */
-
-	@Test
-	public void testSetPrestacion() {
-
-	}
-
-	/*
 	 * Prueba getPaciente
 	 */
 
@@ -32,29 +23,11 @@ public class TestVisita {
 	}
 
 	/*
-	 * Prueba setPaciente
-	 */
-
-	@Test
-	public void testSetPaciente() {
-
-	}
-
-	/*
 	 * Prueba getId
 	 */
 
 	@Test
 	public void testGetId() {
-
-	}
-
-	/*
-	 * Prueba setId
-	 */
-
-	@Test
-	public void testSetId() {
 
 	}
 
