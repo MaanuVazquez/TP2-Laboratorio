@@ -13,9 +13,8 @@ public class Analisis extends Prestacion {
 	private double valorMedido;
 	private ClasificacionEstudio clasificacion;
 
-	public Analisis(String nombre, String indicacion, double valorNormalMinimo,
-			double valorNormalMaximo) throws StringVacioException,
-			ValoresNegativosException, RangoDeValoresInvalido {
+	public Analisis(String nombre, String indicacion, double valorNormalMinimo, double valorNormalMaximo)
+			throws StringVacioException, ValoresNegativosException, RangoDeValoresInvalido {
 
 		super(nombre, indicacion);
 		this.validarValores(valorNormalMaximo);
@@ -25,14 +24,12 @@ public class Analisis extends Prestacion {
 		this.validarRangoValores();
 	}
 
-	public void setResultado(double valorMedido)
-			throws ValoresNegativosException {
+	public void setResultado(double valorMedido) throws ValoresNegativosException {
 
 		this.validarValores(valorMedido);
 		this.valorMedido = valorMedido;
 
-		if (this.valorMedido <= this.valorNormalMaximo
-				&& this.valorMedido >= this.valorNormalMinimo) {
+		if (this.valorMedido <= this.valorNormalMaximo && this.valorMedido >= this.valorNormalMinimo) {
 			this.clasificacion = ClasificacionEstudio.NORMAL;
 		} else {
 			this.clasificacion = ClasificacionEstudio.ANORMAL;
@@ -42,9 +39,8 @@ public class Analisis extends Prestacion {
 
 	@Override
 	public String getResultado() {
-		return (super.toString() + "Valor Medido: " + this.valorMedido
-				+ ". Clasificacion: " + this.getClasificacion().toString()
-				+ ". Rango de Normalidad [" + this.getValorNormalMinimo() + " - "
+		return (super.toString() + "Valor Medido: " + this.valorMedido + ". Clasificacion: "
+				+ this.getClasificacion().toString() + ". Rango de Normalidad [" + this.getValorNormalMinimo() + " - "
 				+ this.getValorNormalMaximo() + "].");
 	}
 
@@ -82,8 +78,12 @@ public class Analisis extends Prestacion {
 	private void validarRangoValores() throws RangoDeValoresInvalido {
 
 		if (this.getValorNormalMaximo() <= this.getValorNormalMinimo()) {
-			throw new RangoDeValoresInvalido(this.getValorNormalMinimo(),
-					this.getValorNormalMaximo());
+			throw new RangoDeValoresInvalido(this.getValorNormalMinimo(), this.getValorNormalMaximo());
 		}
+	}
+
+	@Override
+	public String getResultForm() {
+		return "Analisis";
 	}
 }

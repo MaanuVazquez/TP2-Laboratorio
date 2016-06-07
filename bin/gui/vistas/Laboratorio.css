@@ -3140,3 +3140,9 @@ is being used to size a border should also be in pixels.
 .date-picker-popup > * > .next-month.today:hover {
     -fx-background-color: -fx-selection-bar-non-focused, derive(-fx-selection-bar-non-focused, -20%), -fx-selection-bar-non-focused;
 }
+
+.textFieldSearch {
+  -fx-background-image: url('searchButton.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: right center;
+}

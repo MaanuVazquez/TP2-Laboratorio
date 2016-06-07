@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="anchorPaneMain" prefHeight="366.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controladores.AgregarGrupoDeEstudiosControlador">
    <children>
-      <TableView fx:id="tableViewPrestaciones" layoutX="14.0" layoutY="31.0" prefHeight="318.0" prefWidth="359.0">
+      <TableView fx:id="tableViewPrestaciones" layoutX="5.0" layoutY="31.0" prefHeight="318.0" prefWidth="379.0">
         <columns>
           <TableColumn fx:id="prestacionNombre" prefWidth="75.0" text="Nombre" />
           <TableColumn fx:id="prestacionIndicacion" prefWidth="75.0" text="Indicación" />
@@ -27,14 +27,10 @@
       <Label fx:id="labelNombre" layoutX="398.0" layoutY="31.0" text="Nombre:" />
       <Label fx:id="labelIndicacion" layoutX="388.0" layoutY="61.0" text="Indicación:" />
       <TextField fx:id="textFieldNombre" layoutX="454.0" layoutY="27.0" prefHeight="25.0" prefWidth="160.0" />
-      <VBox fx:id="vBox" layoutX="388.0" layoutY="172.0" prefHeight="100.0" prefWidth="164.0" spacing="10.0">
-         <children>
-            <Button fx:id="buttonAgregarEstudio" mnemonicParsing="false" onAction="#buttonAgregarEstudioOnAction" text="Agregar Estudio" />
-            <Button fx:id="buttonAgregarAnalisis" mnemonicParsing="false" onAction="#buttonAgregarAnalisisOnAction" text="Agregar Analisis" />
-            <Button fx:id="buttonAgregarGrupoDeEstudios" mnemonicParsing="false" onAction="#buttonAgregarGrupoDeEstudiosOnAction" text="Agregar Grupo de Estudios" />
-         </children>
-      </VBox>
       <Button fx:id="buttonAgregar" layoutX="552.0" layoutY="327.0" mnemonicParsing="false" onAction="#buttonAgregarOnAction" text="Agregar" />
       <TextArea fx:id="textAreaIndicacion" layoutX="454.0" layoutY="61.0" prefHeight="100.0" prefWidth="160.0" />
+      <Button fx:id="buttonAgregarEstudio" layoutX="454.0" layoutY="203.0" mnemonicParsing="false" onAction="#buttonAgregarEstudioOnAction" prefHeight="25.0" prefWidth="160.0" text="Agregar Estudio" />
+      <Button fx:id="buttonAgregarGrupoDeEstudios" layoutX="454.0" layoutY="234.0" mnemonicParsing="false" onAction="#buttonAgregarGrupoDeEstudiosOnAction" prefHeight="25.0" prefWidth="160.0" text="Agregar Grupo de Estudios" />
+      <Button fx:id="buttonAgregarAnalisis" layoutX="454.0" layoutY="171.0" mnemonicParsing="false" onAction="#buttonAgregarAnalisisOnAction" prefHeight="25.0" prefWidth="160.0" text="Agregar Análisis" />
    </children>
 </AnchorPane>

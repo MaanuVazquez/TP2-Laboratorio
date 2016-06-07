@@ -40,4 +40,9 @@ public class GrupoDeEstudios extends Prestacion {
 			estudios.get(i).getValoresEstadisticos(estadistica);
 		}
 	}
+
+	@Override
+	public String getResultForm() {
+		return "GrupoDeEstudios";
+	}
 }

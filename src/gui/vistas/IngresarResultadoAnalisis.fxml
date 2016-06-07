@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPaneMain" prefHeight="201.0" prefWidth="219.0" styleClass="anchorPaneMain" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controladores.IngresarResultadoAnalisisControlador">
+   <children>
+      <Label fx:id="labelValorMedido" layoutX="14.0" layoutY="94.0" styleClass="labelValorMedido" text="Valor Medido:" />
+      <TextField fx:id="textFieldValorMedido" layoutX="95.0" layoutY="94.0" prefHeight="25.0" prefWidth="38.0" styleClass="textFieldValolrMedido" />
+      <Button fx:id="buttonIngresar" layoutX="146.0" layoutY="162.0" mnemonicParsing="false" onAction="#buttonIngresarOnAction" styleClass="buttonIngresar" text="Ingresar" />
+      <Label fx:id="labelNombre" layoutX="14.0" layoutY="34.0" styleClass="labelNombre" text="Nombre:" />
+      <Label fx:id="labelValorMinimo" layoutX="14.0" layoutY="54.0" styleClass="labelValorMinimo" text="Valor Minimo:" />
+      <Label fx:id="labelValorMaximo" layoutX="14.0" layoutY="74.0" styleClass="labelValorMaximo" text="Valolr Maximo:" />
+      <Label fx:id="labelPrestacion" layoutX="14.0" layoutY="14.0" styleClass="labelPrestacion" text="Prestación:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

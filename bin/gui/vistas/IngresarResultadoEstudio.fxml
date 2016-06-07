@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane fx:id="anchorPaneMain" prefHeight="314.0" prefWidth="519.0" styleClass="anchorPaneMain" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="gui.controladores.IngresarResultadoEstudioControlador">
+<AnchorPane fx:id="anchorPaneMain" prefHeight="332.0" prefWidth="519.0" styleClass="anchorPaneMain" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controladores.IngresarResultadoEstudioControlador">
    <children>
-      <Label fx:id="labelClasificacion" layoutX="20.0" layoutY="18.0" styleClass="labelClasificacion" text="Clasificación:" />
-      <Label fx:id="labelInforme" layoutX="43.0" layoutY="48.0" styleClass="labelInforme" text="Informe:" />
-      <Button fx:id="buttonIngresar" layoutX="446.0" layoutY="275.0" mnemonicParsing="false" onAction="#buttonIngresarOnAction" styleClass="buttonIngresar" text="Ingresar" />
-      <TextArea fx:id="textAreaInforme" layoutX="92.0" layoutY="48.0" prefHeight="220.0" prefWidth="411.0" styleClass="textAreaInforme" />
-      <ChoiceBox fx:id="choiceBoxClasificacion" layoutX="92.0" layoutY="14.0" prefHeight="25.0" prefWidth="98.0" styleClass="choiceBoxClasificacion" />
+      <Label fx:id="labelClasificacion" layoutX="14.0" layoutY="39.0" styleClass="labelClasificacion" text="Clasificación:" />
+      <Label fx:id="labelInforme" layoutX="15.0" layoutY="64.0" styleClass="labelInforme" text="Informe:" />
+      <Button fx:id="buttonIngresar" layoutX="446.0" layoutY="293.0" mnemonicParsing="false" onAction="#buttonIngresarOnAction" styleClass="buttonIngresar" text="Ingresar" />
+      <TextArea fx:id="textAreaInforme" layoutX="88.0" layoutY="64.0" prefHeight="220.0" prefWidth="411.0" styleClass="textAreaInforme" />
+      <ChoiceBox fx:id="choiceBoxClasificacion" layoutX="88.0" layoutY="34.0" prefHeight="25.0" prefWidth="98.0" styleClass="choiceBoxClasificacion" />
+      <Label fx:id="labelNombre" layoutX="14.0" layoutY="14.0" text="Nombre:" />
    </children>
 </AnchorPane>

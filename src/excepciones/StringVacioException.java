@@ -3,7 +3,7 @@ package excepciones;
 public class StringVacioException extends Exception {
 
 	public StringVacioException() {
-		super("No se puede dejar el espacio en blanco");
+		super("No puede haber espacios en blanco");
 	}
 
 	/**

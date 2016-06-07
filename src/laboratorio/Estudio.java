@@ -9,13 +9,11 @@ public class Estudio extends Prestacion {
 	private ClasificacionEstudio clasificacion;
 	private String informe;
 
-	public Estudio(String nombre, String indicacion)
-			throws StringVacioException {
+	public Estudio(String nombre, String indicacion) throws StringVacioException {
 		super(nombre, indicacion);
 	}
 
-	public void setResultado(ClasificacionEstudio clasificacion, String informe)
-			throws StringVacioException {
+	public void setResultado(ClasificacionEstudio clasificacion, String informe) throws StringVacioException {
 		this.validarStrings(informe);
 		this.clasificacion = clasificacion;
 		this.informe = informe;
@@ -39,7 +37,11 @@ public class Estudio extends Prestacion {
 
 	@Override
 	public String getResultado() {
-		return super.toString() + "Clasificacion: "
-				+ this.getClasificacion().toString() + ". " + this.informe;
+		return super.toString() + "Clasificacion: " + this.getClasificacion().toString() + ". " + this.informe;
+	}
+
+	@Override
+	public String getResultForm() {
+		return "Estudio";
 	}
 }

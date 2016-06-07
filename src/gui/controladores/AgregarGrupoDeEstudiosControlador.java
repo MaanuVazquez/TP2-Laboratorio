@@ -18,7 +18,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -36,13 +35,10 @@ public class AgregarGrupoDeEstudiosControlador {
 	private Button buttonAgregarEstudio;
 
 	@FXML
-	private VBox vBox;
+	private TextArea textAreaIndicacion;
 
 	@FXML
 	private Label labelIndicacion;
-
-	@FXML
-	private TextArea textAreaIndicacion;
 
 	@FXML
 	private Button buttonAgregarAnalisis;
@@ -91,9 +87,8 @@ public class AgregarGrupoDeEstudiosControlador {
 	private void initialize() throws StringVacioException {
 		assert textFieldNombre != null : "fx:id=\"textFieldNombre\" was not injected: check your FXML file 'AgregarGrupoDeEstudios.fxml'.";
 		assert buttonAgregarEstudio != null : "fx:id=\"buttonAgregarEstudio\" was not injected: check your FXML file 'AgregarGrupoDeEstudios.fxml'.";
-		assert vBox != null : "fx:id=\"vBox\" was not injected: check your FXML file 'AgregarGrupoDeEstudios.fxml'.";
+		assert textAreaIndicacion != null : "fx:id=\"textAreaIndicacion\" was not injected: check your FXML file 'AgregarGrupoDeEstudios.fxml'.";
 		assert labelIndicacion != null : "fx:id=\"labelIndicacion\" was not injected: check your FXML file 'AgregarGrupoDeEstudios.fxml'.";
-		assert textAreaIndicacion != null : "fx:id=\"textFieldIndicacion\" was not injected: check your FXML file 'AgregarGrupoDeEstudios.fxml'.";
 		assert buttonAgregarAnalisis != null : "fx:id=\"buttonAgregarAnalisis\" was not injected: check your FXML file 'AgregarGrupoDeEstudios.fxml'.";
 		assert prestacionIndicacion != null : "fx:id=\"prestacionIndicacion\" was not injected: check your FXML file 'AgregarGrupoDeEstudios.fxml'.";
 		assert anchorPaneMain != null : "fx:id=\"anchorPaneMain\" was not injected: check your FXML file 'AgregarGrupoDeEstudios.fxml'.";
@@ -140,6 +135,12 @@ public class AgregarGrupoDeEstudiosControlador {
 	public void initDataDeGrupo(AgregarGrupoDeEstudiosControlador a, GrupoDeEstudios g) {
 		grupoAnterior = g;
 		controlador = a;
+	}
+
+	private void verificarString() throws StringVacioException {
+		if (this.textFieldNombre.getText().trim().isEmpty() || this.textAreaIndicacion.getText().trim().isEmpty()) {
+			throw new StringVacioException();
+		}
 	}
 
 	@FXML
@@ -206,26 +207,36 @@ public class AgregarGrupoDeEstudiosControlador {
 	}
 
 	@FXML
-	private void buttonAgregarOnAction() {
+	private void buttonAgregarOnAction() throws IOException {
 
 		grupo.setNombre(this.textFieldNombre.getText());
 		grupo.setIndicacion(this.textAreaIndicacion.getText());
 
 		if (grupoAnterior != null) {
-			grupoAnterior.agregarEstudio(grupo);
-			controlador.actualizarTablaPacientes();
+			try {
+				verificarString();
+				grupoAnterior.agregarEstudio(grupo);
+				controlador.actualizarTablaPacientes();
+				Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
+				stage.close();
+			} catch (StringVacioException e) {
+				laboratorioControlador.mensaje("Error", e.getMessage());
+			}
+
 		} else {
 			Laboratorio lab = Laboratorio.getIntance();
 			try {
+				verificarString();
 				lab.agregarVisita(grupo, paciente);
 				laboratorioControlador.actualizarTablaPrestaciones(paciente);
-			} catch (NumberFormatException | PrestacionExistenteException e) {
-				// agregar mensaje de error jeje
-				e.printStackTrace();
+				Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
+				stage.close();
+			} catch (PrestacionExistenteException | StringVacioException e) {
+				laboratorioControlador.mensaje("Error", e.getMessage());
 			}
+
 		}
-		Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
-		stage.close();
+
 	}
 
 }

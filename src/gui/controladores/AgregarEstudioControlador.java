@@ -1,5 +1,7 @@
 package gui.controladores;
 
+import java.io.IOException;
+
 import excepciones.PrestacionExistenteException;
 import excepciones.StringVacioException;
 import javafx.fxml.FXML;
@@ -64,7 +66,7 @@ public class AgregarEstudioControlador {
 	}
 
 	@FXML
-	private void buttonAgregarOnAction() {
+	private void buttonAgregarOnAction() throws IOException {
 
 		Laboratorio lab = Laboratorio.getIntance();
 		try {
@@ -77,13 +79,12 @@ public class AgregarEstudioControlador {
 						pacienteAEstudiar);
 				laboratorioControlador.actualizarTablaPrestaciones(pacienteAEstudiar);
 			}
-		} catch (PrestacionExistenteException | StringVacioException e) {
-			// INSERTAR MENSAJE DE ERROR JEJE
-			e.printStackTrace();
-		}
 
-		Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
-		stage.close();
+			Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
+			stage.close();
+		} catch (PrestacionExistenteException | StringVacioException e) {
+			laboratorioControlador.mensaje("Error", e.getMessage());
+		}
 
 	}
 }

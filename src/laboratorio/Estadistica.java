@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.TreeMap;
 
 import estadisticas.EstadisticaAnalisis;
+import estadisticas.EstadisticaEstudios;
 import estadisticas.EstadisticaIndividual;
 
 public class Estadistica {
@@ -19,7 +20,7 @@ public class Estadistica {
 	}
 
 	public String mostrarEstadistica() {
-		String resultado = "123";
+		String resultado = this.estadisticas.toString();
 		Iterator<String> iterador = estadisticas.keySet().iterator();
 		while (iterador.hasNext()) {
 			resultado += estadisticas.get(iterador.next()).toString();
@@ -37,7 +38,7 @@ public class Estadistica {
 
 	public void agregarEstudio(Estudio estudio) {
 		if (!estadisticas.containsKey(estudio.getNombre())) {
-			estadisticas.put(estudio.getNombre(), new EstadisticaAnalisis(estudio));
+			estadisticas.put(estudio.getNombre(), new EstadisticaEstudios(estudio));
 		} else {
 			estadisticas.get(estudio.getNombre()).agregarPrestacion(estudio);
 		}

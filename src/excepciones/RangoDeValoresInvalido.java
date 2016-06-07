@@ -4,7 +4,7 @@ public class RangoDeValoresInvalido extends Exception {
 
 	public RangoDeValoresInvalido(double valorNormalMinimo,
 			double valorNormalMaximo) {
-		super("El valor minimo: " + valorNormalMinimo + " es mayor al valor maximo: " + valorNormalMaximo + ".");
+		super("El valor minimo: " + valorNormalMinimo + " es mayor o igual al valor maximo: " + valorNormalMaximo + ".");
 	}
 
 	/**

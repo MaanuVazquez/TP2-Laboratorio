@@ -1,9 +1,13 @@
 package gui.controladores;
 
+import java.io.IOException;
+
 import excepciones.PrestacionExistenteException;
 import excepciones.RangoDeValoresInvalido;
 import excepciones.StringVacioException;
 import excepciones.ValoresNegativosException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -48,13 +52,13 @@ public class AgregarAnalisisControlador {
 	@FXML
 	private Label labelNombre;
 
-	private LaboratorioControlador laboratorioControlador;
+	private LaboratorioControlador laboratorioControlador = new LaboratorioControlador();
 
 	private Paciente paciente;
 
-	private AgregarGrupoDeEstudiosControlador controlador = null;
+	private AgregarGrupoDeEstudiosControlador controlador;
 
-	private GrupoDeEstudios grupoAnterior = null;
+	private GrupoDeEstudios grupoAnterior;
 
 	@FXML
 	private void initialize() {
@@ -69,6 +73,25 @@ public class AgregarAnalisisControlador {
 		assert labelValorMinimo != null : "fx:id=\"labelValorMinimo\" was not injected: check your FXML file 'AgregarAnalisis.fxml'.";
 		assert labelNombre != null : "fx:id=\"labelNombre\" was not injected: check your FXML file 'AgregarAnalisis.fxml'.";
 
+		// Validar los textField de Valores medidos
+		this.textFieldValorMaximo.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					textFieldValorMaximo.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
+
+		this.textFieldValorMinimo.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					textFieldValorMinimo.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
+
 	}
 
 	public void initData(LaboratorioControlador l, Paciente p) {
@@ -82,7 +105,7 @@ public class AgregarAnalisisControlador {
 	}
 
 	@FXML
-	private void buttonAgregarOnAction() {
+	private void buttonAgregarOnAction() throws IOException {
 
 		Laboratorio lab = Laboratorio.getIntance();
 		try {
@@ -97,13 +120,12 @@ public class AgregarAnalisisControlador {
 						Integer.parseInt(this.textFieldValorMaximo.getText())), paciente);
 				laboratorioControlador.actualizarTablaPrestaciones(paciente);
 			}
+			Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
+			stage.close();
 		} catch (NumberFormatException | ValoresNegativosException | RangoDeValoresInvalido
 				| PrestacionExistenteException | StringVacioException e) {
-			// agregar mensaje de error jeje
-			e.printStackTrace();
+			laboratorioControlador.mensaje("Error", e.getMessage());
 		}
-		Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
-		stage.close();
 
 	}
 

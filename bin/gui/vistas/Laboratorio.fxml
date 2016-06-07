@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPaneMain" prefHeight="425.0" prefWidth="1128.0" styleClass="anchorPaneMain" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controladores.LaboratorioControlador">
+<AnchorPane fx:id="anchorPaneMain" prefHeight="592.0" prefWidth="797.0" styleClass="anchorPaneMain" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controladores.LaboratorioControlador">
    <children>
-      <TableView fx:id="tableViewPacientes" layoutY="36.0" onMouseClicked="#tableViewPacientesOnMouseClicked" prefHeight="339.0" prefWidth="557.0" styleClass="tableViewPacientes" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="36.0">
+      <TableView fx:id="tableViewPacientes" layoutX="14.0" layoutY="29.0" onMouseClicked="#tableViewPacientesOnMouseClicked" prefHeight="250.0" prefWidth="557.0" styleClass="tableViewPacientes">
         <columns>
           <TableColumn fx:id="pacienteID" prefWidth="75.0" styleClass="pacienteID" text="ID" />
           <TableColumn fx:id="pacienteNombre" prefWidth="75.0" styleClass="pacienteNombre" text="Nombre" />
@@ -20,7 +22,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView fx:id="tableViewPrestaciones" layoutX="572.0" layoutY="36.0" prefHeight="339.0" prefWidth="557.0" styleClass="tableViewPrestaciones" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+      <TableView fx:id="tableViewPrestaciones" layoutX="14.0" layoutY="311.0" prefHeight="250.0" prefWidth="557.0" styleClass="tableViewPrestaciones">
         <columns>
           <TableColumn fx:id="prestacionNombre" prefWidth="75.0" styleClass="prestacionNombre" text="Nombre" />
           <TableColumn fx:id="prestacionIndicacion" prefWidth="75.0" styleClass="prestacionIndicacion" text="Indicación" />
@@ -30,25 +32,59 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label fx:id="labelPacientes" layoutX="223.0" layoutY="-1.0" styleClass="labelPacientes" text="Pacientes" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="794.0" AnchorPane.topAnchor="-1.0">
+      <Label fx:id="labelPacientes" layoutX="233.0" layoutY="-1.0" styleClass="labelPacientes" text="Pacientes">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="labelPrestaciones" layoutX="794.0" layoutY="-1.0" styleClass="labelPrestaciones" text="Prestaciones" AnchorPane.leftAnchor="794.0" AnchorPane.rightAnchor="223.0" AnchorPane.topAnchor="-1.0">
+      <Label fx:id="labelPrestaciones" layoutX="223.0" layoutY="281.0" styleClass="labelPrestaciones" text="Prestaciones">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <HBox fx:id="hBox" layoutX="14.0" layoutY="391.0" prefHeight="30.0" prefWidth="1104.0" spacing="10.0" styleClass="hBox" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="391.0">
-         <children>
-            <Button fx:id="buttonAgregarAnalisis" mnemonicParsing="false" onAction="#buttonAgregarAnalisisOnAction" styleClass="buttonAgregarAnalisis" text="Agregar análisis" />
-            <Button fx:id="buttonAgregarPaciente" mnemonicParsing="false" onAction="#buttonAgregarPacienteOnAction" prefHeight="25.0" prefWidth="107.0" styleClass="buttonAgregarPaciente" text="Agregar paciente" />
-            <Button fx:id="buttonAgregarEstudio" mnemonicParsing="false" onAction="#buttonAgregarEstudioOnAction" prefHeight="25.0" prefWidth="104.0" styleClass="buttonAgregarEstudio" text="Agregar estudio" />
-            <Button fx:id="buttonAgregarGrupoDeEstudios" mnemonicParsing="false" onAction="#buttonAgregarGrupoDeEstudiosOnAction" prefHeight="25.0" prefWidth="160.0" styleClass="buttonAgregarGrupoDeEstudios" text="Agregar grupo de estudios" />
-            <Button fx:id="buttonIngresarResultadoPorPrestacion" mnemonicParsing="false" onAction="#buttonIngresarResultadoPorPrestacionOnAction" styleClass="buttonIngresarResultadoPorPrestacion" text="Ingresar resultado por prestación" />
-            <Button fx:id="buttonIngresarResultadoPorPaciente" mnemonicParsing="false" onAction="#buttonIngresarResultadoPorPacienteOnAction" styleClass="buttonIngresarResultadoPorPaciente" text="Ingresar resultado por paciente" />
-         </children>
-      </HBox>
+      <Accordion fx:id="accordionMenu" layoutX="585.0" layoutY="29.0" prefHeight="223.0" prefWidth="202.0">
+        <panes>
+          <TitledPane fx:id="titledPaneVisita" animated="false" prefHeight="170.0" prefWidth="192.0" text="Visita">
+               <content>
+                  <VBox fx:id="VBoxVisita" fillWidth="false" prefHeight="154.0" prefWidth="190.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="buttonAgregarPaciente" mnemonicParsing="false" onAction="#buttonAgregarPacienteOnAction" prefHeight="25.0" prefWidth="204.0" styleClass="buttonAgregarPaciente" text="Agregar paciente" />
+                        <Button fx:id="buttonAgregarEstudio" mnemonicParsing="false" onAction="#buttonAgregarEstudioOnAction" prefHeight="25.0" prefWidth="222.0" styleClass="buttonAgregarEstudio" text="Agregar estudio" />
+                        <Button fx:id="buttonAgregarAnalisis" mnemonicParsing="false" onAction="#buttonAgregarAnalisisOnAction" prefHeight="25.0" prefWidth="265.0" styleClass="buttonAgregarAnalisis" text="Agregar análisis" />
+                        <Button fx:id="buttonAgregarGrupoDeEstudios" mnemonicParsing="false" onAction="#buttonAgregarGrupoDeEstudiosOnAction" prefHeight="25.0" prefWidth="324.0" styleClass="buttonAgregarGrupoDeEstudios" text="Agregar grupo de estudios" />
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </TitledPane>
+          <TitledPane fx:id="titledPaneIngresarResultado" animated="false" prefHeight="49.0" prefWidth="192.0" text="Ingresar Resultado">
+               <content>
+                  <VBox fx:id="VBoxIngresarResultado" prefHeight="186.0" prefWidth="95.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="buttonIngresarResultadoPorPaciente" mnemonicParsing="false" onAction="#buttonIngresarResultadoPorPacienteOnAction" prefHeight="25.0" prefWidth="347.0" styleClass="buttonIngresarResultadoPorPrestacion" text="Ingresar Resultado" />
+                        <Button fx:id="buttonIngresarResultadoPorPrestacion" mnemonicParsing="false" onAction="#buttonIngresarResultadoPorPrestacionOnAction" prefHeight="25.0" prefWidth="476.0" styleClass="buttonIngresarResultadoPorPaciente" text="Ingresar Resultado por Filtro" />
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane fx:id="titledPaneEstadisticas" animated="false" text="Estadisticas">
+               <content>
+                  <VBox fx:id="VBoxEstadisticas" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="buttonVerEstadistica" mnemonicParsing="false" onAction="#buttonVerEstadisticaOnAction" prefHeight="25.0" prefWidth="300.0" text="Ver Estadistica" />
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </TitledPane>
+        </panes>
+      </Accordion>
    </children>
 </AnchorPane>
