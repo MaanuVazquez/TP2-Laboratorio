@@ -68,7 +68,7 @@ public class IngresarResultadoPorFiltroControlador {
 	private String resultadoTitle;
 	private String tipoPrestacion;
 
-	public String search;
+	public String search = "";
 
 	@FXML
 	private void initialize() {
