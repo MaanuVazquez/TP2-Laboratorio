@@ -20,7 +20,7 @@ public class Estadistica {
 	}
 
 	public String mostrarEstadistica() {
-		String resultado = this.estadisticas.toString();
+		String resultado = "";
 		Iterator<String> iterador = estadisticas.keySet().iterator();
 		while (iterador.hasNext()) {
 			resultado += estadisticas.get(iterador.next()).toString();

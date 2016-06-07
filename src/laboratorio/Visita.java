@@ -1,5 +1,7 @@
 package laboratorio;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Visita {
@@ -15,7 +17,13 @@ public class Visita {
 		this.paciente = paciente;
 		this.id = new Integer(idMax.intValue());
 		idMax++;
-		this.fecha = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			this.fecha = formatter.parse(formatter.format(new Date()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Prestacion getPrestacion() {

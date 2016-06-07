@@ -111,3 +111,9 @@
     -fx-padding: 4px;
 }
 /*# sourceMappingURL=DatePicker.css.map */
+
+.textFieldCalendar {
+  -fx-background-image: url('searchButton.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: right center;
+}

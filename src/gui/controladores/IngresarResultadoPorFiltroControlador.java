@@ -82,6 +82,7 @@ public class IngresarResultadoPorFiltroControlador {
 		assert buttonIngresarResultado != null : "fx:id=\"buttonIngresarResultado\" was not injected: check your FXML file 'IngresarResultadoPorFiltro.fxml'.";
 		this.tableViewPrestaciones.setPlaceholder(new Label(""));
 		inicializarTablas();
+		popularTabla("");
 
 		// Realizamos el search
 		this.textFieldSearch.textProperty().addListener(new ChangeListener<String>() {

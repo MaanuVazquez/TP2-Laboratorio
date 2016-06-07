@@ -26,9 +26,8 @@ public class EstadisticaAnalisis extends EstadisticaIndividual {
 	}
 
 	public String toString() {
-		return (super.toString() + "Valor Maximo Medido: " + valorMaximoMedido
-				+ ". Valor Minimo Medido: " + valorMinimoMedido
-				+ ". Promedio de Valores: " + this.getPromedioValores() + "./n");
+		return (super.toString() + "Valor Maximo Medido: " + valorMaximoMedido + ", Valor Minimo Medido: "
+				+ valorMinimoMedido + ", Promedio de Valores: " + this.getPromedioValores() + "]\n\n");
 	}
 
 	private void comprobarValorMinimoMedido(Double valorMedido) {

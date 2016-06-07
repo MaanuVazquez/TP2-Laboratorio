@@ -21,9 +21,8 @@ public class EstadisticaEstudios extends EstadisticaIndividual {
 	}
 
 	public String toString() {
-		return (super.toString() + "Cantidad de Resultados Normales: "
-				+ cantidadResultadosNormales
-				+ ". Cantidad de Resultados Anormales: " + cantidadResultadosAnormales);
+		return (super.toString() + "Cantidad de Resultados Normales: " + cantidadResultadosNormales
+				+ ", Cantidad de Resultados Anormales: " + cantidadResultadosAnormales + "]\n\n");
 	}
 
 	private void setCantidadPorClasificacion(ClasificacionEstudio clasificacion) {

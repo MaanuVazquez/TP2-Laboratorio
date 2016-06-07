@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import eu.schudt.javafx.controls.calendar.DatePicker;
 import excepciones.FechasInvalidasException;
+import excepciones.StringVacioException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import laboratorio.Estadistica;
 import laboratorio.Laboratorio;
 
 public class MostrarEstadisticaControlador {
@@ -54,19 +53,19 @@ public class MostrarEstadisticaControlador {
 		// Initialize the DatePicker for birthday
 		desdeDatePicker = new DatePicker(Locale.getDefault());
 		desdeDatePicker.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
-		desdeDatePicker.getCalendarView().todayButtonTextProperty().set("Today");
+		desdeDatePicker.getCalendarView().todayButtonTextProperty().set("Hoy");
 		desdeDatePicker.getCalendarView().setShowWeeks(false);
 		desdeDatePicker.getStylesheets().add("gui/vistas/DatePicker.css");
 
 		hastaDatePicker = new DatePicker(Locale.getDefault());
 		hastaDatePicker.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
-		hastaDatePicker.getCalendarView().todayButtonTextProperty().set("Today");
+		hastaDatePicker.getCalendarView().todayButtonTextProperty().set("Hoy");
 		hastaDatePicker.getCalendarView().setShowWeeks(false);
 		hastaDatePicker.getStylesheets().add("gui/vistas/DatePicker.css");
 
 		// Add DatePicker to grid
-		gridPaneDate.add(desdeDatePicker, 0, 0);
-		gridPaneDate.add(hastaDatePicker, 1, 0);
+		gridPaneDate.add(desdeDatePicker, 0, 1);
+		gridPaneDate.add(hastaDatePicker, 1, 1);
 	}
 
 	public void inicializarDeLaboratorio(LaboratorioControlador l) {
@@ -81,10 +80,13 @@ public class MostrarEstadisticaControlador {
 	@FXML
 	void buttonMostrarOnAction() throws IOException {
 		try {
+			if (this.desdeDatePicker.getSelectedDate() == null || this.hastaDatePicker.getSelectedDate() == null) {
+				throw new StringVacioException();
+			}
 			this.textAreaEstadistica.setText(this.laboratorio.listarEstadisticas(desdeDatePicker.getSelectedDate(),
 					hastaDatePicker.getSelectedDate()));
 
-		} catch (FechasInvalidasException e) {
+		} catch (FechasInvalidasException | StringVacioException e) {
 			this.laboratorioControlador.mensaje("Error", e.getMessage());
 		}
 	}

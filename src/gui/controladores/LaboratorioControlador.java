@@ -180,12 +180,12 @@ public class LaboratorioControlador {
 		lab.agregarPaciente(p2);
 		lab.agregarPaciente(p3);
 		lab.agregarPaciente(p4);
-		lab.agregarVisita(new Estudio("Estudio Electroencefalograma", "faltan elementos necesarios"), p);
-		lab.agregarVisita(new Analisis("Análisis de Sangre", "ninguna", 1, 10), p);
+		lab.agregarVisita(new Estudio("Electroencefalograma", "faltan elementos necesarios"), p);
+		lab.agregarVisita(new Analisis("Sangre", "ninguna", 1, 10), p);
 		GrupoDeEstudios g = new GrupoDeEstudios("Grupo Hemograma", "ninguna");
-		g.agregarEstudio(new Analisis("Análisis Hematocrito", "ninguna", 1, 10));
-		g.agregarEstudio(new Analisis("Análisis Prequirúrjico", "ninguna", 1, 10));
-		g.agregarEstudio(new Estudio("Estudio Electroencefalograma", "faltan elementos necesarios"));
+		g.agregarEstudio(new Analisis("Hematocrito", "ninguna", 1, 10));
+		g.agregarEstudio(new Analisis("Prequirúrjico", "ninguna", 1, 10));
+		g.agregarEstudio(new Estudio("Electroencefalograma", "faltan elementos necesarios"));
 		g.agregarEstudio(new GrupoDeEstudios("Grupo perfil de leucocitos", "ninguna"));
 		lab.agregarVisita(g, p);
 	}
