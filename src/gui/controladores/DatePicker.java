@@ -200,7 +200,6 @@ public class DatePicker extends HBox {
 			}
 		});
 
-		textField.getStylesheets().add("textFieldCalendar");
 	}
 
 	private void hidePopup() {

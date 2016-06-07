@@ -453,7 +453,7 @@ public class LaboratorioControlador {
 		dialogoMostrarEstadistica.initStyle(StageStyle.DECORATED);
 		dialogoMostrarEstadistica.initModality(Modality.APPLICATION_MODAL);
 		dialogoMostrarEstadistica.setScene(scene);
-		dialogoMostrarEstadistica.setTitle("Agregar Estudio");
+		dialogoMostrarEstadistica.setTitle("Estadisticas de Prestaciones");
 		dialogoMostrarEstadistica.setResizable(false);
 		MostrarEstadisticaControlador controller = (MostrarEstadisticaControlador) loader.getController();
 		controller.inicializarDeLaboratorio(this);

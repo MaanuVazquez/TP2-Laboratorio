@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import laboratorio.Laboratorio;
 
 public class MostrarEstadisticaControlador {
@@ -74,6 +75,9 @@ public class MostrarEstadisticaControlador {
 
 	@FXML
 	void buttonAceptarOnAction() {
+
+		Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
+		stage.close();
 
 	}
 
