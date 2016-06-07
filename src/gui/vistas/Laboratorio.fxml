@@ -42,11 +42,11 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Accordion fx:id="accordionMenu" layoutX="585.0" layoutY="29.0" prefHeight="223.0" prefWidth="202.0">
+      <Accordion fx:id="accordionMenu" layoutX="585.0" layoutY="29.0" prefHeight="153.0" prefWidth="202.0">
         <panes>
           <TitledPane fx:id="titledPaneVisita" animated="false" prefHeight="170.0" prefWidth="192.0" text="Visita">
                <content>
-                  <VBox fx:id="VBoxVisita" fillWidth="false" prefHeight="154.0" prefWidth="190.0" spacing="10.0">
+                  <VBox fx:id="VBoxVisita" fillWidth="false" prefHeight="154.0" prefWidth="190.0" spacing="1.0">
                      <children>
                         <Button fx:id="buttonAgregarPaciente" mnemonicParsing="false" onAction="#buttonAgregarPacienteOnAction" prefHeight="25.0" prefWidth="204.0" styleClass="buttonAgregarPaciente" text="Agregar paciente" />
                         <Button fx:id="buttonAgregarEstudio" mnemonicParsing="false" onAction="#buttonAgregarEstudioOnAction" prefHeight="25.0" prefWidth="222.0" styleClass="buttonAgregarEstudio" text="Agregar estudio" />
@@ -61,7 +61,7 @@
             </TitledPane>
           <TitledPane fx:id="titledPaneIngresarResultado" animated="false" prefHeight="49.0" prefWidth="192.0" text="Ingresar Resultado">
                <content>
-                  <VBox fx:id="VBoxIngresarResultado" prefHeight="186.0" prefWidth="95.0" spacing="10.0">
+                  <VBox fx:id="VBoxIngresarResultado" prefHeight="186.0" prefWidth="95.0" spacing="1.0">
                      <children>
                         <Button fx:id="buttonIngresarResultadoPorPaciente" mnemonicParsing="false" onAction="#buttonIngresarResultadoPorPacienteOnAction" prefHeight="25.0" prefWidth="347.0" styleClass="buttonIngresarResultadoPorPrestacion" text="Ingresar Resultado" />
                         <Button fx:id="buttonIngresarResultadoPorPrestacion" mnemonicParsing="false" onAction="#buttonIngresarResultadoPorPrestacionOnAction" prefHeight="25.0" prefWidth="476.0" styleClass="buttonIngresarResultadoPorPaciente" text="Ingresar Resultado por Filtro" />
@@ -72,19 +72,8 @@
                   </VBox>
                </content>
             </TitledPane>
-            <TitledPane fx:id="titledPaneEstadisticas" animated="false" text="Estadisticas">
-               <content>
-                  <VBox fx:id="VBoxEstadisticas" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Button fx:id="buttonVerEstadistica" mnemonicParsing="false" onAction="#buttonVerEstadisticaOnAction" prefHeight="25.0" prefWidth="300.0" text="Ver Estadistica" />
-                     </children>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </VBox>
-               </content>
-            </TitledPane>
         </panes>
       </Accordion>
+      <Button fx:id="buttonVerEstadistica" layoutX="585.0" layoutY="182.0" mnemonicParsing="false" onAction="#buttonVerEstadisticaOnAction" prefHeight="25.0" prefWidth="202.0" text="Ver Estadistica" />
    </children>
 </AnchorPane>

@@ -50,16 +50,10 @@ public class LaboratorioControlador {
 	private TitledPane titledPaneIngresarResultado;
 
 	@FXML
-	private TitledPane titledPaneEstadisticas;
-
-	@FXML
 	private VBox VBoxVisita;
 
 	@FXML
 	private VBox VBoxIngresarResultado;
-
-	@FXML
-	private VBox VBoxEstadisticas;
 
 	@FXML
 	private HBox hBox;
@@ -155,10 +149,8 @@ public class LaboratorioControlador {
 		assert buttonIngresarResultadoPorPrestacion != null : "fx:id=\"buttonIngresarResultadoPorPrestacion\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		assert accordionMenu != null : "fx:id=\"accordionMenu\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		assert pacienteTelefono != null : "fx:id=\"pacienteTelefono\" was not injected: check your FXML file 'Laboratorio.fxml'.";
-		assert VBoxEstadisticas != null : "fx:id=\"VBoxEstadisticas\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		assert prestacionNombre != null : "fx:id=\"prestacionNombre\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		assert prestacionEstado != null : "fx:id=\"prestacionEstado\" was not injected: check your FXML file 'Laboratorio.fxml'.";
-		assert titledPaneEstadisticas != null : "fx:id=\"titledPaneEstadisticas\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		assert VBoxVisita != null : "fx:id=\"VBoxVisita\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		assert pacienteID != null : "fx:id=\"pacienteID\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		assert pacienteDNI != null : "fx:id=\"pacienteDNI\" was not injected: check your FXML file 'Laboratorio.fxml'.";
