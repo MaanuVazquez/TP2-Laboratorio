@@ -13,6 +13,7 @@ public class EstadisticaEstudios extends EstadisticaIndividual {
 		super(prestacion);
 		this.cantidadResultadosAnormales = 0;
 		this.cantidadResultadosNormales = 0;
+		this.agregarPrestacion(prestacion);
 	}
 
 	public void agregarPrestacion(Prestacion estudio) {

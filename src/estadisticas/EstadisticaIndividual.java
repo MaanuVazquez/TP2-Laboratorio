@@ -9,7 +9,7 @@ public abstract class EstadisticaIndividual {
 
 	public EstadisticaIndividual(Prestacion prestacion) {
 		this.nombre = prestacion.getNombre();
-		this.numeroDePacientes = 1;
+		this.numeroDePacientes = 0;
 	}
 
 	public abstract void agregarPrestacion(Prestacion prestacion);

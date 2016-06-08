@@ -27,7 +27,7 @@ public class GrupoDeEstudios extends Prestacion {
 
 	@Override
 	public String getResultado() {
-		String resultado = super.toString() + "/n";
+		String resultado = super.getResultado() + "/n";
 		for (Prestacion prestacion : estudios.values()) {
 			resultado += " " + prestacion.getResultado() + "\n";
 		}

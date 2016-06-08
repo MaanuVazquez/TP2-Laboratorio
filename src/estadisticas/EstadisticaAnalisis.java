@@ -11,6 +11,7 @@ public class EstadisticaAnalisis extends EstadisticaIndividual {
 
 	public EstadisticaAnalisis(Prestacion prestacion) {
 		super(prestacion);
+		this.numeroDePacientes++;
 		Analisis analisis = (Analisis) prestacion;
 		this.sumaValoresMedidos = analisis.getValorMedido();
 		this.valorMinimoMedido = analisis.getValorMedido();
