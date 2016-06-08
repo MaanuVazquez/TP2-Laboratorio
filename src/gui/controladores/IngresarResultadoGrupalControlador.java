@@ -8,16 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import laboratorio.Analisis;
 import laboratorio.Estudio;
 import laboratorio.GrupoDeEstudios;
@@ -82,15 +79,15 @@ public class IngresarResultadoGrupalControlador {
 	private void setResultadoForm(String tipoDePrestacion) {
 		switch (tipoDePrestacion) {
 		case "Analisis":
-			this.resultadoFXML = "/gui/vistas/IngresarResultadoAnalisis.fxml";
+			this.resultadoFXML = "IngresarResultadoAnalisis";
 			this.resultadoTitle = "Análisis ";
 			break;
 		case "GrupoDeEstudios":
-			this.resultadoFXML = "/gui/vistas/IngresarResultadoGrupal.fxml";
+			this.resultadoFXML = "IngresarResultadoGrupal";
 			this.resultadoTitle = "Grupo de Estudios ";
 			break;
 		default:
-			this.resultadoFXML = "/gui/vistas/IngresarResultadoEstudio.fxml";
+			this.resultadoFXML = "IngresarResultadoEstudio";
 			this.resultadoTitle = "Estudio ";
 			break;
 		}
@@ -166,19 +163,9 @@ public class IngresarResultadoGrupalControlador {
 			Prestacion prestacion = grupo.getEstudios().get(modeloPrestacion.getId());
 			if (prestacion.getEstado() != EstadoPrestacion.FINALIZADO) {
 				setResultadoForm(prestacion.getResultForm());
-				FXMLLoader loader = new FXMLLoader(getClass().getResource(this.resultadoFXML));
-				AnchorPane root;
-				root = (AnchorPane) loader.load();
-				Scene scene = new Scene(root);
-				Stage dialogoIngresarResultado = new Stage();
-				scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-				dialogoIngresarResultado.initOwner(anchorPaneMain.getScene().getWindow());
-				dialogoIngresarResultado.initStyle(StageStyle.DECORATED);
-				dialogoIngresarResultado.initModality(Modality.APPLICATION_MODAL);
-				dialogoIngresarResultado.setScene(scene);
-				dialogoIngresarResultado.setTitle(this.resultadoTitle + prestacion.getId());
-				dialogoIngresarResultado.setResizable(false);
-
+				Stage dialogo = new Stage();
+				FXMLLoader loader = this.laboratorioControlador.crearDialogo(dialogo, this.resultadoFXML,
+						this.resultadoTitle + prestacion.getId());
 				if (this.tipoPrestacion.equals("Analisis")) {
 					IngresarResultadoAnalisisControlador controller = (IngresarResultadoAnalisisControlador) loader
 							.getController();
@@ -193,7 +180,7 @@ public class IngresarResultadoGrupalControlador {
 							.getController();
 					controller.inicializarDeGrupo(this.laboratorioControlador, this, (Estudio) prestacion, paciente);
 				}
-				dialogoIngresarResultado.show();
+				dialogo.show();
 			} else {
 				this.laboratorioControlador.mensaje("Error", "La prestación seleccionada ya se encuentra finalizada");
 			}

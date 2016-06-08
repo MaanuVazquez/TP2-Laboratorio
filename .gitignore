@@ -17,6 +17,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Added by Maanu, CLASS FILES
+*.class
+
 # =========================
 # Operating System Files
 # =========================

@@ -121,9 +121,8 @@ public class LaboratorioControlador {
 	@FXML
 	private ObservableList<ModeloPrestacion> listaPrestaciones;
 
-	private static Laboratorio lab = Laboratorio.getIntance();
+	private static Laboratorio laboratorio = Laboratorio.getIntance();
 
-	// Ingresar Resultado
 	private String resultadoFXML;
 	private String resultadoTitle;
 	private String tipoPrestacion;
@@ -159,8 +158,6 @@ public class LaboratorioControlador {
 		popularPrograma();
 		inicializarColumnas();
 		actualizarTablaPacientes();
-		this.tableViewPacientes.setPlaceholder(new Label("No hay pacientes"));
-		this.tableViewPrestaciones.setPlaceholder(new Label("No se ha seleccionado un paciente"));
 	}
 
 	private void popularPrograma() throws StringVacioException, ValoresNegativosException, PrestacionExistenteException,
@@ -169,23 +166,24 @@ public class LaboratorioControlador {
 		Paciente p2 = new Paciente("Roberto Gomez Bolaños", 12345671, "03034567", "hola@hola.com");
 		Paciente p3 = new Paciente("Bruce Wayne", 12345672, "03034567", "hola@hola.com");
 		Paciente p4 = new Paciente("Danny Trejo", 12345673, "03034567", "hola@hola.com");
-		lab.agregarPaciente(p);
-		lab.agregarPaciente(p2);
-		lab.agregarPaciente(p3);
-		lab.agregarPaciente(p4);
-		lab.agregarVisita(new Estudio("Electroencefalograma", "faltan elementos necesarios"), p);
-		lab.agregarVisita(new Analisis("Sangre", "ninguna", 1, 10), p);
+		laboratorio.agregarPaciente(p);
+		laboratorio.agregarPaciente(p2);
+		laboratorio.agregarPaciente(p3);
+		laboratorio.agregarPaciente(p4);
+		laboratorio.agregarVisita(new Estudio("Electroencefalograma", "faltan elementos necesarios"), p);
+		laboratorio.agregarVisita(new Analisis("Sangre", "ninguna", 1, 10), p);
 		GrupoDeEstudios g = new GrupoDeEstudios("Grupo Hemograma", "ninguna");
 		g.agregarEstudio(new Analisis("Hematocrito", "ninguna", 1, 10));
 		g.agregarEstudio(new Analisis("Prequirúrjico", "ninguna", 1, 10));
 		g.agregarEstudio(new Estudio("Electroencefalograma", "faltan elementos necesarios"));
 		g.agregarEstudio(new GrupoDeEstudios("Grupo perfil de leucocitos", "ninguna"));
-		lab.agregarVisita(g, p);
+		laboratorio.agregarVisita(g, p);
 	}
 
 	private void inicializarColumnas() {
 
 		/* Tabla Paciente */
+		this.tableViewPacientes.setPlaceholder(new Label("No hay pacientes"));
 		this.pacienteID.setCellValueFactory(new PropertyValueFactory<ModeloPaciente, Integer>("id"));
 		this.pacienteNombre.setCellValueFactory(new PropertyValueFactory<ModeloPaciente, String>("nombre"));
 		this.pacienteDNI.setCellValueFactory(new PropertyValueFactory<ModeloPaciente, Integer>("DNI"));
@@ -193,6 +191,7 @@ public class LaboratorioControlador {
 		this.pacienteMail.setCellValueFactory(new PropertyValueFactory<ModeloPaciente, String>("mail"));
 
 		/* Tabla prestaciones */
+		this.tableViewPrestaciones.setPlaceholder(new Label("No se ha seleccionado un paciente"));
 		this.prestacionNombre.setCellValueFactory(new PropertyValueFactory<ModeloPrestacion, String>("nombre"));
 		this.prestacionIndicacion.setCellValueFactory(new PropertyValueFactory<ModeloPrestacion, String>("indicacion"));
 		this.prestacionEstado.setCellValueFactory(new PropertyValueFactory<ModeloPrestacion, String>("estado"));
@@ -202,7 +201,7 @@ public class LaboratorioControlador {
 	public void actualizarTablaPacientes() {
 		listaPacientes = FXCollections.observableArrayList();
 
-		for (Paciente paciente : lab.getPacientes().values()) {
+		for (Paciente paciente : laboratorio.getPacientes().values()) {
 			ModeloPaciente modeloPaciente = new ModeloPaciente(paciente.getId(), paciente.getNombre(),
 					paciente.getDni(), paciente.getTelefono(), paciente.getMail());
 			listaPacientes.add(modeloPaciente);
@@ -216,7 +215,7 @@ public class LaboratorioControlador {
 
 		listaPrestaciones = FXCollections.observableArrayList();
 
-		for (Visita v : lab.getVisitas().values()) {
+		for (Visita v : laboratorio.getVisitas().values()) {
 			if (v.getPaciente() == p) {
 				Prestacion prestacion = v.getPrestacion();
 				ModeloPrestacion modeloPrestacion = new ModeloPrestacion(prestacion.getId(), prestacion.getNombre(),
@@ -233,36 +232,42 @@ public class LaboratorioControlador {
 	public void setResultadoForm(String tipoDePrestacion) {
 		switch (tipoDePrestacion) {
 		case "Analisis":
-			this.resultadoFXML = "/gui/vistas/IngresarResultadoAnalisis.fxml";
+			this.resultadoFXML = "IngresarResultadoAnalisis";
 			this.resultadoTitle = "Análisis ";
 			break;
 		case "GrupoDeEstudios":
-			this.resultadoFXML = "/gui/vistas/IngresarResultadoGrupal.fxml";
+			this.resultadoFXML = "IngresarResultadoGrupal";
 			this.resultadoTitle = "Grupo de Estudios ";
 			break;
 		default:
-			this.resultadoFXML = "/gui/vistas/IngresarResultadoEstudio.fxml";
+			this.resultadoFXML = "IngresarResultadoEstudio";
 			this.resultadoTitle = "Estudio ";
 			break;
 		}
 		this.tipoPrestacion = tipoDePrestacion;
 	}
 
-	public void mensaje(String titulo, String mensaje) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/Mensaje.fxml"));
+	public FXMLLoader crearDialogo(Stage dialogo, String nombreFXML, String tituloDialogo) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/" + nombreFXML + ".fxml"));
 		AnchorPane root;
 		root = (AnchorPane) loader.load();
 		Scene scene = new Scene(root);
-		Stage dialogoAgregarEstudio = new Stage();
 		scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-		dialogoAgregarEstudio.initStyle(StageStyle.DECORATED);
-		dialogoAgregarEstudio.initModality(Modality.APPLICATION_MODAL);
-		dialogoAgregarEstudio.setScene(scene);
-		dialogoAgregarEstudio.setTitle(titulo);
-		dialogoAgregarEstudio.setResizable(false);
+		dialogo.initStyle(StageStyle.DECORATED);
+		dialogo.initModality(Modality.APPLICATION_MODAL);
+		dialogo.setScene(scene);
+		dialogo.setTitle(tituloDialogo);
+		dialogo.setResizable(false);
+		return loader;
+	}
+
+	public void mensaje(String titulo, String mensaje) throws IOException {
+
+		Stage dialogo = new Stage();
+		FXMLLoader loader = crearDialogo(dialogo, "Mensaje", titulo);
 		MensajeControlador controller = (MensajeControlador) loader.getController();
 		controller.inicializador(mensaje);
-		dialogoAgregarEstudio.show();
+		dialogo.show();
 
 	}
 
@@ -270,7 +275,7 @@ public class LaboratorioControlador {
 	void tableViewPacientesOnMouseClicked() {
 		ModeloPaciente modeloPaciente;
 		if ((modeloPaciente = tableViewPacientes.getSelectionModel().getSelectedItem()) != null) {
-			for (Paciente p : lab.getPacientes().values()) {
+			for (Paciente p : laboratorio.getPacientes().values()) {
 				if (p.getId() == modeloPaciente.getId()) {
 					actualizarTablaPrestaciones(p);
 				}
@@ -280,21 +285,12 @@ public class LaboratorioControlador {
 
 	@FXML
 	private void buttonAgregarPacienteOnAction() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/agregarPaciente.fxml"));
-		AnchorPane root;
-		root = (AnchorPane) loader.load();
-		Scene scene = new Scene(root);
-		Stage dialogoAgregarPaciente = new Stage();
-		scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-		dialogoAgregarPaciente.initOwner(anchorPaneMain.getScene().getWindow());
-		dialogoAgregarPaciente.initStyle(StageStyle.DECORATED);
-		dialogoAgregarPaciente.initModality(Modality.APPLICATION_MODAL);
-		dialogoAgregarPaciente.setScene(scene);
-		dialogoAgregarPaciente.setTitle("Agregar Paciente");
-		dialogoAgregarPaciente.setResizable(false);
+
+		Stage dialogo = new Stage();
+		FXMLLoader loader = crearDialogo(dialogo, "agregarPaciente", "Agregar Paciente");
 		AgregarPacienteControlador controller = (AgregarPacienteControlador) loader.getController();
 		controller.initData(this);
-		dialogoAgregarPaciente.show();
+		dialogo.show();
 
 	}
 
@@ -302,22 +298,12 @@ public class LaboratorioControlador {
 	void buttonAgregarAnalisisOnAction() throws IOException {
 
 		if (tableViewPacientes.getSelectionModel().getSelectedItem() != null) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/agregarAnalisis.fxml"));
-			AnchorPane root;
-			root = (AnchorPane) loader.load();
-			Scene scene = new Scene(root);
-			Stage dialogoAgregarAnalisis = new Stage();
-			scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-			dialogoAgregarAnalisis.initOwner(anchorPaneMain.getScene().getWindow());
-			dialogoAgregarAnalisis.initStyle(StageStyle.DECORATED);
-			dialogoAgregarAnalisis.initModality(Modality.APPLICATION_MODAL);
-			dialogoAgregarAnalisis.setScene(scene);
-			dialogoAgregarAnalisis.setTitle("Agregar Análisis");
-			dialogoAgregarAnalisis.setResizable(false);
+			Stage dialogo = new Stage();
+			FXMLLoader loader = crearDialogo(dialogo, "agregarAnalisis", "Agregar Análisis");
 			AgregarAnalisisControlador controller = (AgregarAnalisisControlador) loader.getController();
-			Paciente p = lab.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getId());
+			Paciente p = laboratorio.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getDNI());
 			controller.initData(this, p);
-			dialogoAgregarAnalisis.show();
+			dialogo.show();
 		} else {
 			mensaje("Error", "No se ha seleccionado ningún paciente");
 		}
@@ -327,22 +313,12 @@ public class LaboratorioControlador {
 	@FXML
 	void buttonAgregarEstudioOnAction() throws IOException {
 		if (tableViewPacientes.getSelectionModel().getSelectedItem() != null) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/agregarEstudio.fxml"));
-			AnchorPane root;
-			root = (AnchorPane) loader.load();
-			Scene scene = new Scene(root);
-			Stage dialogoAgregarEstudio = new Stage();
-			scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-			dialogoAgregarEstudio.initOwner(anchorPaneMain.getScene().getWindow());
-			dialogoAgregarEstudio.initStyle(StageStyle.DECORATED);
-			dialogoAgregarEstudio.initModality(Modality.APPLICATION_MODAL);
-			dialogoAgregarEstudio.setScene(scene);
-			dialogoAgregarEstudio.setTitle("Agregar Estudio");
-			dialogoAgregarEstudio.setResizable(false);
+			Stage dialogo = new Stage();
+			FXMLLoader loader = crearDialogo(dialogo, "agregarEstudio", "Agregar Estudio");
 			AgregarEstudioControlador controller = (AgregarEstudioControlador) loader.getController();
-			Paciente p = lab.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getId());
+			Paciente p = laboratorio.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getDNI());
 			controller.initData(this, p);
-			dialogoAgregarEstudio.show();
+			dialogo.show();
 		} else {
 			mensaje("Error", "No se ha seleccionado ningún paciente");
 		}
@@ -351,22 +327,12 @@ public class LaboratorioControlador {
 	@FXML
 	void buttonAgregarGrupoDeEstudiosOnAction() throws IOException {
 		if (tableViewPacientes.getSelectionModel().getSelectedItem() != null) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/agregarGrupoDeEstudios.fxml"));
-			AnchorPane root;
-			root = (AnchorPane) loader.load();
-			Scene scene = new Scene(root);
-			Stage dialogoAgregarGrupoDeEstudios = new Stage();
-			scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-			dialogoAgregarGrupoDeEstudios.initOwner(anchorPaneMain.getScene().getWindow());
-			dialogoAgregarGrupoDeEstudios.initStyle(StageStyle.DECORATED);
-			dialogoAgregarGrupoDeEstudios.initModality(Modality.APPLICATION_MODAL);
-			dialogoAgregarGrupoDeEstudios.setScene(scene);
-			dialogoAgregarGrupoDeEstudios.setTitle("Agregar Estudio");
-			dialogoAgregarGrupoDeEstudios.setResizable(false);
+			Stage dialogo = new Stage();
+			FXMLLoader loader = crearDialogo(dialogo, "agregarGrupoDeEstudios", "Agregar Grupo de Estudios");
 			AgregarGrupoDeEstudiosControlador controller = (AgregarGrupoDeEstudiosControlador) loader.getController();
-			Paciente p = lab.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getId());
+			Paciente p = laboratorio.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getDNI());
 			controller.initData(this, p);
-			dialogoAgregarGrupoDeEstudios.show();
+			dialogo.show();
 		} else {
 			mensaje("Error", "No se ha seleccionado ningún paciente");
 		}
@@ -374,22 +340,18 @@ public class LaboratorioControlador {
 
 	@FXML
 	void buttonIngresarResultadoPorPrestacionOnAction() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/IngresarResultadoPorFiltro.fxml"));
-		AnchorPane root;
-		root = (AnchorPane) loader.load();
-		Scene scene = new Scene(root);
-		Stage dialogoIngresarResultadoPorPrestacion = new Stage();
-		scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-		dialogoIngresarResultadoPorPrestacion.initOwner(anchorPaneMain.getScene().getWindow());
-		dialogoIngresarResultadoPorPrestacion.initStyle(StageStyle.DECORATED);
-		dialogoIngresarResultadoPorPrestacion.initModality(Modality.APPLICATION_MODAL);
-		dialogoIngresarResultadoPorPrestacion.setScene(scene);
-		dialogoIngresarResultadoPorPrestacion.setTitle("Filtrar Prestaciones");
-		dialogoIngresarResultadoPorPrestacion.setResizable(false);
+		Stage dialogo = new Stage();
+		FXMLLoader loader = crearDialogo(dialogo, "IngresarResultadoPorFiltro", "Filtrar Prestaciones");
 		IngresarResultadoPorFiltroControlador controller = (IngresarResultadoPorFiltroControlador) loader
 				.getController();
-		controller.inicializarLaboratorio(this);
-		dialogoIngresarResultadoPorPrestacion.show();
+		if (tableViewPacientes.getSelectionModel().getSelectedItem() != null) {
+			Paciente p = laboratorio.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getDNI());
+			controller.inicializarLaboratorio(this, p);
+
+		} else {
+			controller.inicializarLaboratorio(this);
+		}
+		dialogo.show();
 	}
 
 	@FXML
@@ -397,42 +359,27 @@ public class LaboratorioControlador {
 
 		ModeloPrestacion modeloPrestacion;
 		if ((modeloPrestacion = tableViewPrestaciones.getSelectionModel().getSelectedItem()) != null) {
-			Prestacion prestacion = lab.getPrestaciones().get(modeloPrestacion.getId());
+			Prestacion prestacion = laboratorio.getPrestaciones().get(modeloPrestacion.getId());
 			if (prestacion.getEstado() != EstadoPrestacion.FINALIZADO) {
 				setResultadoForm(prestacion.getResultForm());
-				FXMLLoader loader = new FXMLLoader(getClass().getResource(this.resultadoFXML));
-				AnchorPane root;
-				root = (AnchorPane) loader.load();
-				Scene scene = new Scene(root);
-				Stage dialogoIngresarResultado = new Stage();
-				scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-				dialogoIngresarResultado.initOwner(anchorPaneMain.getScene().getWindow());
-				dialogoIngresarResultado.initStyle(StageStyle.DECORATED);
-				dialogoIngresarResultado.initModality(Modality.APPLICATION_MODAL);
-				dialogoIngresarResultado.setScene(scene);
-				dialogoIngresarResultado.setTitle(this.resultadoTitle + prestacion.getId());
-				dialogoIngresarResultado.setResizable(false);
-
+				Stage dialogo = new Stage();
+				FXMLLoader loader = crearDialogo(dialogo, this.resultadoFXML, this.resultadoTitle + prestacion.getId());
+				Paciente paciente = laboratorio
+						.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getDNI());
 				if (this.tipoPrestacion.equals("Analisis")) {
 					IngresarResultadoAnalisisControlador controller = (IngresarResultadoAnalisisControlador) loader
 							.getController();
-					Paciente paciente = lab
-							.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getId());
 					controller.inicializarDeLaboratorio(this, (Analisis) prestacion, paciente);
 				} else if (this.tipoPrestacion.equals("GrupoDeEstudios")) {
 					IngresarResultadoGrupalControlador controller = (IngresarResultadoGrupalControlador) loader
 							.getController();
-					Paciente paciente = lab
-							.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getId());
 					controller.inicializarDeLaboratorio(this, (GrupoDeEstudios) prestacion, paciente);
 				} else {
 					IngresarResultadoEstudioControlador controller = (IngresarResultadoEstudioControlador) loader
 							.getController();
-					Paciente paciente = lab
-							.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getId());
 					controller.inicializarDeLaboratorio(this, (Estudio) prestacion, paciente);
 				}
-				dialogoIngresarResultado.show();
+				dialogo.show();
 			} else {
 				mensaje("Error", "La prestación seleccionada ya se encuentra finalizada");
 			}
@@ -444,21 +391,11 @@ public class LaboratorioControlador {
 
 	@FXML
 	void buttonVerEstadisticaOnAction() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/MostrarEstadistica.fxml"));
-		AnchorPane root;
-		root = (AnchorPane) loader.load();
-		Scene scene = new Scene(root);
-		Stage dialogoMostrarEstadistica = new Stage();
-		scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-		dialogoMostrarEstadistica.initOwner(anchorPaneMain.getScene().getWindow());
-		dialogoMostrarEstadistica.initStyle(StageStyle.DECORATED);
-		dialogoMostrarEstadistica.initModality(Modality.APPLICATION_MODAL);
-		dialogoMostrarEstadistica.setScene(scene);
-		dialogoMostrarEstadistica.setTitle("Estadisticas de Prestaciones");
-		dialogoMostrarEstadistica.setResizable(false);
+		Stage dialogo = new Stage();
+		FXMLLoader loader = crearDialogo(dialogo, "MostrarEstadistica", "Estadisticas de Prestaciones");
 		MostrarEstadisticaControlador controller = (MostrarEstadisticaControlador) loader.getController();
 		controller.inicializarDeLaboratorio(this);
-		dialogoMostrarEstadistica.show();
+		dialogo.show();
 	}
 
 }

@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -18,13 +17,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import laboratorio.Analisis;
 import laboratorio.Estudio;
 import laboratorio.GrupoDeEstudios;
 import laboratorio.Laboratorio;
+import laboratorio.Paciente;
 import laboratorio.Prestacion;
 
 public class IngresarResultadoPorFiltroControlador {
@@ -62,6 +60,8 @@ public class IngresarResultadoPorFiltroControlador {
 	private LaboratorioControlador laboratorioControlador;
 
 	private Laboratorio lab = Laboratorio.getIntance();
+
+	private Paciente paciente;
 
 	// Ingresar Resultado
 	private String resultadoFXML;
@@ -106,6 +106,11 @@ public class IngresarResultadoPorFiltroControlador {
 		this.laboratorioControlador = l;
 	}
 
+	public void inicializarLaboratorio(LaboratorioControlador l, Paciente p) {
+		this.laboratorioControlador = l;
+		this.paciente = p;
+	}
+
 	public void popularTabla(String nombreEstudio) {
 		this.tableViewPrestaciones.setPlaceholder(new Label("No se han encontrado resultados"));
 		listaPrestaciones = FXCollections.observableArrayList();
@@ -139,15 +144,15 @@ public class IngresarResultadoPorFiltroControlador {
 	private void setResultadoForm(String tipoDePrestacion) {
 		switch (tipoDePrestacion) {
 		case "Analisis":
-			this.resultadoFXML = "/gui/vistas/IngresarResultadoAnalisis.fxml";
+			this.resultadoFXML = "IngresarResultadoAnalisis";
 			this.resultadoTitle = "Análisis ";
 			break;
 		case "GrupoDeEstudios":
-			this.resultadoFXML = "/gui/vistas/IngresarResultadoGrupal.fxml";
+			this.resultadoFXML = "IngresarResultadoGrupal";
 			this.resultadoTitle = "Grupo de Estudios ";
 			break;
 		default:
-			this.resultadoFXML = "/gui/vistas/IngresarResultadoEstudio.fxml";
+			this.resultadoFXML = "IngresarResultadoEstudio";
 			this.resultadoTitle = "Estudio ";
 			break;
 		}
@@ -156,6 +161,9 @@ public class IngresarResultadoPorFiltroControlador {
 
 	@FXML
 	private void buttonOkOnAction() {
+		if (paciente != null) {
+			this.laboratorioControlador.actualizarTablaPrestaciones(this.paciente);
+		}
 		Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
 		stage.close();
 	}
@@ -168,19 +176,9 @@ public class IngresarResultadoPorFiltroControlador {
 			Prestacion prestacion = lab.getPrestaciones().get(modeloPrestacion.getId());
 			if (prestacion.getEstado() != EstadoPrestacion.FINALIZADO) {
 				setResultadoForm(prestacion.getResultForm());
-				FXMLLoader loader = new FXMLLoader(getClass().getResource(this.resultadoFXML));
-				AnchorPane root;
-				root = (AnchorPane) loader.load();
-				Scene scene = new Scene(root);
-				Stage dialogoIngresarResultado = new Stage();
-				scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-				dialogoIngresarResultado.initOwner(anchorPaneMain.getScene().getWindow());
-				dialogoIngresarResultado.initStyle(StageStyle.DECORATED);
-				dialogoIngresarResultado.initModality(Modality.APPLICATION_MODAL);
-				dialogoIngresarResultado.setScene(scene);
-				dialogoIngresarResultado.setTitle(this.resultadoTitle + prestacion.getId());
-				dialogoIngresarResultado.setResizable(false);
-
+				Stage dialogo = new Stage();
+				FXMLLoader loader = this.laboratorioControlador.crearDialogo(dialogo, this.resultadoFXML,
+						this.resultadoTitle + prestacion.getId());
 				if (this.tipoPrestacion.equals("Analisis")) {
 					IngresarResultadoAnalisisControlador controller = (IngresarResultadoAnalisisControlador) loader
 							.getController();
@@ -194,7 +192,7 @@ public class IngresarResultadoPorFiltroControlador {
 							.getController();
 					controller.inicializarDeFiltro(this.laboratorioControlador, this, (Estudio) prestacion);
 				}
-				dialogoIngresarResultado.show();
+				dialogo.show();
 			} else {
 				laboratorioControlador.mensaje("Error", "La prestación seleccionada ya se encuentra finalizada");
 			}

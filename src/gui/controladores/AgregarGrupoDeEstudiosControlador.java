@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -19,9 +18,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import laboratorio.GrupoDeEstudios;
 import laboratorio.Laboratorio;
 import laboratorio.Paciente;
@@ -77,9 +74,9 @@ public class AgregarGrupoDeEstudiosControlador {
 
 	private GrupoDeEstudios grupo;
 
-	private AgregarGrupoDeEstudiosControlador controlador = null;
+	private AgregarGrupoDeEstudiosControlador grupoDeEstudiosControlador;
 
-	private GrupoDeEstudios grupoAnterior = null;
+	private GrupoDeEstudios grupoDeEstudiosRecursivo;
 
 	@FXML
 	private ObservableList<ModeloPrestacion> listaPrestaciones;
@@ -134,8 +131,8 @@ public class AgregarGrupoDeEstudiosControlador {
 	}
 
 	public void initDataDeGrupo(AgregarGrupoDeEstudiosControlador a, GrupoDeEstudios g) {
-		grupoAnterior = g;
-		controlador = a;
+		grupoDeEstudiosRecursivo = g;
+		grupoDeEstudiosControlador = a;
 	}
 
 	private void verificarString() throws StringVacioException {
@@ -146,64 +143,32 @@ public class AgregarGrupoDeEstudiosControlador {
 
 	@FXML
 	private void buttonAgregarEstudioOnAction() throws IOException {
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/agregarEstudio.fxml"));
-		AnchorPane root;
-		root = (AnchorPane) loader.load();
-		Scene scene = new Scene(root);
-		Stage dialogoAgregarEstudio = new Stage();
-		scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-		dialogoAgregarEstudio.initOwner(anchorPaneMain.getScene().getWindow());
-		dialogoAgregarEstudio.initStyle(StageStyle.DECORATED);
-		dialogoAgregarEstudio.initModality(Modality.APPLICATION_MODAL);
-		dialogoAgregarEstudio.setScene(scene);
-		dialogoAgregarEstudio.setTitle("Agregar Estudio");
-		dialogoAgregarEstudio.setResizable(false);
+		Stage dialogo = new Stage();
+		FXMLLoader loader = this.laboratorioControlador.crearDialogo(dialogo, "agregarEstudio", "Agregar Estudio");
 		AgregarEstudioControlador controller = (AgregarEstudioControlador) loader.getController();
 		controller.initDataDeGrupo(this, grupo);
-		dialogoAgregarEstudio.show();
+		dialogo.show();
 
 	}
 
 	@FXML
 	private void buttonAgregarAnalisisOnAction() throws IOException {
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/agregarAnalisis.fxml"));
-		AnchorPane root;
-		root = (AnchorPane) loader.load();
-		Scene scene = new Scene(root);
-		Stage dialogoAgregarAnalisis = new Stage();
-		scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-		dialogoAgregarAnalisis.initOwner(anchorPaneMain.getScene().getWindow());
-		dialogoAgregarAnalisis.initStyle(StageStyle.DECORATED);
-		dialogoAgregarAnalisis.initModality(Modality.APPLICATION_MODAL);
-		dialogoAgregarAnalisis.setScene(scene);
-		dialogoAgregarAnalisis.setTitle("Agregar Estudio");
-		dialogoAgregarAnalisis.setResizable(false);
+		Stage dialogo = new Stage();
+		FXMLLoader loader = this.laboratorioControlador.crearDialogo(dialogo, "agregarAnalisis", "Agregar Análisis");
 		AgregarAnalisisControlador controller = (AgregarAnalisisControlador) loader.getController();
 		controller.initDataDeGrupo(this, grupo);
-		dialogoAgregarAnalisis.show();
+		dialogo.show();
 
 	}
 
 	@FXML
 	private void buttonAgregarGrupoDeEstudiosOnAction() throws IOException {
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/agregarGrupoDeEstudios.fxml"));
-		AnchorPane root;
-		root = (AnchorPane) loader.load();
-		Scene scene = new Scene(root);
-		Stage dialogoAgregarGrupoDeEstudios = new Stage();
-		scene.getStylesheets().add(getClass().getResource("/gui/vistas/Laboratorio.css").toExternalForm());
-		dialogoAgregarGrupoDeEstudios.initOwner(anchorPaneMain.getScene().getWindow());
-		dialogoAgregarGrupoDeEstudios.initStyle(StageStyle.DECORATED);
-		dialogoAgregarGrupoDeEstudios.initModality(Modality.APPLICATION_MODAL);
-		dialogoAgregarGrupoDeEstudios.setScene(scene);
-		dialogoAgregarGrupoDeEstudios.setTitle("Agregar Estudio");
-		dialogoAgregarGrupoDeEstudios.setResizable(false);
+		Stage dialogo = new Stage();
+		FXMLLoader loader = this.laboratorioControlador.crearDialogo(dialogo, "agregarGrupoDeEstudios",
+				"Agregar Grupo de Estudios");
 		AgregarGrupoDeEstudiosControlador controller = (AgregarGrupoDeEstudiosControlador) loader.getController();
 		controller.initDataDeGrupo(this, grupo);
-		dialogoAgregarGrupoDeEstudios.show();
+		dialogo.show();
 
 	}
 
@@ -213,11 +178,11 @@ public class AgregarGrupoDeEstudiosControlador {
 		grupo.setNombre(this.textFieldNombre.getText());
 		grupo.setIndicacion(this.textAreaIndicacion.getText());
 
-		if (grupoAnterior != null) {
+		if (grupoDeEstudiosRecursivo != null) {
 			try {
 				verificarString();
-				grupoAnterior.agregarEstudio(grupo);
-				controlador.actualizarTablaPacientes();
+				grupoDeEstudiosRecursivo.agregarEstudio(grupo);
+				grupoDeEstudiosControlador.actualizarTablaPacientes();
 				Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
 				stage.close();
 			} catch (StringVacioException e) {
