@@ -3,13 +3,6 @@ package gui.controladores;
 import java.io.IOException;
 import java.text.ParseException;
 
-import enums.EstadoPrestacion;
-import excepciones.PrestacionExistenteException;
-import excepciones.RangoDeValoresInvalido;
-import excepciones.StringVacioException;
-import excepciones.ValoresNegativosException;
-import gui.modelos.ModeloPaciente;
-import gui.modelos.ModeloPrestacion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import laboratorio.Analisis;
 import laboratorio.Estudio;
 import laboratorio.GrupoDeEstudios;
@@ -35,6 +29,13 @@ import laboratorio.Laboratorio;
 import laboratorio.Paciente;
 import laboratorio.Prestacion;
 import laboratorio.Visita;
+import enums.EstadoPrestacion;
+import excepciones.PrestacionExistenteException;
+import excepciones.RangoDeValoresInvalido;
+import excepciones.StringVacioException;
+import excepciones.ValoresNegativosException;
+import gui.modelos.ModeloPaciente;
+import gui.modelos.ModeloPrestacion;
 
 public class LaboratorioControlador {
 
@@ -106,6 +107,7 @@ public class LaboratorioControlador {
 
 	@FXML
 	private TableColumn<ModeloPaciente, String> pacienteNombre;
+
 	@FXML
 	private TableColumn<ModeloPaciente, Integer> pacienteDNI;
 
@@ -156,9 +158,20 @@ public class LaboratorioControlador {
 		assert pacienteDNI != null : "fx:id=\"pacienteDNI\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		assert buttonAgregarGrupoDeEstudios != null : "fx:id=\"buttonAgregarGrupoDeEstudios\" was not injected: check your FXML file 'Laboratorio.fxml'.";
 		popularPrograma();
-		inicializarColumnas();
+		inicializarTablas();
 		actualizarTablaPacientes();
 	}
+
+	/**
+	 * 
+	 * Ingresa datos de prueba a la aplicacion
+	 * 
+	 * @throws StringVacioException
+	 * @throws ValoresNegativosException
+	 * @throws PrestacionExistenteException
+	 * @throws RangoDeValoresInvalido
+	 * @throws ParseException
+	 */
 
 	private void popularPrograma() throws StringVacioException, ValoresNegativosException, PrestacionExistenteException,
 			RangoDeValoresInvalido, ParseException {
@@ -176,11 +189,14 @@ public class LaboratorioControlador {
 		g.agregarEstudio(new Analisis("Hematocrito", "ninguna", 1, 10));
 		g.agregarEstudio(new Analisis("Prequirúrjico", "ninguna", 1, 10));
 		g.agregarEstudio(new Estudio("Electroencefalograma", "faltan elementos necesarios"));
-		g.agregarEstudio(new GrupoDeEstudios("Grupo perfil de leucocitos", "ninguna"));
 		laboratorio.agregarVisita(g, p);
 	}
 
-	private void inicializarColumnas() {
+	/**
+	 * Inicializa las tablas de pacientes y de prestaciones
+	 */
+
+	private void inicializarTablas() {
 
 		/* Tabla Paciente */
 		this.tableViewPacientes.setPlaceholder(new Label("No hay pacientes"));
@@ -198,6 +214,10 @@ public class LaboratorioControlador {
 
 	}
 
+	/**
+	 * Refresca la tabla de pacientes
+	 */
+
 	public void actualizarTablaPacientes() {
 		listaPacientes = FXCollections.observableArrayList();
 
@@ -211,12 +231,19 @@ public class LaboratorioControlador {
 
 	}
 
-	public void actualizarTablaPrestaciones(Paciente p) {
+	/**
+	 * 
+	 * Refresca la tabla de prestaciones del paciente indicado
+	 * 
+	 * @param paciente
+	 */
 
+	public void actualizarTablaPrestaciones(Paciente paciente) {
+		tableViewPrestaciones.setPlaceholder(new Label("El paciente no tiene prestaciones"));
 		listaPrestaciones = FXCollections.observableArrayList();
 
 		for (Visita v : laboratorio.getVisitas().values()) {
-			if (v.getPaciente() == p) {
+			if (v.getPaciente() == paciente) {
 				Prestacion prestacion = v.getPrestacion();
 				ModeloPrestacion modeloPrestacion = new ModeloPrestacion(prestacion.getId(), prestacion.getNombre(),
 						prestacion.getIndicacion(), prestacion.getEstado().toString());
@@ -224,10 +251,17 @@ public class LaboratorioControlador {
 			}
 
 		}
-		tableViewPrestaciones.setPlaceholder(new Label("El paciente no tiene prestaciones"));
+
 		tableViewPrestaciones.setItems(listaPrestaciones);
 
 	}
+
+	/**
+	 * 
+	 * Selecciona el formulario a usar de la prestación seleccionada
+	 * 
+	 * @param tipoDePrestacion
+	 */
 
 	public void setResultadoForm(String tipoDePrestacion) {
 		switch (tipoDePrestacion) {
@@ -247,6 +281,19 @@ public class LaboratorioControlador {
 		this.tipoPrestacion = tipoDePrestacion;
 	}
 
+	/**
+	 * 
+	 * Con el dialogo pasado por parametro le asigna la plantilla FXML pasada
+	 * por parametro y crea el dialogo con las propiedades necesarias y el
+	 * título asignado devolviendo el Loader del mismo para ser modificado
+	 * 
+	 * @param dialogo
+	 * @param nombreFXML
+	 * @param tituloDialogo
+	 * @return FXMLLoader
+	 * @throws IOException
+	 */
+
 	public FXMLLoader crearDialogo(Stage dialogo, String nombreFXML, String tituloDialogo) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/vistas/" + nombreFXML + ".fxml"));
 		AnchorPane root;
@@ -260,6 +307,15 @@ public class LaboratorioControlador {
 		dialogo.setResizable(false);
 		return loader;
 	}
+
+	/**
+	 * 
+	 * Crea un MessageBox con el título y mensaje asignados
+	 * 
+	 * @param titulo
+	 * @param mensaje
+	 * @throws IOException
+	 */
 
 	public void mensaje(String titulo, String mensaje) throws IOException {
 
@@ -283,6 +339,8 @@ public class LaboratorioControlador {
 		}
 	}
 
+	/* ACCIONES DE BOTONES */
+
 	@FXML
 	private void buttonAgregarPacienteOnAction() throws IOException {
 
@@ -295,7 +353,7 @@ public class LaboratorioControlador {
 	}
 
 	@FXML
-	void buttonAgregarAnalisisOnAction() throws IOException {
+	private void buttonAgregarAnalisisOnAction() throws IOException {
 
 		if (tableViewPacientes.getSelectionModel().getSelectedItem() != null) {
 			Stage dialogo = new Stage();
@@ -311,7 +369,7 @@ public class LaboratorioControlador {
 	}
 
 	@FXML
-	void buttonAgregarEstudioOnAction() throws IOException {
+	private void buttonAgregarEstudioOnAction() throws IOException {
 		if (tableViewPacientes.getSelectionModel().getSelectedItem() != null) {
 			Stage dialogo = new Stage();
 			FXMLLoader loader = crearDialogo(dialogo, "agregarEstudio", "Agregar Estudio");
@@ -325,7 +383,7 @@ public class LaboratorioControlador {
 	}
 
 	@FXML
-	void buttonAgregarGrupoDeEstudiosOnAction() throws IOException {
+	private void buttonAgregarGrupoDeEstudiosOnAction() throws IOException {
 		if (tableViewPacientes.getSelectionModel().getSelectedItem() != null) {
 			Stage dialogo = new Stage();
 			FXMLLoader loader = crearDialogo(dialogo, "agregarGrupoDeEstudios", "Agregar Grupo de Estudios");
@@ -339,7 +397,7 @@ public class LaboratorioControlador {
 	}
 
 	@FXML
-	void buttonIngresarResultadoPorPrestacionOnAction() throws IOException {
+	private void buttonIngresarResultadoPorPrestacionOnAction() throws IOException {
 		Stage dialogo = new Stage();
 		FXMLLoader loader = crearDialogo(dialogo, "IngresarResultadoPorFiltro", "Filtrar Prestaciones");
 		IngresarResultadoPorFiltroControlador controller = (IngresarResultadoPorFiltroControlador) loader
@@ -355,7 +413,7 @@ public class LaboratorioControlador {
 	}
 
 	@FXML
-	void buttonIngresarResultadoPorPacienteOnAction() throws IOException {
+	private void buttonIngresarResultadoPorPacienteOnAction() throws IOException {
 
 		ModeloPrestacion modeloPrestacion;
 		if ((modeloPrestacion = tableViewPrestaciones.getSelectionModel().getSelectedItem()) != null) {
@@ -390,7 +448,7 @@ public class LaboratorioControlador {
 	}
 
 	@FXML
-	void buttonVerEstadisticaOnAction() throws IOException {
+	private void buttonVerEstadisticaOnAction() throws IOException {
 		Stage dialogo = new Stage();
 		FXMLLoader loader = crearDialogo(dialogo, "MostrarEstadistica", "Estadisticas de Prestaciones");
 		MostrarEstadisticaControlador controller = (MostrarEstadisticaControlador) loader.getController();
