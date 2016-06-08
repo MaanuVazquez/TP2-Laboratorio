@@ -1,8 +1,13 @@
 package test;
 
+import laboratorio.Estudio;
+import laboratorio.Prestacion;
 
-
+import org.junit.Assert;
 import org.junit.Test;
+
+import enums.EstadoPrestacion;
+import excepciones.StringVacioException;
 
 public class TestPrestacion {
 
@@ -11,62 +16,23 @@ public class TestPrestacion {
 	 */
 
 	@Test
-	public void testConstructor() {
+	public void testConstructor() throws StringVacioException {
 
-	
-	}
-
-	/*
-	 * Prueba getId
-	 */
-
-	@Test
-	public void testGetId() {
+		Prestacion prestacion = new Estudio("nombre", "indicacion");
+		Assert.assertEquals("nombre", prestacion.getNombre());
+		Assert.assertEquals(EstadoPrestacion.PENDIENTE, prestacion.getEstado());
 
 	}
 
 	/*
-	 * Prueba setId
+	 * Prueba incremento del id
 	 */
 
 	@Test
-	public void testSetId() {
-
+	public void testGetId() throws StringVacioException {
+		Prestacion prestacion1 = new Estudio("nombre", "indicacion");
+		Prestacion prestacion2 = new Estudio("nombre2", "indicacion");
+		Assert.assertEquals(prestacion1.getId() + 1, prestacion2.getId());
 	}
 
-	/*
-	 * Prueba getNombre
-	 */
-
-	@Test
-	public void testGetNombre() {
-
-	}
-
-	/*
-	 * Prueba setNombre
-	 */
-
-	@Test
-	public void testSetNombre() {
-
-	}
-
-	/*
-	 * Prueba getIndicacion
-	 */
-
-	@Test
-	public void testGetIndicacion() {
-
-	}
-
-	/*
-	 * Prueba setIndicacion
-	 */
-
-	@Test
-	public void testSetIndicacion() {
-
-	}
 }

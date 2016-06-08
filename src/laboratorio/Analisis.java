@@ -10,7 +10,7 @@ public class Analisis extends Prestacion {
 
 	private double valorNormalMinimo;
 	private double valorNormalMaximo;
-	private double valorMedido;
+	private Double valorMedido;
 	private ClasificacionEstudio clasificacion;
 
 	public Analisis(String nombre, String indicacion, double valorNormalMinimo, double valorNormalMaximo)
@@ -39,7 +39,7 @@ public class Analisis extends Prestacion {
 
 	@Override
 	public String getResultado() {
-		return (super.toString() + "Valor Medido: " + this.valorMedido + ". Clasificacion: "
+		return (super.getResultado() + "Valor Medido: " + this.valorMedido + ". Clasificacion: "
 				+ this.getClasificacion().toString() + ". Rango de Normalidad [" + this.getValorNormalMinimo() + " - "
 				+ this.getValorNormalMaximo() + "].");
 	}
@@ -53,7 +53,7 @@ public class Analisis extends Prestacion {
 		return this.valorNormalMaximo;
 	}
 
-	public double getValorMedido() {
+	public Double getValorMedido() {
 		return valorMedido;
 	}
 

@@ -37,7 +37,7 @@ public class Estudio extends Prestacion {
 
 	@Override
 	public String getResultado() {
-		return super.toString() + "Clasificacion: " + this.getClasificacion().toString() + ". " + this.informe;
+		return super.getResultado() + "Clasificacion: " + this.getClasificacion().toString() + ". " + this.informe + ".";
 	}
 
 	@Override

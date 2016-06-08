@@ -81,6 +81,15 @@ public class TestAnalisis {
 
 	}
 
+	@Test
+	public void AnalisisSinResultadoCargado() throws StringVacioException,
+			ValoresNegativosException, RangoDeValoresInvalido {
+		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
+				50.0);
+
+		Assert.assertEquals(null, analisisDePrueba.getValorMedido());
+	}
+
 	/*
 	 * Prueba obtener el valor minimo del analisis.
 	 */
@@ -104,7 +113,7 @@ public class TestAnalisis {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
 				50.0);
 
-		Assert.assertEquals(10, analisisDePrueba.getValorNormalMinimo(), 0);
+		Assert.assertEquals(50, analisisDePrueba.getValorNormalMaximo(), 0);
 	}
 
 	@Test
@@ -133,5 +142,16 @@ public class TestAnalisis {
 		Assert.assertEquals(ClasificacionEstudio.ANORMAL,
 				analisisDePrueba.getClasificacion());
 
+	}
+
+	@Test
+	public void getResultado() throws StringVacioException,
+			ValoresNegativosException, RangoDeValoresInvalido {
+		Analisis analisisDePrueba = new Analisis("Sangre", "indicacion", 10.0,
+				50.0);
+
+		analisisDePrueba.setResultado(14);
+		String resultado = "Nombre del estudio: Sangre. Valor Medido: 14.0. Clasificacion: NORMAL. Rango de Normalidad [10.0 - 50.0].";
+		Assert.assertTrue(analisisDePrueba.getResultado().contains(resultado));
 	}
 }
