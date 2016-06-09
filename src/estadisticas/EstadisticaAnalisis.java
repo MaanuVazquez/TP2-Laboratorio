@@ -18,6 +18,18 @@ public class EstadisticaAnalisis extends EstadisticaIndividual {
 		this.valorMaximoMedido = analisis.getValorMedido();
 	}
 
+	public Double getValorMinimoMedido() {
+		return valorMinimoMedido;
+	}
+
+	public Double getValorMaximoMedido() {
+		return valorMaximoMedido;
+	}
+
+	public Double getSumaValoresMedidos() {
+		return sumaValoresMedidos;
+	}
+
 	public void agregarPrestacion(Prestacion prestacion) {
 		Analisis analisis = (Analisis) prestacion;
 		this.numeroDePacientes++;
@@ -47,7 +59,7 @@ public class EstadisticaAnalisis extends EstadisticaIndividual {
 		this.sumaValoresMedidos += valorMedido;
 	}
 
-	private Double getPromedioValores() {
+	public Double getPromedioValores() {
 		return (this.sumaValoresMedidos / this.numeroDePacientes);
 	}
 

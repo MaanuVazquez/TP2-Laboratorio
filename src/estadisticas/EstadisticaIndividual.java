@@ -17,4 +17,12 @@ public abstract class EstadisticaIndividual {
 	public String toString() {
 		return "[Nombre: " + nombre + ", Cantidad de pacientes: " + numeroDePacientes + ", \n";
 	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public int getNumeroDePacientes() {
+		return numeroDePacientes;
+	}
 }

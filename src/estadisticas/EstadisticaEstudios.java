@@ -33,4 +33,12 @@ public class EstadisticaEstudios extends EstadisticaIndividual {
 			this.cantidadResultadosAnormales++;
 		}
 	}
+
+	public Integer getCantidadResultadosNormales() {
+		return cantidadResultadosNormales;
+	}
+
+	public Integer getCantidadResultadosAnormales() {
+		return cantidadResultadosAnormales;
+	}
 }
