@@ -76,6 +76,13 @@ public class IngresarResultadoGrupalControlador {
 		inicializarTablas();
 	}
 
+	/**
+	 * 
+	 * Selecciona el formulario a usar de la prestación seleccionada
+	 * 
+	 * @param tipoDePrestacion
+	 */
+
 	private void setResultadoForm(String tipoDePrestacion) {
 		switch (tipoDePrestacion) {
 		case "Analisis":
@@ -94,12 +101,25 @@ public class IngresarResultadoGrupalControlador {
 		this.tipoPrestacion = tipoDePrestacion;
 	}
 
+	/**
+	 * Inicializa la tabla de prestaciones
+	 */
+
 	private void inicializarTablas() {
 		/* Tabla prestaciones */
 		this.prestacionNombre.setCellValueFactory(new PropertyValueFactory<ModeloPrestacion, String>("nombre"));
 		this.prestacionIndicacion.setCellValueFactory(new PropertyValueFactory<ModeloPrestacion, String>("indicacion"));
 		this.prestacionEstado.setCellValueFactory(new PropertyValueFactory<ModeloPrestacion, String>("estado"));
 	}
+
+	/**
+	 * Inicializa el controlador con un controlador de laboratorio, un grupo de
+	 * estudios y un paciente pasados por parametros
+	 * 
+	 * @param l
+	 * @param g
+	 * @param p
+	 */
 
 	public void inicializarDeLaboratorio(LaboratorioControlador l, GrupoDeEstudios g, Paciente p) {
 		this.laboratorioControlador = l;
@@ -108,6 +128,17 @@ public class IngresarResultadoGrupalControlador {
 		actualizarTablasDeGrupo();
 		this.labelNombre.setText("Nombre: " + this.grupo.getNombre());
 	}
+
+	/**
+	 * Inicializa el controlador desde otro IngresarResulgadoGrupal con
+	 * laboratorio, ingresarResultadoGrupal, grupo de estudios y paciente
+	 * pasados por parametro
+	 * 
+	 * @param l
+	 * @param gc
+	 * @param g
+	 * @param p
+	 */
 
 	public void inicializarDeGrupo(LaboratorioControlador l, IngresarResultadoGrupalControlador gc, GrupoDeEstudios g,
 			Paciente p) {
@@ -119,6 +150,16 @@ public class IngresarResultadoGrupalControlador {
 		this.labelNombre.setText("Nombre: " + this.grupo.getNombre());
 	}
 
+	/**
+	 * 
+	 * Inizialia el controlador desde un filtro de prestaciones con el
+	 * laboratorio, filtro y grupo de estudios pasados por parametro
+	 * 
+	 * @param l
+	 * @param f
+	 * @param g
+	 */
+
 	public void inicializarDeFiltro(LaboratorioControlador l, IngresarResultadoPorFiltroControlador f,
 			GrupoDeEstudios g) {
 		this.laboratorioControlador = l;
@@ -127,6 +168,10 @@ public class IngresarResultadoGrupalControlador {
 		actualizarTablasDeGrupo();
 		this.labelNombre.setText("Nombre: " + this.grupo.getNombre());
 	}
+
+	/**
+	 * Refresca la tabla de grupos de estudio
+	 */
 
 	public void actualizarTablasDeGrupo() {
 
@@ -142,6 +187,10 @@ public class IngresarResultadoGrupalControlador {
 
 	}
 
+	/**
+	 * Acción del botón Aceptar
+	 */
+
 	@FXML
 	void buttonOkOnAction() {
 		if (grupoControlador != null)
@@ -154,6 +203,12 @@ public class IngresarResultadoGrupalControlador {
 		Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
 		stage.close();
 	}
+
+	/**
+	 * Acción del botón Ingresar Resultado
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	void buttonIngresarResultadoOnAction() throws IOException {
@@ -182,7 +237,8 @@ public class IngresarResultadoGrupalControlador {
 				}
 				dialogo.show();
 			} else {
-				this.laboratorioControlador.crearMensaje("Error", "La prestación seleccionada ya se encuentra finalizada");
+				this.laboratorioControlador.crearMensaje("Error",
+						"La prestación seleccionada ya se encuentra finalizada");
 			}
 		} else {
 			this.laboratorioControlador.crearMensaje("Error", "No se ha seleccionado ningúna prestación");

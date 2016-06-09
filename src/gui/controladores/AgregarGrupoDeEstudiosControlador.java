@@ -103,6 +103,10 @@ public class AgregarGrupoDeEstudiosControlador {
 		actualizarTablaPacientes();
 	}
 
+	/**
+	 * Inicializa las columnas
+	 */
+
 	private void inicializarColumnas() {
 
 		/* Tabla prestaciones */
@@ -111,6 +115,10 @@ public class AgregarGrupoDeEstudiosControlador {
 		this.prestacionEstado.setCellValueFactory(new PropertyValueFactory<ModeloPrestacion, String>("estado"));
 
 	}
+
+	/**
+	 * Refresca la tabla de pacientes
+	 */
 
 	public void actualizarTablaPacientes() {
 		listaPrestaciones = FXCollections.observableArrayList();
@@ -125,15 +133,38 @@ public class AgregarGrupoDeEstudiosControlador {
 
 	}
 
-	public void initData(LaboratorioControlador l, Paciente p) {
+	/**
+	 * Inicializa el controlador desde un laboratorio y con un paciente, ambos
+	 * pasados por parametro
+	 * 
+	 * @param l
+	 * @param p
+	 */
+
+	public void inicializarDeLaboratorio(LaboratorioControlador l, Paciente p) {
 		this.laboratorioControlador = l;
 		this.paciente = p;
 	}
 
-	public void initDataDeGrupo(AgregarGrupoDeEstudiosControlador a, GrupoDeEstudios g) {
+	/**
+	 * Inicializa el controlador desde otro grupo de estudios y un grupo pasados
+	 * por parametro
+	 * 
+	 * @param a
+	 * @param g
+	 */
+
+	public void inicializarDeGrupo(LaboratorioControlador l, AgregarGrupoDeEstudiosControlador a, GrupoDeEstudios g) {
+		laboratorioControlador = l;
 		grupoDeEstudiosRecursivo = g;
 		grupoDeEstudiosControlador = a;
 	}
+
+	/**
+	 * Verifica strings vacios
+	 * 
+	 * @throws StringVacioException
+	 */
 
 	private void verificarString() throws StringVacioException {
 		if (this.textFieldNombre.getText().trim().isEmpty() || this.textAreaIndicacion.getText().trim().isEmpty()) {
@@ -141,25 +172,43 @@ public class AgregarGrupoDeEstudiosControlador {
 		}
 	}
 
+	/**
+	 * Acción del boton Agregar Estudio
+	 * 
+	 * @throws IOException
+	 */
+
 	@FXML
 	private void buttonAgregarEstudioOnAction() throws IOException {
 		Stage dialogo = new Stage();
 		FXMLLoader loader = this.laboratorioControlador.crearFormulario(dialogo, "agregarEstudio", "Agregar Estudio");
 		AgregarEstudioControlador controller = (AgregarEstudioControlador) loader.getController();
-		controller.initDataDeGrupo(this, grupo);
+		controller.inicializarDeGrupoDeEstudios(this.laboratorioControlador, this, grupo);
 		dialogo.show();
 
 	}
+
+	/**
+	 * Acción del boton Agregar Análisis
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	private void buttonAgregarAnalisisOnAction() throws IOException {
 		Stage dialogo = new Stage();
 		FXMLLoader loader = this.laboratorioControlador.crearFormulario(dialogo, "agregarAnalisis", "Agregar Análisis");
 		AgregarAnalisisControlador controller = (AgregarAnalisisControlador) loader.getController();
-		controller.initDataDeGrupo(this, grupo);
+		controller.inicializarDeGrupoDeEstudios(this.laboratorioControlador, this, grupo);
 		dialogo.show();
 
 	}
+
+	/**
+	 * Acción del boton Agregar Grupo de Estudios
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	private void buttonAgregarGrupoDeEstudiosOnAction() throws IOException {
@@ -167,10 +216,17 @@ public class AgregarGrupoDeEstudiosControlador {
 		FXMLLoader loader = this.laboratorioControlador.crearFormulario(dialogo, "agregarGrupoDeEstudios",
 				"Agregar Grupo de Estudios");
 		AgregarGrupoDeEstudiosControlador controller = (AgregarGrupoDeEstudiosControlador) loader.getController();
-		controller.initDataDeGrupo(this, grupo);
+		controller.inicializarDeGrupo(this.laboratorioControlador, this, grupo);
 		dialogo.show();
 
 	}
+
+	/**
+	 * Acción del boton Agregar
+	 * 
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 
 	@FXML
 	private void buttonAgregarOnAction() throws IOException, ParseException {

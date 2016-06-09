@@ -59,12 +59,31 @@ public class IngresarResultadoEstudioControlador {
 		choiceBoxClasificacion.getSelectionModel().select(1);
 	}
 
+	/**
+	 * inicializa el controlador desde el laboratorio con el laboratorio, el
+	 * estudio y el paciente pasados por parametro
+	 * 
+	 * @param l
+	 * @param e
+	 * @param p
+	 */
+
 	public void inicializarDeLaboratorio(LaboratorioControlador l, Estudio e, Paciente p) {
 		laboratorioControlador = l;
 		estudio = e;
 		paciente = p;
 		labelNombre.setText("Nombre: " + estudio.getNombre());
 	}
+
+	/**
+	 * Inicializa el controlador desde un grupo de estudos con el laboratorio,
+	 * el controlador del grupo, el estudio y el paciente pasados por parametro
+	 * 
+	 * @param l
+	 * @param g
+	 * @param e
+	 * @param p
+	 */
 
 	public void inicializarDeGrupo(LaboratorioControlador l, IngresarResultadoGrupalControlador g, Estudio e,
 			Paciente p) {
@@ -75,12 +94,27 @@ public class IngresarResultadoEstudioControlador {
 		labelNombre.setText("Nombre: " + estudio.getNombre());
 	}
 
+	/**
+	 * Inicializa el controlador desde un filtro de prestaciones con el
+	 * laboratorio, el filtro y el estudio pasados por parametro
+	 * 
+	 * @param l
+	 * @param f
+	 * @param e
+	 */
+
 	public void inicializarDeFiltro(LaboratorioControlador l, IngresarResultadoPorFiltroControlador f, Estudio e) {
 		this.laboratorioControlador = l;
 		this.filtroControlador = f;
 		this.estudio = e;
 		labelNombre.setText("Nombre: " + estudio.getNombre());
 	}
+
+	/**
+	 * Acción del botón Ingresar Resultado
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	void buttonIngresarOnAction() throws IOException {

@@ -50,6 +50,10 @@ public class MostrarEstadisticaControlador {
 
 	}
 
+	/**
+	 * Inicializa el controlador importado
+	 */
+
 	private void inicializarDatePickers() {
 		// Initialize the DatePicker
 		desdeDatePicker = new DatePicker(Locale.getDefault());
@@ -69,9 +73,19 @@ public class MostrarEstadisticaControlador {
 		gridPaneDate.add(hastaDatePicker, 1, 1);
 	}
 
+	/**
+	 * Inicializa el controlador desde el laboratorio pasado por parametro
+	 * 
+	 * @param l
+	 */
+
 	public void inicializarDeLaboratorio(LaboratorioControlador l) {
 		this.laboratorioControlador = l;
 	}
+
+	/**
+	 * Acción del botón Aceptar
+	 */
 
 	@FXML
 	void buttonAceptarOnAction() {
@@ -80,6 +94,12 @@ public class MostrarEstadisticaControlador {
 		stage.close();
 
 	}
+
+	/**
+	 * Acción del botón mostrar
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	void buttonMostrarOnAction() throws IOException {

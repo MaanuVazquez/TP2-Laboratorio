@@ -70,6 +70,15 @@ public class IngresarResultadoAnalisisControlador {
 		});
 	}
 
+	/**
+	 * inicializa el controlador desde el laboratorio con el laboratorio, el
+	 * analisis y el paciente pasados por parametro
+	 * 
+	 * @param l
+	 * @param e
+	 * @param p
+	 */
+
 	public void inicializarDeLaboratorio(LaboratorioControlador l, Analisis a, Paciente p) {
 		this.laboratorioControlador = l;
 		this.analisis = a;
@@ -78,6 +87,16 @@ public class IngresarResultadoAnalisisControlador {
 		this.labelValorMinimo.setText("Valor Mínimo: " + analisis.getValorNormalMinimo());
 		this.labelValorMaximo.setText("Valor Máximo: " + analisis.getValorNormalMaximo());
 	}
+
+	/**
+	 * Inicializa el controlador desde un grupo de estudos con el laboratorio,
+	 * el controlador del grupo, el analisis y el paciente pasados por parametro
+	 * 
+	 * @param l
+	 * @param g
+	 * @param e
+	 * @param p
+	 */
 
 	public void inicializarDeGrupo(LaboratorioControlador l, IngresarResultadoGrupalControlador g, Analisis a,
 			Paciente p) {
@@ -90,6 +109,15 @@ public class IngresarResultadoAnalisisControlador {
 		this.labelValorMaximo.setText("Valor Máximo: " + analisis.getValorNormalMaximo());
 	}
 
+	/**
+	 * Inicializa el controlador desde un filtro de prestaciones con el
+	 * laboratorio, el filtro y el analisis pasados por parametro
+	 * 
+	 * @param l
+	 * @param f
+	 * @param e
+	 */
+
 	public void inicializarDeFiltro(LaboratorioControlador l, IngresarResultadoPorFiltroControlador f, Analisis a) {
 		this.laboratorioControlador = l;
 		this.analisis = a;
@@ -98,6 +126,12 @@ public class IngresarResultadoAnalisisControlador {
 		this.labelValorMinimo.setText("Valor Mínimo: " + analisis.getValorNormalMinimo());
 		this.labelValorMaximo.setText("Valor Máximo: " + analisis.getValorNormalMaximo());
 	}
+
+	/**
+	 * Acción del botón Ingresar Resultado
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	void buttonIngresarOnAction() throws IOException {

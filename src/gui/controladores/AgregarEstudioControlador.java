@@ -56,15 +56,40 @@ public class AgregarEstudioControlador {
 
 	}
 
-	public void initData(LaboratorioControlador l, Paciente p) {
+	/**
+	 * Inicializa el controlador desde un laboratorio y un paciente pasados por
+	 * parametro
+	 * 
+	 * @param l
+	 * @param p
+	 */
+
+	public void inicializarDeLaboratorio(LaboratorioControlador l, Paciente p) {
 		this.laboratorioControlador = l;
 		this.pacienteAEstudiar = p;
 	}
 
-	public void initDataDeGrupo(AgregarGrupoDeEstudiosControlador a, GrupoDeEstudios g) {
+	/**
+	 * Inicializa el controlador desde un grupo de estudios anterior y un grupo
+	 * pasados por parametro
+	 * 
+	 * @param a
+	 * @param g
+	 */
+
+	public void inicializarDeGrupoDeEstudios(LaboratorioControlador l, AgregarGrupoDeEstudiosControlador a,
+			GrupoDeEstudios g) {
+		laboratorioControlador = l;
 		grupoAnterior = g;
 		controlador = a;
 	}
+
+	/**
+	 * Acción del botón Agregar
+	 * 
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 
 	@FXML
 	private void buttonAgregarOnAction() throws IOException, ParseException {

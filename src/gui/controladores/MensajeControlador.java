@@ -25,9 +25,19 @@ public class MensajeControlador {
 
 	}
 
+	/**
+	 * Inicializador con el mensaje
+	 * 
+	 * @param mensaje
+	 */
+
 	public void inicializador(String mensaje) {
 		this.textMessage.setText(mensaje);
 	}
+
+	/**
+	 * Acción del botón aceptar
+	 */
 
 	@FXML
 	private void buttonAceptarOnAction() {

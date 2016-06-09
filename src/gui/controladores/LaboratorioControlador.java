@@ -21,7 +21,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import laboratorio.Analisis;
 import laboratorio.Estudio;
 import laboratorio.GrupoDeEstudios;
@@ -327,8 +326,12 @@ public class LaboratorioControlador {
 
 	}
 
+	/**
+	 * Acción al hacer click en la tabla de pacientes
+	 */
+
 	@FXML
-	void tableViewPacientesOnMouseClicked() {
+	private void tableViewPacientesOnMouseClicked() {
 		ModeloPaciente modeloPaciente;
 		if ((modeloPaciente = tableViewPacientes.getSelectionModel().getSelectedItem()) != null) {
 			for (Paciente p : laboratorio.getPacientes().values()) {
@@ -339,7 +342,11 @@ public class LaboratorioControlador {
 		}
 	}
 
-	/* ACCIONES DE BOTONES */
+	/**
+	 * Acción al hacer click en el botón Agregar Paciente
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	private void buttonAgregarPacienteOnAction() throws IOException {
@@ -347,10 +354,16 @@ public class LaboratorioControlador {
 		Stage dialogo = new Stage();
 		FXMLLoader loader = crearFormulario(dialogo, "agregarPaciente", "Agregar Paciente");
 		AgregarPacienteControlador controller = (AgregarPacienteControlador) loader.getController();
-		controller.initData(this);
+		controller.inicializarLaboratorio(this);
 		dialogo.show();
 
 	}
+
+	/**
+	 * Acción al hacer click en el botón Agregar Análisis
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	private void buttonAgregarAnalisisOnAction() throws IOException {
@@ -360,13 +373,19 @@ public class LaboratorioControlador {
 			FXMLLoader loader = crearFormulario(dialogo, "agregarAnalisis", "Agregar Análisis");
 			AgregarAnalisisControlador controller = (AgregarAnalisisControlador) loader.getController();
 			Paciente p = laboratorio.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getDNI());
-			controller.initData(this, p);
+			controller.inicializarDeLaboratorio(this, p);
 			dialogo.show();
 		} else {
 			crearMensaje("Error", "No se ha seleccionado ningún paciente");
 		}
 
 	}
+
+	/**
+	 * Acción al hacer click en el botón Agregar Estudio
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	private void buttonAgregarEstudioOnAction() throws IOException {
@@ -375,12 +394,18 @@ public class LaboratorioControlador {
 			FXMLLoader loader = crearFormulario(dialogo, "agregarEstudio", "Agregar Estudio");
 			AgregarEstudioControlador controller = (AgregarEstudioControlador) loader.getController();
 			Paciente p = laboratorio.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getDNI());
-			controller.initData(this, p);
+			controller.inicializarDeLaboratorio(this, p);
 			dialogo.show();
 		} else {
 			crearMensaje("Error", "No se ha seleccionado ningún paciente");
 		}
 	}
+
+	/**
+	 * Acción al hacer click en el botón Agregar grupo de estudios
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	private void buttonAgregarGrupoDeEstudiosOnAction() throws IOException {
@@ -389,12 +414,18 @@ public class LaboratorioControlador {
 			FXMLLoader loader = crearFormulario(dialogo, "agregarGrupoDeEstudios", "Agregar Grupo de Estudios");
 			AgregarGrupoDeEstudiosControlador controller = (AgregarGrupoDeEstudiosControlador) loader.getController();
 			Paciente p = laboratorio.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getDNI());
-			controller.initData(this, p);
+			controller.inicializarDeLaboratorio(this, p);
 			dialogo.show();
 		} else {
 			crearMensaje("Error", "No se ha seleccionado ningún paciente");
 		}
 	}
+
+	/**
+	 * Acción al hacer click en el botón Ingresar Resultado por prestación
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	private void buttonIngresarResultadoPorPrestacionOnAction() throws IOException {
@@ -412,6 +443,12 @@ public class LaboratorioControlador {
 		dialogo.show();
 	}
 
+	/**
+	 * Acción al hacer click en el botón Ingresar Resultado
+	 * 
+	 * @throws IOException
+	 */
+
 	@FXML
 	private void buttonIngresarResultadoPorPacienteOnAction() throws IOException {
 
@@ -421,7 +458,8 @@ public class LaboratorioControlador {
 			if (prestacion.getEstado() != EstadoPrestacion.FINALIZADO) {
 				setResultadoForm(prestacion.getResultForm());
 				Stage dialogo = new Stage();
-				FXMLLoader loader = crearFormulario(dialogo, this.resultadoFXML, this.resultadoTitle + prestacion.getId());
+				FXMLLoader loader = crearFormulario(dialogo, this.resultadoFXML,
+						this.resultadoTitle + prestacion.getId());
 				Paciente paciente = laboratorio
 						.buscarPaciente(tableViewPacientes.getSelectionModel().getSelectedItem().getDNI());
 				if (this.tipoPrestacion.equals("Analisis")) {
@@ -446,6 +484,12 @@ public class LaboratorioControlador {
 		}
 
 	}
+
+	/**
+	 * Acción al hacer click en el botón Ver Estadistica
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	private void buttonVerEstadisticaOnAction() throws IOException {

@@ -82,7 +82,7 @@ public class IngresarResultadoPorFiltroControlador {
 		assert buttonIngresarResultado != null : "fx:id=\"buttonIngresarResultado\" was not injected: check your FXML file 'IngresarResultadoPorFiltro.fxml'.";
 		this.tableViewPrestaciones.setPlaceholder(new Label(""));
 		inicializarTablas();
-		popularTabla("");
+		popularTabla(this.search);
 
 		// Realizamos el search
 		this.textFieldSearch.textProperty().addListener(new ChangeListener<String>() {
@@ -95,6 +95,10 @@ public class IngresarResultadoPorFiltroControlador {
 
 	}
 
+	/**
+	 * Inicializa la tabla de prestaciones
+	 */
+
 	private void inicializarTablas() {
 		/* Tabla prestaciones */
 		this.prestacionNombre.setCellValueFactory(new PropertyValueFactory<ModeloPrestacion, String>("nombre"));
@@ -102,21 +106,42 @@ public class IngresarResultadoPorFiltroControlador {
 		this.prestacionEstado.setCellValueFactory(new PropertyValueFactory<ModeloPrestacion, String>("estado"));
 	}
 
+	/**
+	 * Inicializa este controlador desde un laboratorio pasado por parámetro
+	 * 
+	 * @param l
+	 */
+
 	public void inicializarLaboratorio(LaboratorioControlador l) {
 		this.laboratorioControlador = l;
 	}
+
+	/**
+	 * Inicializa este controlador desde un laboratorio con un laboratorio y un
+	 * paciente pasados por parámetro
+	 * 
+	 * @param l
+	 * @param p
+	 */
 
 	public void inicializarLaboratorio(LaboratorioControlador l, Paciente p) {
 		this.laboratorioControlador = l;
 		this.paciente = p;
 	}
 
+	/**
+	 * Popula la tabla desde el textField de busqueda con la cadena pasada por
+	 * parámetro
+	 * 
+	 * @param nombreEstudio
+	 */
+
 	public void popularTabla(String nombreEstudio) {
 		this.tableViewPrestaciones.setPlaceholder(new Label("No se han encontrado resultados"));
 		listaPrestaciones = FXCollections.observableArrayList();
 
 		for (Prestacion prestacion : lab.getPrestaciones().values()) {
-			if (containsIgnoreCase(prestacion.getNombre(), nombreEstudio)) {
+			if (containsSinCaseSensitive(prestacion.getNombre(), nombreEstudio)) {
 				ModeloPrestacion modeloPrestacion = new ModeloPrestacion(prestacion.getId(), prestacion.getNombre(),
 						prestacion.getIndicacion(), prestacion.getEstado().toString());
 				listaPrestaciones.add(modeloPrestacion);
@@ -127,7 +152,17 @@ public class IngresarResultadoPorFiltroControlador {
 
 	}
 
-	private boolean containsIgnoreCase(final String str, final String searchStr) {
+	/**
+	 * 
+	 * Método contains pero sin casesensitive para poder realizar la búsqueda
+	 * del textFieldSearch
+	 * 
+	 * @param str
+	 * @param searchStr
+	 * @return
+	 */
+
+	private boolean containsSinCaseSensitive(final String str, final String searchStr) {
 		if (str == null || searchStr == null) {
 			return false;
 		}
@@ -140,6 +175,13 @@ public class IngresarResultadoPorFiltroControlador {
 		}
 		return false;
 	}
+
+	/**
+	 * 
+	 * Selecciona el formulario a usar de la prestación seleccionada
+	 * 
+	 * @param tipoDePrestacion
+	 */
 
 	private void setResultadoForm(String tipoDePrestacion) {
 		switch (tipoDePrestacion) {
@@ -159,6 +201,10 @@ public class IngresarResultadoPorFiltroControlador {
 		this.tipoPrestacion = tipoDePrestacion;
 	}
 
+	/**
+	 * Acción del botón aceptar
+	 */
+
 	@FXML
 	private void buttonOkOnAction() {
 		if (paciente != null) {
@@ -167,6 +213,12 @@ public class IngresarResultadoPorFiltroControlador {
 		Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
 		stage.close();
 	}
+
+	/**
+	 * Acción del botón ingresarResultado
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	private void buttonIngresarResultadoOnAction() throws IOException {

@@ -84,9 +84,21 @@ public class AgregarPacienteControlador {
 
 	}
 
-	public void initData(LaboratorioControlador l) {
+	/**
+	 * Inicializa el controlador desde el Laboratorio con este como parametro
+	 * 
+	 * @param l
+	 */
+
+	public void inicializarLaboratorio(LaboratorioControlador l) {
 		this.laboratorioControlador = l;
 	}
+
+	/**
+	 * Acción del botón agregar
+	 * 
+	 * @throws IOException
+	 */
 
 	@FXML
 	private void buttonAgregarOnAction() throws IOException {
