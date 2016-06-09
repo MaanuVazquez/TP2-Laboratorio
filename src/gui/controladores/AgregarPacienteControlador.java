@@ -100,7 +100,7 @@ public class AgregarPacienteControlador {
 			Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
 			stage.close();
 		} catch (NumberFormatException | StringVacioException | ValoresNegativosException e) {
-			laboratorioControlador.mensaje("Error", e.getMessage());
+			laboratorioControlador.crearMensaje("Error", e.getMessage());
 		}
 
 	}

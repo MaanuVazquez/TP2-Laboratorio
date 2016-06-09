@@ -144,7 +144,7 @@ public class AgregarGrupoDeEstudiosControlador {
 	@FXML
 	private void buttonAgregarEstudioOnAction() throws IOException {
 		Stage dialogo = new Stage();
-		FXMLLoader loader = this.laboratorioControlador.crearDialogo(dialogo, "agregarEstudio", "Agregar Estudio");
+		FXMLLoader loader = this.laboratorioControlador.crearFormulario(dialogo, "agregarEstudio", "Agregar Estudio");
 		AgregarEstudioControlador controller = (AgregarEstudioControlador) loader.getController();
 		controller.initDataDeGrupo(this, grupo);
 		dialogo.show();
@@ -154,7 +154,7 @@ public class AgregarGrupoDeEstudiosControlador {
 	@FXML
 	private void buttonAgregarAnalisisOnAction() throws IOException {
 		Stage dialogo = new Stage();
-		FXMLLoader loader = this.laboratorioControlador.crearDialogo(dialogo, "agregarAnalisis", "Agregar Análisis");
+		FXMLLoader loader = this.laboratorioControlador.crearFormulario(dialogo, "agregarAnalisis", "Agregar Análisis");
 		AgregarAnalisisControlador controller = (AgregarAnalisisControlador) loader.getController();
 		controller.initDataDeGrupo(this, grupo);
 		dialogo.show();
@@ -164,7 +164,7 @@ public class AgregarGrupoDeEstudiosControlador {
 	@FXML
 	private void buttonAgregarGrupoDeEstudiosOnAction() throws IOException {
 		Stage dialogo = new Stage();
-		FXMLLoader loader = this.laboratorioControlador.crearDialogo(dialogo, "agregarGrupoDeEstudios",
+		FXMLLoader loader = this.laboratorioControlador.crearFormulario(dialogo, "agregarGrupoDeEstudios",
 				"Agregar Grupo de Estudios");
 		AgregarGrupoDeEstudiosControlador controller = (AgregarGrupoDeEstudiosControlador) loader.getController();
 		controller.initDataDeGrupo(this, grupo);
@@ -186,7 +186,7 @@ public class AgregarGrupoDeEstudiosControlador {
 				Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
 				stage.close();
 			} catch (StringVacioException e) {
-				laboratorioControlador.mensaje("Error", e.getMessage());
+				laboratorioControlador.crearMensaje("Error", e.getMessage());
 			}
 
 		} else {
@@ -198,7 +198,7 @@ public class AgregarGrupoDeEstudiosControlador {
 				Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
 				stage.close();
 			} catch (PrestacionExistenteException | StringVacioException e) {
-				laboratorioControlador.mensaje("Error", e.getMessage());
+				laboratorioControlador.crearMensaje("Error", e.getMessage());
 			}
 
 		}

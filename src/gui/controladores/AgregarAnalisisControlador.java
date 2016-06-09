@@ -125,7 +125,7 @@ public class AgregarAnalisisControlador {
 			stage.close();
 		} catch (NumberFormatException | ValoresNegativosException | RangoDeValoresInvalido
 				| PrestacionExistenteException | StringVacioException e) {
-			laboratorioControlador.mensaje("Error", e.getMessage());
+			laboratorioControlador.crearMensaje("Error", e.getMessage());
 		}
 
 	}

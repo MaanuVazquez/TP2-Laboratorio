@@ -164,7 +164,7 @@ public class IngresarResultadoGrupalControlador {
 			if (prestacion.getEstado() != EstadoPrestacion.FINALIZADO) {
 				setResultadoForm(prestacion.getResultForm());
 				Stage dialogo = new Stage();
-				FXMLLoader loader = this.laboratorioControlador.crearDialogo(dialogo, this.resultadoFXML,
+				FXMLLoader loader = this.laboratorioControlador.crearFormulario(dialogo, this.resultadoFXML,
 						this.resultadoTitle + prestacion.getId());
 				if (this.tipoPrestacion.equals("Analisis")) {
 					IngresarResultadoAnalisisControlador controller = (IngresarResultadoAnalisisControlador) loader
@@ -182,10 +182,10 @@ public class IngresarResultadoGrupalControlador {
 				}
 				dialogo.show();
 			} else {
-				this.laboratorioControlador.mensaje("Error", "La prestación seleccionada ya se encuentra finalizada");
+				this.laboratorioControlador.crearMensaje("Error", "La prestación seleccionada ya se encuentra finalizada");
 			}
 		} else {
-			this.laboratorioControlador.mensaje("Error", "No se ha seleccionado ningúna prestación");
+			this.laboratorioControlador.crearMensaje("Error", "No se ha seleccionado ningúna prestación");
 		}
 
 	}

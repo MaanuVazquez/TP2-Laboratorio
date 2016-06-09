@@ -84,7 +84,7 @@ public class AgregarEstudioControlador {
 			Stage stage = (Stage) anchorPaneMain.getScene().getWindow();
 			stage.close();
 		} catch (PrestacionExistenteException | StringVacioException e) {
-			laboratorioControlador.mensaje("Error", e.getMessage());
+			laboratorioControlador.crearMensaje("Error", e.getMessage());
 		}
 
 	}

@@ -51,7 +51,7 @@ public class MostrarEstadisticaControlador {
 	}
 
 	private void inicializarDatePickers() {
-		// Initialize the DatePicker for birthday
+		// Initialize the DatePicker
 		desdeDatePicker = new DatePicker(Locale.getDefault());
 		desdeDatePicker.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 		desdeDatePicker.getCalendarView().todayButtonTextProperty().set("Hoy");
@@ -91,7 +91,7 @@ public class MostrarEstadisticaControlador {
 					hastaDatePicker.getSelectedDate()));
 
 		} catch (FechasInvalidasException | StringVacioException e) {
-			this.laboratorioControlador.mensaje("Error", e.getMessage());
+			this.laboratorioControlador.crearMensaje("Error", e.getMessage());
 		}
 	}
 }

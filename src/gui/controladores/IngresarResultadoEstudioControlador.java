@@ -99,7 +99,7 @@ public class IngresarResultadoEstudioControlador {
 			stage.close();
 
 		} catch (StringVacioException e) {
-			laboratorioControlador.mensaje("Error", e.getMessage());
+			laboratorioControlador.crearMensaje("Error", e.getMessage());
 
 		}
 

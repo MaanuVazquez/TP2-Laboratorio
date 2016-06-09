@@ -42,7 +42,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Accordion fx:id="accordionMenu" layoutX="585.0" layoutY="29.0" prefHeight="153.0" prefWidth="202.0">
+      <Accordion fx:id="accordionMenu" layoutX="585.0" layoutY="54.0" prefHeight="153.0" prefWidth="202.0">
         <panes>
           <TitledPane fx:id="titledPaneVisita" animated="false" prefHeight="170.0" prefWidth="192.0" text="Visita">
                <content>
@@ -74,6 +74,6 @@
             </TitledPane>
         </panes>
       </Accordion>
-      <Button fx:id="buttonVerEstadistica" layoutX="585.0" layoutY="182.0" mnemonicParsing="false" onAction="#buttonVerEstadisticaOnAction" prefHeight="25.0" prefWidth="202.0" text="Ver Estadistica" />
+      <Button fx:id="buttonVerEstadistica" layoutX="585.0" layoutY="29.0" mnemonicParsing="false" onAction="#buttonVerEstadisticaOnAction" prefHeight="25.0" prefWidth="202.0" text="Ver Estadistica" />
    </children>
 </AnchorPane>

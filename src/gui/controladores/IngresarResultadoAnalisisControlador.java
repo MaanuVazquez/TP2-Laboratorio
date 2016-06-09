@@ -115,7 +115,7 @@ public class IngresarResultadoAnalisisControlador {
 			stage.close();
 
 		} catch (NumberFormatException | ValoresNegativosException e) {
-			this.laboratorioControlador.mensaje("Error", e.getMessage());
+			this.laboratorioControlador.crearMensaje("Error", e.getMessage());
 		}
 
 	}
