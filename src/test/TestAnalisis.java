@@ -15,11 +15,17 @@ import excepciones.ValoresNegativosException;
 
 public class TestAnalisis {
 
+	/*
+	 * Se crea una regla para testear los throws
+	 */
 	@Rule
 	public final ExpectedException exception = ExpectedException.none();
 
+	/*
+	 * Prueba del constructor de analisis
+	 */
 	@Test
-	public void ConstructorDeAnalisis() throws StringVacioException,
+	public void testConstructorDeAnalisis() throws StringVacioException,
 			ValoresNegativosException, RangoDeValoresInvalido {
 
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
@@ -28,8 +34,12 @@ public class TestAnalisis {
 		Assert.assertEquals("nombre", analisisDePrueba.getNombre());
 	}
 
+	/*
+	 * Prueba devolver el estado de un analisis
+	 */
+
 	@Test
-	public void EstadoDeAnalisisAlCrearlo() throws StringVacioException,
+	public void testEstadoDeAnalisisAlCrearlo() throws StringVacioException,
 			ValoresNegativosException, RangoDeValoresInvalido {
 
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
@@ -39,16 +49,24 @@ public class TestAnalisis {
 				analisisDePrueba.getEstado());
 	}
 
+	/*
+	 * Prueba esperar ValoresNegativosException
+	 */
+	
 	@Test
-	public void ConstructorDeAnalisisConErrorDeAnalisis()
+	public void testConstructorDeAnalisisConErrorDeAnalisis()
 			throws StringVacioException, ValoresNegativosException,
 			RangoDeValoresInvalido {
 		exception.expect(ValoresNegativosException.class);
 		new Analisis("Glucemia", "Indicaciones", -200.0, 100.0);
 	}
 
+	/*
+	 * Prueba esperar StringVacioException
+	 */
+	
 	@Test
-	public void ConstructorDeAnalisisConErrorDePrestacion()
+	public void testConstructorDeAnalisisConErrorDePrestacion()
 			throws StringVacioException, ValoresNegativosException,
 			RangoDeValoresInvalido {
 
@@ -56,8 +74,12 @@ public class TestAnalisis {
 		new Analisis("Glucemia", "", 10.0, 100.0);
 	}
 
+	/*
+	 * Prueba esperar RangoDeValoresInvalido
+	 */
+	
 	@Test
-	public void AnalisisConValorMinimoMedidoMayorOIgualAlMayor()
+	public void testAnalisisConValorMinimoMedidoMayorOIgualAlMayor()
 			throws StringVacioException, ValoresNegativosException,
 			RangoDeValoresInvalido {
 
@@ -66,11 +88,11 @@ public class TestAnalisis {
 	}
 
 	/*
-	 * prueba obtener un resultado de un analisis
+	 * Prueba obtener un resultado de un analisis
 	 */
 
 	@Test
-	public void AnalisisConResultadoCargado() throws StringVacioException,
+	public void testAnalisisConResultadoCargado() throws StringVacioException,
 			ValoresNegativosException, RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
 				50.0);
@@ -81,8 +103,12 @@ public class TestAnalisis {
 
 	}
 
+	/*
+	 * Prueba obtener un valor medido de un analisis
+	 */
+	
 	@Test
-	public void AnalisisSinResultadoCargado() throws StringVacioException,
+	public void testAnalisisSinResultadoCargado() throws StringVacioException,
 			ValoresNegativosException, RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
 				50.0);
@@ -95,7 +121,7 @@ public class TestAnalisis {
 	 */
 
 	@Test
-	public void GetValorMinimo() throws StringVacioException,
+	public void testGetValorMinimo() throws StringVacioException,
 			ValoresNegativosException, RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
 				50.0);
@@ -108,7 +134,7 @@ public class TestAnalisis {
 	 */
 
 	@Test
-	public void AnalisisGetValorMaximo() throws StringVacioException,
+	public void testAnalisisGetValorMaximo() throws StringVacioException,
 			ValoresNegativosException, RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
 				50.0);
@@ -116,8 +142,12 @@ public class TestAnalisis {
 		Assert.assertEquals(50, analisisDePrueba.getValorNormalMaximo(), 0);
 	}
 
+	/*
+	 * Prueba obtener un valot normal de un analisis
+	 */
+	
 	@Test
-	public void ClasificacionEstudioNormalDeAnalisis()
+	public void testClasificacionEstudioNormalDeAnalisis()
 			throws StringVacioException, ValoresNegativosException,
 			RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
@@ -130,8 +160,12 @@ public class TestAnalisis {
 
 	}
 
+	/*
+	 * Prueba obtener un valot anormal de un analisis
+	 */
+	
 	@Test
-	public void ClasificacionEstudioAnormalDeAnalisis()
+	public void testClasificacionEstudioAnormalDeAnalisis()
 			throws StringVacioException, ValoresNegativosException,
 			RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("nombre", "indicacion", 10.0,
@@ -144,8 +178,12 @@ public class TestAnalisis {
 
 	}
 
+	/*
+	 * Prueba obtener un resultado
+	 */
+	
 	@Test
-	public void getResultado() throws StringVacioException,
+	public void testgetResultado() throws StringVacioException,
 			ValoresNegativosException, RangoDeValoresInvalido {
 		Analisis analisisDePrueba = new Analisis("Sangre", "indicacion", 10.0,
 				50.0);
